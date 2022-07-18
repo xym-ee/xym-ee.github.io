@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 bilibili.svg github-brands -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.5in" height="11in" viewBox="0 0 612 792"
+		xml:space="preserve" color-interpolation-filters="sRGB" class="st3">
+	<v:documentProperties v:langID="2052"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:none;stroke:#f1f1f1;stroke-linecap:round;stroke-linejoin:round;stroke-width:30}
+		.st2 {fill:#f1f1f1;stroke:#f1f1f1;stroke-linecap:butt;stroke-width:1.19531}
+		.st3 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>github-brands</title>
+		<v:pageProperties v:drawingScale="1" v:pageScale="1" v:drawingUnits="19" v:shadowOffsetX="9" v:shadowOffsetY="-9"/>
+		<v:layer v:name="连接线" v:index="0"/>
+		<g id="shape1-1" v:mID="1" v:groupContext="shape" transform="translate(51.1432,-97.9767)">
+			<title>工作表.2</title>
+			<ellipse cx="270" cy="522.806" rx="270" ry="269.194" class="st1"/>
+		</g>
+		<g id="group2-3" transform="translate(133.273,-197.245)" v:mID="2" v:groupContext="group">
+			<title>工作表.15</title>
+			<g id="shape3-4" v:mID="3" v:groupContext="shape">
+				<title>工作表.16</title>
+				<path d="M357.87 528.4 C370.1 541.65 375.74 557.47 374.94 576.52 L374.94 724.76 C374.64 744.1 368.2 759.99 355.53
+							 772.44 C342.93 784.9 326.89 791.41 307.55 792 L67.4 792 C48.03 791.41 32.09 784.82 19.59 772.08 C7.09
+							 759.33 0.56 742.56 0 721.83 L0 576.52 C0.56 557.47 7.09 541.65 19.59 528.4 C32.09 516.42 48.03 509.84
+							 67.4 509.28 L88.92 509.28 L70.35 490.37 C66.14 486.18 64.03 480.85 64.03 474.41 C64.03 467.97 66.14
+							 462.65 70.35 458.45 C74.56 454.25 79.91 452.15 86.35 452.15 C92.8 452.15 98.15 454.25 102.39 458.45
+							 L156.08 509.28 L220.54 509.28 L275.1 458.45 C279.57 454.25 285.06 452.15 291.51 452.15 C297.96 452.15
+							 303.3 454.25 307.55 458.45 C311.73 462.65 313.85 467.97 313.85 474.41 C313.85 480.85 311.73 486.18 307.55
+							 490.37 L289.02 509.28 L310.48 509.28 C329.82 509.84 345.64 516.42 357.87 528.4 ZM329.45 579.45 C329.16
+							 572.42 326.74 566.7 321.61 562.23 C317.8 557.77 311.36 555.35 304.99 555.06 L70.35 555.06 C63.33 555.35
+							 57.57 557.77 53.08 562.23 C48.58 566.7 46.19 572.42 45.92 579.45 L45.92 721.83 C45.92 728.57 48.3 734.28
+							 53.08 739.04 C57.86 743.81 63.61 746.22 70.35 746.22 L304.99 746.22 C311.73 746.22 317.44 743.81 322.05
+							 739.04 C326.67 734.28 329.16 728.57 329.45 721.83 L329.45 579.45 ZM135.87 610.72 C140.48 615.34 142.97
+							 621.05 143.26 627.71 L143.26 652.1 C142.97 658.84 140.55 664.48 136.09 669.1 C131.55 673.71 125.83 676.06
+							 118.8 676.06 C111.77 676.06 105.98 673.71 101.52 669.1 C97.05 664.48 94.63 658.84 94.34 652.1 L94.34
+							 627.71 C94.63 621.05 97.12 615.34 101.74 610.72 C106.35 606.11 111.4 603.69 118.8 603.4 C125.54 603.69
+							 131.25 606.11 135.87 610.72 ZM276.13 610.72 C280.74 615.34 283.23 621.05 283.53 627.71 L283.53 652.1
+							 C283.23 658.84 280.82 664.48 276.35 669.1 C271.88 673.71 266.09 676.06 259.06 676.06 C252.03 676.06
+							 246.32 673.71 241.78 669.1 C236.65 664.48 234.89 658.84 234.67 652.1 L234.67 627.71 C234.89 621.05 237.38
+							 615.34 242 610.72 C246.61 606.11 252.32 603.69 259.06 603.4 C265.8 603.69 271.51 606.11 276.13 610.72
+							 Z" class="st2"/>
+			</g>
+		</g>
+	</g>
+</svg>

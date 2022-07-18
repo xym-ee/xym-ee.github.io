@@ -1,0 +1,47 @@
+---
+layout: framework
+banner:
+banner_html: post-header.html
+hidden:
+  - related_posts
+sidebar:
+  - article-menu
+---
+
+<div class="post">
+  <section>
+
+    {%- assign name = 'banner' -%}
+    {%- include functions.html func='get_value' -%}
+    {%- assign banner = return -%}
+
+    {%- assign name = 'hidden' -%}
+    {%- include functions.html func='get_value' -%}
+    {%- assign hidden = return -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'header'" -%}
+    {%- if banner == nil and result.size == 0 -%}
+    {%- include views/post-header.html -%}
+    {%- endif -%}
+
+    {%- include views/article.html -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'navigator'" -%}
+
+    {%- assign result = hidden | where_exp: "item", "item == 'related_posts'" -%}
+    {%- if result.size == 0 -%}
+      <div class="post-related">
+        <div>Related Articles</div>
+        <ul>
+          {% assign posts = site[page.collection] | sample:4 %}
+          {%- for post in posts -%}
+          <li><a class="post-link" href="{{post.url | relative_url}}" title="{{ page.next.title | escape }}">{{ post.title | escape | truncatewords: 12 }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    
+    {%- include extensions/gittalk.html -%}
+
+  </section>
+</div>
