@@ -46,7 +46,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Hello.
 
 # url: "http://127.0.0.1:4000"
-url: "https://xu.yumeng.tech"
+url: "https://xym.work"
 baseurl: "" # the subpath of your site, e.g. /blog
 favicon: "/assets/ico.png" # the favicon for your site
 
