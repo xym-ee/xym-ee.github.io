@@ -29,7 +29,7 @@ FOC控制大规模的商业应用也能看出这是一种相当成熟的电机�
 矢量控制的基本方法是使用**坐标变换**（矢量变换），**核心思路就是把混叠在一起励磁电流和电枢电流分开来**，单独控制励磁电流恒定，这样转矩就可以单独由电枢电流控制，和直流电机一样了。坐标变换只是我们看待问题的视角变了，实际电机物理系统的磁动势和功率是个客观量，因此变换原则是保持磁动势不变。分解出励磁电流和电枢电流后，按照给定值加以控制后，还需要再合成三相电流的给定值，让实际电流跟随三相给定电流。这就是基本的矢量控制思路。
 
 <figure>
-    <img src = "https://xu.yumeng.website/motor-control/part3/chapter2/images/%E7%94%B5%E6%B5%81%E9%97%AD%E7%8E%AF1.jpg" width=400 />
+    <img src = "https://xym.work/motor-control/part3/chapter2/images/%E7%94%B5%E6%B5%81%E9%97%AD%E7%8E%AF1.jpg" width=400 />
     <figcaption>CHBPWM调制矢量控制结构图</figcaption>
 </figure>
 
