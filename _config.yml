@@ -26,7 +26,7 @@
 
 title:      xym-ee
 email:      m@njust.edu.cn
-author:     xym
+author:     X.Y.M
 
 # Copyright setting
 # You can use any html code, currently below placeholders are available:
@@ -183,9 +183,9 @@ gittalk:
   enable:       true
   clientID:     5c4a4805389461265123
   clientSecret: b13a143f197a4e12a8295c256b366d884ec661d8
-  repo:         Meng2025.github.io
-  owner:        Meng2025
-  admin:        Meng2025
+  repo:         xym-ee.github.io
+  owner:        xym-ee
+  admin:        xym-ee
   id:           location.pathname
 
 # Build settings
