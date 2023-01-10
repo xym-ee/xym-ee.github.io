@@ -16,7 +16,7 @@ banner  : "/assets/home1.jpg"
 - [**电子电路基础**](https://xym.work/electronics){:target="_blank"}
   - [ ] 基本元件与电路基本定理；模拟电路基础，信号放大、反馈放大、波形功率等实用电路
   - [ ] 数字电路：布尔代数、组合逻辑、存储电路、时序逻辑；数字和模拟混合电路
-  - [ ] 高频、低功耗、传感器与检测技术
+  - [ ] 高频、低功耗、传感器与检测技术(测量技术与误差)
 
 - [**计算机技术基础**](https://xym.work/computer-technology/){:target="_blank"}
   - [ ] 计算机原理：由逻辑门到计算机，组成原理、上古神机IBM5150(微机原理及单片机)、体系结构
@@ -29,11 +29,16 @@ banner  : "/assets/home1.jpg"
   - [x] 电机控制技术：DCM双闭环、交流电机FOC
 
 - [**MCU和嵌入式系统**](https://xym.work/embedded-system){:target="_blank"}
-  - [ ] ARM Cortex-M3内核：指令集、存储器、中断
-  - [ ] STM32F1微控制器：架构、外设、调试等
-  - [ ] 实时操作系统
+  - [ ] MCU 裸机系统开发
+  - [ ] LVGL 与 C 语言 OOP 思想
+  - [ ] 基于 RTOS 开发(rt-thread 和 freeRTOS)
+  - [ ] ARM Cortex-M3 内核，ARM 架构
+  - [ ] RTOS 原理与 rt-thread 实现
+  - [ ] 嵌入式 linux
 
 - [**机器人开发技术相关**](https://xym.work/robot){:target="_blank"}
+  - webots
+  - ROS
 
 - [**控制论、系统科学和哲学**](https://xym.work/cyberlosophy){:target="_blank"}  
   社会科学和自然科学的交叉路口，关于控制的历史，系统的观点，控制的方法论。
