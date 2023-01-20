@@ -11,16 +11,16 @@ date:       2023-01-13
 
 ## PID 离散表达
 
-一个控制系统的结构如图
+一个使用 PID 控制器的控制系统结构如图
 
 <figure>
-    <img src="../images/pidinc/1.png" width=200>
+    <img src="../images/pidinc/1.png" width=260>
 </figure>
 
-其中 PID 控制器串在前向通路上，所以是串联校正装置。PID 控制器内部的结构如下图
+其中 PID 控制器串在前向通路上，所以这是一个串联校正装置。PID 控制器内部的结构如下图
 
 <figure>
-    <img src="../images/pidinc/2.png" width=130>
+    <img src="../images/pidinc/2.png" width=200>
 </figure>
 
 数学表达式为
@@ -29,13 +29,15 @@ $$
 u(t) = K_p e(t) + K_i \int e(t) \text{d}t + K_p \frac{\text{d}e(t)}{\text{d}t}
 $$
 
-这是个连续函数的表达式。程序是离散时刻运行的，我们还需要离散化。也很容易，求和代替积分，差分代替微分
+这是个连续函数的表达式。计算机程序是离散时刻运行的，我们还需要得到离散化的表达式。也很容易，离散时间定义域里的求和就是连续时间的积分，离散的差分就是连续的微分。则离散时间定义域下 PID 控制器的表达式为
 
 $$
 u(k) = K_p e(k) + K_i \sum e(k) + K_p (e(k) - e(k-1)) \tag{1}
 $$
 
 式(1)就是**位置式PID**。
+
+相邻两次控制输出的增量为：
 
 $$
 \begin{array}{rcl}
@@ -47,7 +49,6 @@ $$
 $$
 
 式(2)为**增量式PID**。
-
 
 ## 位置式 PID 代码实现
 
@@ -89,7 +90,7 @@ void pid_set_parameter(pid_t* pid, double kp, double ki, double kd)
 在实际的控制程序中，还需要一个函数来实现框中的部分，及算法本身：
 
 <figure>
-    <img src="../images/pidinc/3.png" width=300>
+    <img src="../images/pidinc/3.png" width=380>
 </figure>
 
 ```c
