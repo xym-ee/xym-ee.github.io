@@ -1,6 +1,6 @@
 ---
 layout:     post
-categories: 计算机相关
+categories: 计算机与嵌入式相关
 title:      计算机系统实践：Cheat Engine开发游戏修改器
 date:       2022-01-28
 ---
