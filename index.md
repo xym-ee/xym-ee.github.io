@@ -21,6 +21,17 @@ banner  : "/assets/home1.jpg"
     - [ ] linux 系统构建：bootloader、kernel、device tree、root filesystem
     - [ ] 各种驱动框架
 
+- [**机器人开发技术相关**](https://xym.work/robot){:target="_blank"}
+  - 移动机器人相关(自主移动机器人导论)
+    - 机器人运动、底盘运动学与逆运动学、运动控制
+    - 感知、定位与地图、规划和导航
+  - 机械臂(机器人学导论)
+    - 空间描述与坐标变换，正逆运动学，动力学，轨迹生成
+    - 机械臂控制：线性控制、非线性控制、力控制、力/位置混合控制
+  - 机器人开发相关
+    - ROS，ROS2
+    - webots、vrep、gazebo
+
 - [**计算机技术基础**](https://xym.work/computer-technology/){:target="_blank"}
   - [ ] 计算机原理：由逻辑门到计算机，组成原理、上古神机IBM5150(微机原理及单片机)、体系结构
   - [ ] 语言和程序设计：C/C++和汇编、编译过程、数据结构和算法、软件工程，各种基本工具的使用
@@ -33,11 +44,6 @@ banner  : "/assets/home1.jpg"
   - [ ] 数学进阶：矩阵分析、泛函分析、优化理论
   - [ ] 控制理论进阶：线性系统理论、最优控制、状态估计
   - [ ] 智能控制方法
-
-- [**机器人开发技术相关**](https://xym.work/robot){:target="_blank"}
-  - 机械臂(机器人学导论)
-  - 移动机器人
-  - 软件、工具、框架，ROS、webots
 
 - [**电子电路基础**](https://xym.work/electronics){:target="_blank"}
   - [ ] 基本元件与电路基本定理；模拟电路基础，信号放大、反馈放大、波形功率等实用电路
