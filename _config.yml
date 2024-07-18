@@ -147,10 +147,10 @@ code_badge:
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
 header_pages:
-  - index.md
-  - categories.md
-  - about.md
-
+  - 1_index.md
+  - 2_categories.md
+  - 3_note.md
+  
 # Banner default settings
 # These banner settings are for global banner default, but you can also
 # config it by the front matter for one specific post
