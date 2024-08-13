@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{ partial "header.html" . }}
+  
+  <div class="flex flex-col pt-8 gap-10">
+    <!-- Main Content-->
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">{{ .Title }}</h2>
+      <!-- Blog Post Metadata -->
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 {{ .Date.Format "Monday, Jan 2, 2006" }}</p>
+        <p>⏰ {{ .Date.Format "15:04:05" }}</p>
+        {{ with .Params.lastmod }}
+          <p>🔄 {{ .Format "Monday, Jan 2, 2006 15:04:05" }}</p>
+        {{ end }}
+        <p>📖 Reading time: {{ .ReadingTime }} min</p>
+      </div>
+      <!-- Authors -->
+      <div class="flex flex-row gap-2 flex-nowrap">
+        {{ partial "authors.html" . }}
+      </div>
+      <!-- Tags -->
+      <div class="flex flex-row gap-2 flex-nowrap">
+        {{ partial "tags.html" . }}
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          {{ .Content }}
+          <hr />
+        </div>
+        <div>
+          {{ partial "comments.html" . }}
+        </div>
+      </div>
+    </div>
+
+    {{ partial "footer_regular.html" .}}
+  </div>
+  
+{{ end }}
+

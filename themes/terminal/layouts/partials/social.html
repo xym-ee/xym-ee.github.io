@@ -1,0 +1,8 @@
+{{ range .Site.Params.social }}
+  <div>
+    <a href="{{ .url }}">
+      <!-- CSS don't apply when importing SVGs. Hence, using partials -->
+      {{ partial (printf "content/svg/%s" (replace .name " " "")) . }}
+    </a>
+  </div>
+{{ end }}

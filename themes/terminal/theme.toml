@@ -1,0 +1,19 @@
+name = 'Terminal'
+license = 'MPL-2.0'
+licenselink = 'https://github.com/techbarrack/terminal-hugo-theme/blob/master/LICENSE'
+description = 'Terminal is a theme inspired by the cobalt 2 theme for terminal on macOS. It uses tailwind CSS to achieve the look and feel'
+
+# The home page of the theme, where the source can be found
+homepage = 'https://github.com/techbarrack/terminal-hugo-theme'
+
+# If you have a running demo of the theme
+demosite = 'https://nayanseth.com'
+
+# Taxonomy terms
+tags = ['blog', 'personal', 'responsive', 'terminal', 'dark mode', 'minimal', 'dark']
+features = ['blog', 'personal', 'responsive', 'terminal', 'dark mode', 'minimal', 'dark', 'hugo', 'shortcodes', 'tailwind', 'markdown']
+
+# If the theme has a single author
+[author]
+  name = 'Nayan Seth'
+  homepage = 'https://nayanseth.com'

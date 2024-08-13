@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>基于Simscape的倒立摆控制算法仿真 | xym-ee</title>
+
+
+      <link rel="stylesheet" href="/css/tailwind.css" type="text/css">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="http://10.0.0.22:1313/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>______________</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">基于Simscape的倒立摆控制算法仿真</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 Thursday, Aug 19, 2021</p>
+        <p>⏰ 00:00:00</p>
+        
+          <p>🔄 Thursday, Aug 19, 2021 00:00:00</p>
+        
+        <p>📖 Reading time: 1 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <div class="py-1">📝</div>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <!-- raw HTML omitted -->
+<p>各种现代控制方法层出不穷，但是PID万古长青。纵使你理论发展又快又好，工业上还是PID占据了大半江山。没事整整PID还是挺有用的。</p>
+<h2 id="仿真对象">仿真对象</h2>
+<p>这里用倒立摆作为仿真对象，对各种花式PID的控制效果进行比较。通过对倒立摆这一典型的非线性系统的控制，可以检验各种PID控制方法是否有较强的处理非线性和不稳定性问题的能力。</p>
+<p>常用的机器人仿真工具有Gazebo、Webots、MATLAB等，这里使用到的是MATLAB中的Simscape Multibody模块，MATLAB版本为2019b。Simscape 是 Simulink 的一个模块，而 Simscape Multibody 又是 Simscape 的一个模块。这个模块是一个多体机构仿真环境，提供了几何体、关节、约束、施力单元以及传感器等大量的组件，这使得在MATLAB中搭建一个机构仿真框图十分容易，同时模块集成了3D可视化组件，这使得仿真结果更为直观。</p>
+<p>搭建一个倒立摆的模型，</p>
+<!-- raw HTML omitted -->
+<p>设置好各种物理参数，输出4个传感器数据作为反馈参数（不一定都要用到，先留着），打包成一个subsystem。直接启动仿真，可以看到在没有外力所用下，只要有轻微干扰，倒立摆就直接倒了。</p>
+<!-- raw HTML omitted -->
+<p>然后把摆杆角度作为反馈，直立状态作为给定计算得到偏差，把摆杆初始角度调成左偏30°，然后随便整两个PD参数，基本上就能立起来了。</p>
+<p>系统结构是下面这个样子，这个结构就代表了很大一类的简单控制系统，比如温度控制、液位控制等。</p>
+<!-- raw HTML omitted -->
+<p>控制效果</p>
+<!-- raw HTML omitted -->
+<p>当然也可以加上位置控制，看起来更像比较厉害的控制理论。要做的就是在角度控制的基础上串上个位置控制</p>
+<!-- raw HTML omitted -->
+<p>对于一个阶跃信号的控制效果</p>
+<!-- raw HTML omitted -->
+<p>由此可以看出，PID是个好东西。倒立摆其实并没这么简单，是个挺复杂的小东西，但是在使用PID的时候，完全没考虑其数学模型的问题，就直接让他立了起来，甚至效果还不错。PID让即使是不懂控制控制理论的人也可以随便试几个参数达到这个效果，所以PID的广泛应用也是情理之中的。当然网上讲PID的直观理解的人很多，开车的、倒水的、烧火炉的故事都有人讲过，这些故事对PID的直观理解也有很大帮助。当然PID的在数学上的作用机理没这么好理解，搞控制理论的人总是执着的用数学手段严格证明一个系统的稳定性，关于控制背后的数学原理，后面有空再写写。</p>
+<p>再加点程序控制手段，用$\theta$和$\dot \theta$这两个参数模仿人把摆甩起来，然后偏差小到一定范围内切换角度+位置闭环控制，控制结构图如下图：</p>
+<!-- raw HTML omitted -->
+<p>控制效果</p>
+<!-- raw HTML omitted -->
+<p>这个启动控制看起来相当厉害，但是控制手段却是最没牌面的，坦率的讲没有用到任何控制算法，这只能叫控制方法，就是个开环盲甩，实际情况下抗干扰能力太差，随便什么参数变一下后果直接不可预测，当然这里启动不是重点，相关方法也有很多比如bangbang控制、能量反馈控制，这些都是有反馈即自动控制的核心思想在里面的。</p>
+<p>到这里一切只是个开始，在比较早的年代，有用纯硬件搭的PID控制电路，随着嵌入式与微电子的发展，数字控制逐渐取代了模拟控制，越来越多的改进PID方法诞生了，这些改进的PID控制方法使得经久不衰的PID再次焕发了生机，这也是本文想学习仿真的东西。</p>
+<h2 id="理论分析">理论分析</h2>
+<p>只试两个参数感觉还是差了点意思，毕竟不学控制理论的朋友稍微试试也能到这个效果，还是要理论分析一下才显得像是个学过理论的人。</p>
+<p>理论分析的第一步就是把这个物理的东西先变成数学上的一个式子，俗称数学建模。众所周知，经典控制理论分析的是线性定常微分方程，这个倒立摆输入是力，把摆杆偏角认为是输出，那么正好凑凑能搞出的微分方程，这样就可以进一步分析了。</p>
+<!-- raw HTML omitted -->
+<p>$$ F(t) = M \ddot{x}(t) + m [ \ddot{x}(t) + ]  $$</p>
+<p>然后工作点附近线性化一下，有了线性定常微分方程了：</p>
+<p>$$ \left[ ml - J\left(\frac{M}{m} + 1\right) \right] \ddot\theta(t) + (M+m)g\theta = f(t)$$</p>
+<p>然后呢，传递函数就有了，这时候，零极点、根轨迹、波特图各种分析手段都可以使用了，各种校正手段都可以用在这个微分方程上。</p>
+<p>如果想更先进一点，可以使用状态空间来描述这个事情。</p>
+<h2 id="heading">。。。。。</h2>
+<p>（有时间一定补充）</p>
+<ul>
+<li><input disabled="" type="checkbox"> 模糊控制</li>
+<li><input disabled="" type="checkbox"> 自适应模糊PID</li>
+<li><input disabled="" type="checkbox"> 状态反馈控制</li>
+<li><input disabled="" type="checkbox"> 二阶倒立摆状态反馈控制</li>
+</ul>
+<h2 id="二阶摆">二阶摆</h2>
+<p>模型</p>
+<!-- raw HTML omitted -->
+<p>不加外力</p>
+<!-- raw HTML omitted -->
+<p>并联PD，一般单入单出的控制，不能这么搞的，😂，这个东西不一样，本质上是状态反馈，用极点配置法求出6个反馈参数，所以看起来是并联PD，但是本质是状态反馈。</p>
+<!-- raw HTML omitted -->
+<p>来个初始小偏差，看看效果</p>
+<!-- raw HTML omitted -->
+<p>能立起来了。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "http:\/\/10.0.0.22:1313\/blog\/%E5%9F%BA%E4%BA%8Esimscape%E7%9A%84%E5%80%92%E7%AB%8B%E6%91%86%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95%E4%BB%BF%E7%9C%9F\/";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://mydisquscode.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+      <script type="text/javascript" src="/js/navbar.js"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  
+</body>
+
+</html>

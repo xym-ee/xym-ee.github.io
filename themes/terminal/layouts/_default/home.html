@@ -1,0 +1,31 @@
+{{ define "main" }}
+    <div class="flex flex-col h-[calc(100dvh)]">
+      {{ partial "header.html" . }}
+      <div class="flex flex-col justify-center items-center gap-4 flex-grow">
+        <div class="flex flex-col justify-center items-center gap-4">
+          <!-- Name of Website -->
+          <div class="flex flex-col gap-4 items-center justify-center">
+            <h1 class="font-bold text-5xl hover:text-sky-400 max-sm:text-4xl">
+              <a href="{{ .Site.BaseURL }}" class="whitespace-nowrap">
+                Embedded Systems & Robot Control
+              </a>
+            </h1>
+            <p>In-depth Insights into Computer Technology and Intelligent Control: From Low-Level Development to High-Level Applications</p>
+          </div>
+          <!-- Navigation for Big Screens -->
+          <div>
+            <ul class="flex flex-row justify-center items-center gap-6 text-xl max-sm:hidden visible">
+              {{ partial "home_menu.html" . }}
+            </ul>
+          </div>
+          <!-- Social -->
+          <div class="flex flex-row gap-6 p-4 border">
+            {{ partial "social.html" . }}
+          </div>
+        </div>
+        
+        {{ partial "footer_bottom.html" . }}
+        
+      </div>
+  </div>
+{{ end }}

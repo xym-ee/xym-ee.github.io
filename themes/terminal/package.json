@@ -1,0 +1,17 @@
+{
+  "name": "terminal",
+  "version": "1.0.0",
+  "description": "## Features",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i assets/css/tailwind/base.dev.css -o assets/css/tailwind.css",
+    "prod": "npx tailwindcss -i assets/css/tailwind/base.css -o assets/css/tailwind.css"
+  },
+  "keywords": [],
+  "author": "Nayan Seth",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.12",
+    "tailwindcss": "^3.4.1"
+  }
+}

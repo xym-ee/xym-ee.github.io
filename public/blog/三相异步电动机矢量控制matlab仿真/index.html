@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>三相异步电动机矢量控制MATLAB仿真 | xym-ee</title>
+
+
+      <link rel="stylesheet" href="/css/tailwind.css" type="text/css">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="http://10.0.0.22:1313/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>______________</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">三相异步电动机矢量控制MATLAB仿真</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 Tuesday, Jan 18, 2022</p>
+        <p>⏰ 00:00:00</p>
+        
+          <p>🔄 Tuesday, Jan 18, 2022 00:00:00</p>
+        
+        <p>📖 Reading time: 1 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <div class="py-1">📝</div>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <p><strong>矢量控制</strong>或者<strong>FOC控制</strong>近些年逐渐走进日常消费电器了，在一些洗衣机，电动玩具的广告里甚至可以直接看到这个词，我觉得这对消费者来说要求还是有点高了😂😂。</p>
+<!-- raw HTML omitted -->
+<p>FOC控制大规模的商业应用也能看出这是一种相当成熟的电机控制方法了，这里做一个异步电机的矢量控制仿真总结。</p>
+<h2 id="矢量控制基本思想">矢量控制基本思想</h2>
+<p>矢量控制这个名字的由来是控制方法里有坐标变换（矢量变换），FOC控制的全名是<strong>按照转子磁链定向控制</strong>，其含义是在坐标变换后把旋转坐标系的d轴方向固定在转子磁链方向。往往伴随的还有SVPWM这个词，这是一种调制方法，可以提高电压利用率，矢量控制不一定必须用到SVPWM的调制方法。</p>
+<p>矢量控制系统比较复杂，整个系统由很多部分或者叫模块构成，每个模块又有不止一种方法实现，但是使用不同方法的模块实现的功能是一样的。因此比较先进的控制方法也是在整个老的系统结构上去优化一个模块。一个典型的就是无传感器控制，实际上是状态观测器用作传感器。</p>
+<p>首先梳理一下矢量控制的基本思想：</p>
+<p>对于他励式直流电动机来说，接线端子4个，两根为励磁绕组引出，两根电枢绕组引出，磁通和电枢电流可以分开单独控制，磁通恒定后电磁转矩就只和电枢电流有关了。</p>
+<p>对于三相异步交流电机来说，接线端子有6个，如果是接成了Y型不引出中心线，那么端子有3个，这三根线进去的电流有一部分产生磁通，一部分产生电磁转矩，混叠在一起。这也是交流电机控制复杂的原因。</p>
+<p>矢量控制的基本方法是使用<strong>坐标变换</strong>（矢量变换），<strong>核心思路就是把混叠在一起励磁电流和电枢电流分开来</strong>，单独控制励磁电流恒定，这样转矩就可以单独由电枢电流控制，和直流电机一样了。坐标变换只是我们看待问题的视角变了，实际电机物理系统的磁动势和功率是个客观量，因此变换原则是保持磁动势不变。分解出励磁电流和电枢电流后，按照给定值加以控制后，还需要再合成三相电流的给定值，让实际电流跟随三相给定电流。这就是基本的矢量控制思路。</p>
+<!-- raw HTML omitted -->
+<p>根据上面的描述，关注这几个细节：</p>
+<ol>
+<li>
+<p>如何进行坐标变化。参考系的选取，怎么变才能达到分解电流为励磁分量和转矩分量。</p>
+</li>
+<li>
+<p>转子磁链定向问题。在坐标变换中有个坐标系是和转子磁链一同旋转的，因此我们需要知道转子磁链的角度，在对励磁电流进行控制时，也需要知道磁链大小，因此转子磁链计算是要解决的一个问题。</p>
+</li>
+<li>
+<p>PWM调制方式。电子电子变压变频器都是要去使用脉冲宽度调制的。在使用PWM时有个小问题，日常家用电220V，如果使用SPWM去产生220V的交流电，使用220V直流电做不到，日常讲的220V交流电是有效值，其标准的数学表达式为$$ u(t) = 220\sqrt{2}\sin(\omega t + \varphi) $$，因此如果使用SPWM调制方法，需要的直流电源为$$ 220\sqrt{2} \approx 311 \mathrm{V} $$，如果要产生有效值380电压的交流电，需要的直流电源约为537V。这就感觉很不舒服，因此如何用电压更小的直流电源产生有效值更大交流电，也是个需要解决的问题。</p>
+</li>
+</ol>
+<p>如果这几个细节都清楚了，那么矢量控制的核心原理及方法大概也就搞明白了。</p>
+<p>在整个矢量控制细节结构上，还可以进行一些优化改进，比如：</p>
+<ol>
+<li>
+<p>进行转矩控制提高动态。这是矢量控制里的转矩控制，区别另一种思想<strong>直接转矩控制</strong>。虽然励磁电流和电枢电流解耦了，但是在控制励磁电流跟随给定的时候还是会有波动，因此为了更好的动态性能，在转矩波形影响转速前就对其进行控制，有两个常用的方法。</p>
+</li>
+<li>
+<p>无传感器控制。转速控制需要转速值，一些磁链计算方法也要转速值，现在转速传感器也不想要了，使用算法充当转速传感器，比如状态观测器等一些转子位置估计方法，这也是近些年电机控制的一个新话题。</p>
+</li>
+</ol>
+<p>以上这些点，后面的仿真都会出现。</p>
+<p>接下来就要开始做仿真了。</p>
+<h2 id="仿真电机参数">仿真电机参数</h2>
+<p>被控对象为一台三相笼型异步电动机(Triple-phase asynchronous motor)，铭牌参数：</p>
+<ul>
+<li>额定功率$$ P_N = 3\mathrm{kW} $$</li>
+<li>额定电压$$ U_N = 380 \mathrm{V} $$</li>
+<li>额定电流$$ I_N = 6.9 \mathrm{A} $$</li>
+<li>额定转速$$ n_N = 1400 \mathrm{r/min} $$</li>
+<li>额定频率$$ f_N = 50 \mathrm{Hz} $$</li>
+<li>极对数$$ n_p = 2 $$</li>
+<li>定子绕组$$ \mathrm{Y} $$联结</li>
+</ul>
+<p>由实验测得的数据：</p>
+<ul>
+<li>定子电阻$$ R_s = 1.85 \mathrm{\Omega} $$</li>
+<li>转子电阻$$ R_r = 2.685 \mathrm{\Omega} $$</li>
+<li>定子自感$$ L_s = 0.294 \mathrm{H} $$</li>
+<li>转子自感$$ L_r = 0.2898 \mathrm{H} $$</li>
+<li>定转子互感$$ L_m = 0.2838 \mathrm{H} $$</li>
+<li>转动惯量$$ J = 0.1284 \mathrm{kg\cdot m^2} $$</li>
+</ul>
+<p>异步电动机的等效结构图</p>
+<p>设置好参数以后，直接通上三相交流电，并在运行稳定后加上额定负载</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="focchbpwm">FOC/CHBPWM</h2>
+<p>首先使用最基本的方式，数据全部使用电机输出数据，给定磁链幅值和转速，经过控制器后反变换回三相电流给定值，使用电流滞环跟踪PWM(CHBPWM)，仿真原理图</p>
+<!-- raw HTML omitted -->
+<p>空载启动，在0.4秒加上额定负载，0.6秒制动，转速、转矩曲线</p>
+<!-- raw HTML omitted -->
+<p>因为转子磁链计算使用的是真实值，所以效果还是不错的，ASR、ATR使用PI控制，参数随便给的，可以明显的看到和直流电机电流、电压闭环效果很接近，启动时有一段恒转矩（角加速度）时期，转速直线上升，制动的时候也是到了反向最大允许的电流。</p>
+<p>三相电流</p>
+<!-- raw HTML omitted -->
+<p>额定电流6.9A，这个过载倍数应该是可以接受的，当然过载也可以由积分限幅值根据实际电机性能、系统动态响应要求去调整。</p>
+<p>观测到刚启动时转子磁链</p>
+<!-- raw HTML omitted -->
+<h2 id="focchbpwm转子磁链直接定向">FOC/CHBPWM/转子磁链直接定向</h2>
+<p>上面这个系统实际是没法用的，因为转子磁链这个东西没有直接的传感器可以测量，仿真的时候MATLAB里是直接给出来了，因此需要一种实际可用的找到转子磁链的方法。这就是转子磁链定向问题，有直接定向和间接定向。直接定向就是用能测量到的物理量算出来，直接定向方法由基于电流的和基于电压的。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "http:\/\/10.0.0.22:1313\/blog\/%E4%B8%89%E7%9B%B8%E5%BC%82%E6%AD%A5%E7%94%B5%E5%8A%A8%E6%9C%BA%E7%9F%A2%E9%87%8F%E6%8E%A7%E5%88%B6matlab%E4%BB%BF%E7%9C%9F\/";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://mydisquscode.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+      <script type="text/javascript" src="/js/navbar.js"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  
+</body>
+
+</html>

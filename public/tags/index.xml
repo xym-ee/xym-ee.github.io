@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on xym-ee</title>
+    <link>http://10.0.0.22:1313/tags/</link>
+    <description>Recent content in Tags on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Apr 2024 19:01:48 +0530</lastBuildDate>
+    <atom:link href="http://10.0.0.22:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Another Tag</title>
+      <link>http://10.0.0.22:1313/tags/another-tag/</link>
+      <pubDate>Mon, 01 Apr 2024 19:01:48 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/another-tag/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Demo</title>
+      <link>http://10.0.0.22:1313/tags/demo/</link>
+      <pubDate>Mon, 01 Apr 2024 19:01:48 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/demo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Example</title>
+      <link>http://10.0.0.22:1313/tags/example/</link>
+      <pubDate>Mon, 01 Apr 2024 19:01:48 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/example/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>http://10.0.0.22:1313/tags/markdown/</link>
+      <pubDate>Mon, 01 Apr 2024 19:01:48 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Template</title>
+      <link>http://10.0.0.22:1313/tags/template/</link>
+      <pubDate>Mon, 01 Apr 2024 19:01:48 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/template/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Css</title>
+      <link>http://10.0.0.22:1313/tags/css/</link>
+      <pubDate>Sat, 30 Mar 2024 19:25:10 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/css/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>http://10.0.0.22:1313/tags/testing/</link>
+      <pubDate>Sat, 30 Mar 2024 19:25:10 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/testing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pagination</title>
+      <link>http://10.0.0.22:1313/tags/pagination/</link>
+      <pubDate>Wed, 28 Feb 2024 23:12:51 +0530</pubDate>
+      <guid>http://10.0.0.22:1313/tags/pagination/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
