@@ -5,7 +5,9 @@ test:
 
 
 dir:
-	mkdir ./layouts/partials/third_party_js
+	mkdir -p layouts/partials/third_party_js
+
+
 
 
 
