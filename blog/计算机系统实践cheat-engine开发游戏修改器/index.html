@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>计算机系统实践：Cheat Engine开发游戏修改器 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.4a783adb4da105fabad23a262263bcc9d9fade8ada248161a9f40b5ceefb5659.css" type="text/css" integrity="sha256-Sng6202hBfq60jomImO8ydn63oraJIFhqfQLXO77Vlk=" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>______________</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">计算机系统实践：Cheat Engine开发游戏修改器</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 Friday, Jan 28, 2022</p>
+        <p>⏰ 00:00:00</p>
+        
+          <p>🔄 Friday, Jan 28, 2022 00:00:00</p>
+        
+        <p>📖 Reading time: 1 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <div class="py-1">📝</div>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <p>（待完善）</p>
+<p><strong>官网介绍</strong>：Cheat Engine是一个主要用于修改游戏和应用程序的开发环境。</p>
+<p>也就是说CE是一个和游戏修改器差不多的东西，改物品栏数值、锁血啥的，但是普通游戏修改器是个现成的程序一键操作完成，CE是个开发环境，功能相当强大。</p>
+<p>CE最终目的并不是去改游戏，更重要的，是对计算机组成原理、微机原理、汇编、程序与数据理论知识的应用。在游戏修改器开发过程中计算机知识的实践，这种快乐程度要比在8086虚拟环境上多得多。</p>
+<p>既然是游戏修改，就涉及到一个游戏道德甚至是法律问题，对于单人游戏，个人认为怎么搞随便，至于多人游戏，有反作弊机制，更严重的“破坏计算机信息系统罪”适用于制作外挂并传播这一行为。</p>
+<p>这个工作涉及到CPU工作原理、内存、x86指令集，理论知识，CE使用方法、工作流程，数据修改与指令修改。</p>
+<p><a href="https://github.com/cheat-engine/cheat-engine">GitHub: Cheat Engine. A development environment focused on modding</a></p>
+<p><a href="https://wiki.cheatengine.org/index.php?title=Main_Page">Cheat Engine wiki</a></p>
+<h2 id="游戏的运行与ce原理">游戏的运行与CE原理</h2>
+<p>CPU是逻辑电路，进行简单的逻辑运算，游戏执行最终落实到CPU上是一系列指令。因此最终CPU运行的就是一条一条指令。</p>
+<p>CPU工作很呆板，就是执行一条条指令，通过指令操作数据对数据进行读和写。</p>
+<p>比如游戏背包里的物品个数，这就是数据，物品数量变化，CPU进行加减就可以。</p>
+<p>事实上，指令和数据是编码的形式存在在电脑内部的。</p>
+<p>如果只有这么一串01，理论上讲是无法区分到底是指令还是数据，CPU是靠上下文来判断的。电脑开机后CPU读到的第一个字节必然是指令，每条指令里会指示后面的编码是指令还是数据。所以，改数据和改指令从编码层次上来看是一样的。</p>
+<p>如果要修改编码，我们就得知道这些编码保存在哪里，肯定不是CPU，事实上存在内存里，指令和数据都是从内存里面取出来的，所以我们改程序实际上是在改内存里的编码。</p>
+<p>CE的工作原理就是监控任意一个应用程序使用的全部内存，并且可以随意修改编码。这样一来，理论上就可以对游戏进行任何操作。</p>
+<p>比如说，找到了血量的存储位置，并冻结数据，这就锁血了。或者找到“减”指令，换成空指令，或者直接变成加，这就挨打了还加血。</p>
+<p>综上，CE修改的思路也就是很简单两步：</p>
+<ul>
+<li>1.找到感兴趣的编码在内存里的位置</li>
+<li>2.修改编码
+<ul>
+<li>数据</li>
+<li>指令</li>
+</ul>
+</li>
+</ul>
+<p>数据和指令没有区别，都是编码</p>
+<p>计算机编码是二进制的，但是为了表达方便，用字节为单位使用16进制表示。</p>
+<h2 id="数据修改">数据修改</h2>
+<h3 id="基本操作">基本操作</h3>
+<p>最简单的用法，根据精确的数值行为定位内存地址。多次筛选后，就可以找到<strong>生命值</strong>所在的内存地址，可以直接修改数值。</p>
+<p>如果不知道具体数值，比如说只有个血条，那么使用未知初值的选项进行第一次搜索，然后使用数值行为，比如说正在减少或者减少的具体值这些特征来筛选对应的内存地址。</p>
+<p>数据类型也是个需要关注的问题。</p>
+<h3 id="内存数据结构">内存数据结构</h3>
+<p>单次修改保存了变量列表，下次打开以后，发现这个表已经变了。如果要反复使用该如何操作呢？</p>
+<p>内存从下往上看，</p>
+<p>指令|数据（全局、堆、栈）</p>
+<p>堆是随便分配加回收的，栈倒是连续的，但是栈的其实位置随机的。</p>
+<p>因此指令的位置是固定的，堆和栈里的数据位置不固定，因此重新运行的游戏就不知道了。</p>
+<p>但是游戏自己肯定是知道堆栈地址在哪里的。通过指针指向堆栈数据。</p>
+<p>那么我们也可以和游戏一样，通过源头指针一路找到血量。</p>
+<h3 id="指针追溯">指针追溯</h3>
+<p>追溯到全局变量段就可以了。</p>
+<p>手动追溯，对数据结构的深入理解。</p>
+<p>查找到具体数值所在的内存后，可以直接查找这个内存地址，查看是什么指令在访问这个内存，就可以找到这个地址的指针。直接使用指针来操作数据，在每次游戏重启后，同样也是可以用的。</p>
+<p>要注意的是，有时候数据定义在一个结构体内（或者是一个类），寻址方式是基地址+偏移地址，因此需要计算出偏移地址。可以在手动添加指针的时候设置偏移地址。</p>
+<p>实际游戏这么一级指针还是有点简单了，更多情况下是好多级指针，在上层程序设计的时候有数据的继承，在汇编层次上就是多次指针跳转。每次跳转实际上是跳转到结构体的基地址了，因此要注意每一次跳转的偏移地址。追溯到绿色名称就可以停下了，这一段是指令段。</p>
+<p>手动追溯指针需要非常了解数据结构以及编译后的数据存储方式。自动追溯会容易一点，首先找到血量所在的地址，使用指针扫描，然后瑞出游戏重新进入。再次找到血量的地址，找出相关指针，取个交集。大概就是这么个思路，因为偏移量总是固定的，交叉比对出我们需要的指针。</p>
+<p>最后，如果数据的源头也不在全局变量里，那这修改数据就行不通了，然而指令肯定是在固定位置的。这时候就得使用改指令的方法了。</p>
+<h2 id="指令修改">指令修改</h2>
+<h3 id="x86指令集">x86指令集</h3>
+<p>指令集和机器码差不多（真指令），可以等价起来。机器码给给机器读，汇编给人看更容易一点。</p>
+<p>CPU里的寄存器数量有限，速度快数量少。x86对应的寄存器只有16个，除了寄存器，还需要了解一下寻址方式和常用的指令。</p>
+<p>MOV ECX, [RSI + 07E0]</p>
+<p>机器码的格式，指令编码的长度是不固定的，简单知道编码格式</p>
+<p>操作码 数据1 数据2</p>
+<h3 id="指令修改思路">指令修改思路</h3>
+<p>这也是个去哪里干什么的事情。</p>
+<p>首先找到感兴趣的数据，查看对这个数据的操作，看看是哪些指令修改了这些数据。</p>
+<p>然后去看看反汇编代码，这时候就可以调整指令了。一个典型的，减血指令SUB位置替换为NOP，就实现锁血效果了。</p>
+<p>还有个小问题，脚本如何知道替换哪个位置的指令呢？</p>
+<p>把指令的物理地址记下来了，因此游戏一旦启动，指令的位置是固定的。</p>
+<p>我们有了个更高的目标：在游戏版本更新后，这个插件还能使用。</p>
+<p>游戏版本更新一般会有指令地址的偏移，但是这一段的顺序应该还是不变的，因此把这一段指令当作数据，查找这一段数据，使用内存扫描器。</p>
+<p>这就是AOB技术，</p>
+<h3 id="一些经验">一些经验</h3>
+<p>现代游戏基本上只能通过指令修改</p>
+<p>实际修改的时候</p>
+<p>寻找数据-&gt;找到关联指令-&gt;执行修改(自己写汇编)</p>
+<p>寻找数据，可以通过具体数字直接找。</p>
+<p>间接找数据，比如血量，</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%AE%9E%E8%B7%B5cheat-engine%E5%BC%80%E5%8F%91%E6%B8%B8%E6%88%8F%E4%BF%AE%E6%94%B9%E5%99%A8\/";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://mydisquscode.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.a2e7a3db4f1b58e7616cfd31a099340a207d5b99d96df87f525f17c604e184c1.js" integrity="sha256-ouej208bWOdhbP0xoJk0CiB9W5nZbfh/Ul8XxgThhME=" crossorigin="anonymous"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  
+</body>
+
+</html>
