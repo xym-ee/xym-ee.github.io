@@ -19,7 +19,7 @@ menus:
       weight: 40
 paginate: 20
 permalinks:
-  blog: "/blog/:title/"
+  blog: "/blog/:slug/"
 taxonomies:
   tag: "tags"
   author: "authors"
@@ -36,8 +36,8 @@ markup:
     # (enable to allow ^ and ~ for superscript and subscript)
     superscript: true
     unsafe: true
-ignoreFiles:
-  - "\\.gitkeep$"
+# ignoreFiles:
+#  - "\\.gitkeep$"
 # outputs:
 #   blog:
 #     - HTML
@@ -51,15 +51,15 @@ params:
   social:
     - name: github
       url: https://github.com/xym-ee
-    - name: x
-      url: https://x.com/myusername
-    - name: youtube
-      url: https://youtube.com/myusername
-    - name: linkedin
-      url: https://linkedin.com/in/myusername
-    - name: "buy me a coffee"
-      url: https://www.buymeacoffee.com/myusername
-  disqus: "mydisquscode"
+    - name: wechat
+      url: ./images/wechat.png
+    - name: qq
+      url: ./images/qq.png
+    - name: mail
+      url: mailto:m@njust.edu.cn
+#    - name: "buy me a coffee"
+#      url: https://www.buymeacoffee.com/myusername
+  disqus: "xym"
 
 module:
   hugoVersion:

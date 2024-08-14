@@ -1,6 +1,6 @@
 {{ $blogPages := .Scratch.Get "blogPages" }}
 {{ $paginator := .Paginate ($blogPages) }}
-{{ range $paginator.Pages.GroupByDate "January 2006" }}
+{{ range $paginator.Pages.GroupByDate "2006" }}
   <div class="flex flex-col gap-4">
     <h2 class="text-2xl max-sm:text-xl font-bold">📅 {{ .Key }}</h2>
     <ul class="flex flex-col">
@@ -8,7 +8,7 @@
         <a href="{{ .RelPermalink }}">
           <div class="flex flex-row justify-between border-l px-4 py-2 hover:text-sky-400">
             <h2>{{ .LinkTitle }}</h2>
-            <p class="max-lg:hidden">{{ .Date | time.Format ":date_medium" }}</p>
+            <p class="max-lg:hidden">{{ .Date | time.Format "2006-01-02" }}</p>
           </div>
         </a>
       {{ end }}

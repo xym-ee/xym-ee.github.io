@@ -1,8 +1,11 @@
 ---
-layout:     post
-categories: 计算机与嵌入式相关
-title:      计算机系统实践：Cheat Engine开发游戏修改器
-date:       2022-01-28
+title:      "计算机系统实践：Cheat Engine开发游戏修改器"
+date:       "2022-01-28T19:01:48+05:30"
+lastmod:    "2022-01-28T19:01:48+05:30"
+draft:      true
+url:        /blog/cheat-engine.html
+layout:     "post"
+tags:       ["computer technology","embedded"]
 ---
 
 （待完善）

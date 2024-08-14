@@ -1,14 +1,17 @@
 ---
-layout:     post
-categories: 控制理论相关
-title:      三相异步电动机矢量控制MATLAB仿真
-date:       2022-01-18
+title:      "三相异步电动机矢量控制 MATLAB 仿真"
+date:       "2022-01-18T19:01:48+05:30"
+lastmod:    "2022-01-18T19:01:48+05:30"
+draft:      true
+url:        /blog/motor-foc.html
+layout:     "post"
+tags:       ["control theory","simulation","MATLAB"]
 ---
 
 **矢量控制**或者**FOC控制**近些年逐渐走进日常消费电器了，在一些洗衣机，电动玩具的广告里甚至可以直接看到这个词，我觉得这对消费者来说要求还是有点高了😂😂。
 
 <figure>
-    <img src="../images/ybdjFOC广告.jpg" width = 150 />
+    <img src="/images/ybdjFOC广告.jpg" width = 150 />
 </figure>
 
 FOC控制大规模的商业应用也能看出这是一种相当成熟的电机控制方法了，这里做一个异步电机的矢量控制仿真总结。

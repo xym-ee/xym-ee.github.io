@@ -1,9 +1,13 @@
 ---
-layout:     post
-categories: 控制理论相关
-title:      基于Simscape的倒立摆控制算法仿真
-date:       2021-08-19
+title:      "基于Simscape的倒立摆控制算法仿真"
+date:       "2021-08-19T19:01:48+05:30"
+lastmod:    "2021-08-19T19:01:48+05:30"
+draft:      true
+url:        /blog/simscape.html
+layout:     "post"
+tags:       ["control theory","simulation","MATLAB"]
 ---
+
 <!--知识层次：动化本科大二水平-->
 
 各种现代控制方法层出不穷，但是PID万古长青。纵使你理论发展又快又好，工业上还是PID占据了大半江山。没事整整PID还是挺有用的。

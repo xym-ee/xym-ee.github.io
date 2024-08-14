@@ -1,9 +1,11 @@
 ---
-layout:     post
-categories: 控制理论相关
-title:      PID控制器、串联校正装置理论分析和性能对比
-subtitle:   
-date:       2021-11-19
+title:      "PID控制器、串联校正装置理论分析和性能对比"
+date:       "2021-11-19T19:01:48+05:30"
+lastmod:    "2021-11-19T19:01:48+05:30"
+draft:      true
+url:        /blog/pid-controller.html
+layout:     "post"
+tags:       ["control theory"]
 ---
 
 经典控制理论在频域或者复频域分析系统的性能。

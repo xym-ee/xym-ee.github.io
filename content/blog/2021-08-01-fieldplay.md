@@ -1,14 +1,11 @@
 ---
-layout:     post
-categories: 控制理论相关
-title:      二维向量场可视化工具与相平面图
-subtitle:   
-date:       2021-10-31
-banner:
-  image:            ../images/fieldplay/非线性相轨迹2.gif
-  height:           "40vh"
-  min_height:       "20vh"
-  heading_style:    "font-size: 36px; font-color: #000000 ;font-weight: bold; text-decoration: underline"
+title:      "二维向量场可视化工具与相平面图"
+date:       "2021-10-31T19:01:48+05:30"
+lastmod:    "2021-10-31T19:01:48+05:30"
+draft:      true
+url:        /blog/field-play.html
+layout:     "post"
+tags:       ["control theory"]
 ---
 
 ## 1.二维向量场

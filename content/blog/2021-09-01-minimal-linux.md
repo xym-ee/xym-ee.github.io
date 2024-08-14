@@ -1,11 +1,12 @@
 ---
-layout:     post
-categories: 计算机与嵌入式相关
-title:      构建最小 Linux 系统
-date:       2023-07-17
+title:      "构建最小 Linux 系统"
+date:       "2023-07-17T19:01:48+05:30"
+lastmod:    "2023-07-17T19:01:48+05:30"
+draft:      true
+url:        /blog/minimal-linux.html
+layout:     "post"
+tags:       ["computer technology","embedded"]
 ---
-
-
 
 - [Linux 世界中的应用程序 (从零开始构建 “最小” Linux) [南京大学2023操作系统-P16] (蒋炎岩)](https://www.bilibili.com/video/BV1gg4y1T71C)
 - [16. Linux 操作系统](http://jyywiki.cn/OS/2023/build/lect16.ipynb)

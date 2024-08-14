@@ -1,8 +1,11 @@
 ---
-layout:     post
-categories: 控制理论相关
-title:      C 语言实现 PID 控制算法
-date:       2023-01-13
+title:      "C 语言实现 PID 控制算法"
+date:       "2023-01-13T19:01:48+05:30"
+lastmod:    "2023-01-13T19:01:48+05:30"
+draft:      true
+url:        /blog/pid-in-c.html
+layout:     "post"
+tags:       ["control theory", "c programming"]
 ---
 
 实时控制在嵌入式平台上完成，ARM 内核的 MCU 主流开发语言还是 C 语言，花点时间去实现一个通用的 PID 控制器是值得的。这里使用 webots 仿真一个平衡车来验证控制器实现的正确性。
