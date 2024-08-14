@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>C 语言实现 PID 控制算法 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.ca455b23498f4976d08b799839ce187d55027cf214eb4db0451fd447628253fb.css" type="text/css" integrity="sha256-ykVbI0mPSXbQi3mYOc4YfVUCfPIU602wRR/UR2KCU/s=" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">C 语言实现 PID 控制算法</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2023-01-13</p>
+        
+          <p>🔄 2023-01-13</p>
+        
+        <p>⌚ Reading time: 2 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/tags/control-theory'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">control theory</a>
+  
+    <a href='/tags/c-programming'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">c programming</a>
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <p>实时控制在嵌入式平台上完成，ARM 内核的 MCU 主流开发语言还是 C 语言，花点时间去实现一个通用的 PID 控制器是值得的。这里使用 webots 仿真一个平衡车来验证控制器实现的正确性。</p>
+<p>平衡车和倒立摆的原理基本一致，可以参考另一个倒立摆 MATLAB 仿真的文章。</p>
+<h2 id="pid-离散表达">PID 离散表达</h2>
+<p>一个使用 PID 控制器的控制系统结构如图</p>
+<!-- raw HTML omitted -->
+<p>其中 PID 控制器串在前向通路上，所以这是一个串联校正装置。PID 控制器内部的结构如下图</p>
+<!-- raw HTML omitted -->
+<p>数学表达式为</p>
+<p>$$
+u(t) = K_p e(t) + K_i \int e(t) \text{d}t + K_p \frac{\text{d}e(t)}{\text{d}t}
+$$</p>
+<p>这是个连续函数的表达式。计算机程序是离散时刻运行的，我们还需要得到离散化的表达式。也很容易，离散时间定义域里的求和就是连续时间的积分，离散的差分就是连续的微分。则离散时间定义域下 PID 控制器的表达式为</p>
+<p>$$
+u(k) = K_p e(k) + K_i \sum e(k) + K_p (e(k) - e(k-1)) \tag{1}
+$$</p>
+<p>式(1)就是<strong>位置式PID</strong>。</p>
+<p>相邻两次控制输出的增量为：</p>
+<p>$$
+\begin{array}{rcl}
+\Delta u(k) &amp;= &amp;u(k) - u(k-1)  \
+&amp;=&amp; K_p [e(k) - e(k-1) ] + K_i e(k) + K_d [e(k) - 2e(k-1) + e(k-2)] \
+\
+u(k) &amp;=&amp; u(k-1) + \Delta u(k) \
+\end{array}\tag{2}
+$$</p>
+<p>式(2)为<strong>增量式PID</strong>。</p>
+<h2 id="位置式-pid-代码实现">位置式 PID 代码实现</h2>
+<p>首先需要定义一个 PID 控制器的结构体，存放所有的相关参数，声明为 <code>pid_t</code> 类型</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> ref;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> feedback;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> output;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> kp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> ki;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> kd;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... 其他的 */</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">pid_t</span>;
+</span></span></code></pre></div><p>定义一个控制器可以用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">pid_t</span> controller;
+</span></span></code></pre></div><p>定义之后，还需要设置控制参数，当然可以直接修改结构体变量，但是还是写一个函数来实现，让主程序的逻辑更清晰</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pid_set_parameter</span>(<span style="color:#66d9ef">pid_t</span><span style="color:#f92672">*</span> pid, <span style="color:#66d9ef">double</span> kp, <span style="color:#66d9ef">double</span> ki, <span style="color:#66d9ef">double</span> kd)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>kp <span style="color:#f92672">=</span> kp;
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>ki <span style="color:#f92672">=</span> ki;
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>kd <span style="color:#f92672">=</span> kd;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>准备工作就这些。</p>
+<p>在实际的控制程序中，还需要一个函数来实现框中的部分，及算法本身：</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">pid_control</span>(<span style="color:#66d9ef">pid_t</span> <span style="color:#f92672">*</span>pid, <span style="color:#66d9ef">double</span> ref, <span style="color:#66d9ef">double</span> feedback)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>feedback <span style="color:#f92672">=</span> feedback;
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>ref <span style="color:#f92672">=</span> ref;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">=</span> pid<span style="color:#f92672">-&gt;</span>ref <span style="color:#f92672">-</span> pid<span style="color:#f92672">-&gt;</span>feedback;
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>err_sum <span style="color:#f92672">+=</span> pid<span style="color:#f92672">-&gt;</span>err;
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">=</span> pid<span style="color:#f92672">-&gt;</span>kp <span style="color:#f92672">*</span> pid<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                  pid<span style="color:#f92672">-&gt;</span>ki <span style="color:#f92672">*</span> pid<span style="color:#f92672">-&gt;</span>err_sum <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                  pid<span style="color:#f92672">-&gt;</span>kd <span style="color:#f92672">*</span> (pid<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">-</span> pid<span style="color:#f92672">-&gt;</span>err1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>err1 <span style="color:#f92672">=</span> pid<span style="color:#f92672">-&gt;</span>err;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pid<span style="color:#f92672">-&gt;</span>output;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="位置式-pid-算法测试">位置式 PID 算法测试</h2>
+<p>在 webots 搭一个平衡小车，使用上面的控制器实现位置控制。</p>
+<p>这是一个典型的三闭环串级 PID 控制结构，核心的控制代码如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;webots/robot.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;webots/motor.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;webots/inertial_unit.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;webots/position_sensor.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;math.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;pid.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> argv)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wb_robot_init</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... 其他设备初始化代码省略 */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* position pd controller */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> position_ref <span style="color:#f92672">=</span> <span style="color:#ae81ff">40.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> position_feedback <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pid_t</span> position_controller;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pid_set_parameter</span>(<span style="color:#f92672">&amp;</span>position_controller, <span style="color:#ae81ff">0.011</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.03</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pid_set_output_limit</span>(<span style="color:#f92672">&amp;</span>position_controller, <span style="color:#ae81ff">0.2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* velocity pd controller */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> velocity_ref <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> velocity_feedback <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pid_t</span> velocity_controller;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pid_set_parameter</span>(<span style="color:#f92672">&amp;</span>velocity_controller, <span style="color:#ae81ff">65.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">20.0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pid_set_output_limit</span>(<span style="color:#f92672">&amp;</span>velocity_controller, <span style="color:#ae81ff">10.0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* angle pd controller */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> angle_ref <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> angle_feedback <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pid_t</span> angle_controller;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">pid_set_parameter</span>(<span style="color:#f92672">&amp;</span>angle_controller, <span style="color:#ae81ff">0.008</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0.05</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">wb_robot_step</span>(TIME_STEP) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* ... 传感器数据获取代码省略 */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* position pd control.  */</span>
+</span></span><span style="display:flex;"><span>        position_feedback <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>position;
+</span></span><span style="display:flex;"><span>        velocity_ref <span style="color:#f92672">=</span> <span style="color:#a6e22e">pid_control</span>(<span style="color:#f92672">&amp;</span>position_controller, position_ref, position_feedback);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* velocity pd control.  */</span>
+</span></span><span style="display:flex;"><span>        velocity_feedback <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>velocity;
+</span></span><span style="display:flex;"><span>        angle_ref <span style="color:#f92672">=</span> <span style="color:#a6e22e">pid_control</span>(<span style="color:#f92672">&amp;</span>velocity_controller, velocity_ref, velocity_feedback);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* angle pd control.  */</span>
+</span></span><span style="display:flex;"><span>        angle_feedback <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>pitch;
+</span></span><span style="display:flex;"><span>        motor_torque <span style="color:#f92672">=</span> <span style="color:#a6e22e">pid_control</span>(<span style="color:#f92672">&amp;</span>angle_controller, angle_ref, angle_feedback);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wb_motor_set_torque</span>(motor_left, motor_torque);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wb_motor_set_torque</span>(motor_right, motor_torque);
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wb_robot_cleanup</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>控制效果如下：</p>
+<!-- raw HTML omitted -->
+<p>控制效果还是可以的。</p>
+<h2 id="其他">其他</h2>
+<p>上面只是实现了基本的位置式 PID 控制器。还有增量式的没有写。此外还有许多改进的 PID 算法如积分分离、微分先行等。</p>
+<p>都是以基本的PID为基础，框架就这样了，需要修改的是 <code>double pid_control(pid_t *pid, double ref, double feedback)</code> 这个函数的内部实现。</p>
+<p>后面有空再搞搞。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/pid-in-c.html";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.a2e7a3db4f1b58e7616cfd31a099340a207d5b99d96df87f525f17c604e184c1.js" integrity="sha256-ouej208bWOdhbP0xoJk0CiB9W5nZbfh/Ul8XxgThhME=" crossorigin="anonymous"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  
+</body>
+
+</html>

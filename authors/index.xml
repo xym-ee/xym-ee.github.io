@@ -15,5 +15,33 @@
       <guid>https://xym.work/authors/nayan-seth/</guid>
       <description></description>
     </item>
+    <item>
+      <title>Author 3</title>
+      <link>https://xym.work/authors/author-3/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Author 4</title>
+      <link>https://xym.work/authors/author-4/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-4/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Author 5</title>
+      <link>https://xym.work/authors/author-5/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>John Doe</title>
+      <link>https://xym.work/authors/john-doe/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/john-doe/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

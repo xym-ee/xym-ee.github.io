@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C Programming on xym-ee</title>
+    <link>https://xym.work/tags/c-programming/</link>
+    <description>Recent content in C Programming on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Jan 2023 19:01:48 +0530</lastBuildDate>
+    <atom:link href="https://xym.work/tags/c-programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C 语言实现 PID 控制算法</title>
+      <link>https://xym.work/blog/pid-in-c.html</link>
+      <pubDate>Fri, 13 Jan 2023 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/blog/pid-in-c.html</guid>
+      <description>实时控制在嵌入式平台上完成，ARM 内核的 MCU 主流开发语言还是 C 语言，花点时间去实现一个通用的 PID 控制器是值得的。这里使用 webots 仿真一个平衡车来验证控制器实现的正确性。&#xA;平衡车和倒立摆的原理基本一致，可以参考另一个倒立摆 MATLAB 仿真的文章。&#xA;PID 离散表达 一个使用 PID 控制器的控制系统结构如图&#xA;其中 PID 控制器串在前向通路上，所以这是一个串联校正装置。PID 控制器内部的结构如下图&#xA;数学表达式为&#xA;$$ u(t) = K_p e(t) + K_i \int e(t) \text{d}t + K_p \frac{\text{d}e(t)}{\text{d}t} $$&#xA;这是个连续函数的表达式。计算机程序是离散时刻运行的，我们还需要得到离散化的表达式。也很容易，离散时间定义域里的求和就是连续时间的积分，离散的差分就是连续的微分。则离散时间定义域下 PID 控制器的表达式为&#xA;$$ u(k) = K_p e(k) + K_i \sum e(k) + K_p (e(k) - e(k-1)) \tag{1} $$&#xA;式(1)就是位置式PID。&#xA;相邻两次控制输出的增量为：&#xA;$$ \begin{array}{rcl} \Delta u(k) &amp;amp;= &amp;amp;u(k) - u(k-1) \ &amp;amp;=&amp;amp; K_p [e(k) - e(k-1) ] + K_i e(k) + K_d [e(k) - 2e(k-1) + e(k-2)] \ \ u(k) &amp;amp;=&amp;amp; u(k-1) + \Delta u(k) \ \end{array}\tag{2} $$</description>
+    </item>
+  </channel>
+</rss>
