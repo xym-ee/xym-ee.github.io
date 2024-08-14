@@ -2,7 +2,7 @@
 title:      "基于Simscape的倒立摆控制算法仿真"
 date:       "2021-08-19T19:01:48+05:30"
 lastmod:    "2021-08-19T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/simscape.html
 layout:     "post"
 tags:       ["control theory","simulation","MATLAB"]

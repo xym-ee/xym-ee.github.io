@@ -2,7 +2,7 @@
 title:      "PID控制器、串联校正装置理论分析和性能对比"
 date:       "2021-11-19T19:01:48+05:30"
 lastmod:    "2021-11-19T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/pid-controller.html
 layout:     "post"
 tags:       ["control theory"]

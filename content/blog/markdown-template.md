@@ -1,7 +1,7 @@
 ---
 title: "Markdown Template"
 date: "1999-01-01T19:01:48+05:30"
-draft: true
+draft: false
 params:
   slug: "markdown-template"
 layout: "post"

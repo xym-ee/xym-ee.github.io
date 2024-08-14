@@ -2,7 +2,7 @@
 title:      "C 语言实现 PID 控制算法"
 date:       "2023-01-13T19:01:48+05:30"
 lastmod:    "2023-01-13T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/pid-in-c.html
 layout:     "post"
 tags:       ["control theory", "c programming"]

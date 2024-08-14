@@ -2,7 +2,7 @@
 title:      "计算机系统实践：Cheat Engine开发游戏修改器"
 date:       "2022-01-28T19:01:48+05:30"
 lastmod:    "2022-01-28T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/cheat-engine.html
 layout:     "post"
 tags:       ["computer technology","embedded"]

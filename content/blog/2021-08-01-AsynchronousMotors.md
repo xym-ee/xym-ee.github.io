@@ -2,7 +2,7 @@
 title:      "三相异步电动机矢量控制 MATLAB 仿真"
 date:       "2022-01-18T19:01:48+05:30"
 lastmod:    "2022-01-18T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/motor-foc.html
 layout:     "post"
 tags:       ["control theory","simulation","MATLAB"]

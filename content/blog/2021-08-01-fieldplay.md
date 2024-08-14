@@ -2,7 +2,7 @@
 title:      "二维向量场可视化工具与相平面图"
 date:       "2021-10-31T19:01:48+05:30"
 lastmod:    "2021-10-31T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/field-play.html
 layout:     "post"
 tags:       ["control theory"]

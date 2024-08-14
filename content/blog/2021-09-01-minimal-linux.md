@@ -2,7 +2,7 @@
 title:      "构建最小 Linux 系统"
 date:       "2023-07-17T19:01:48+05:30"
 lastmod:    "2023-07-17T19:01:48+05:30"
-draft:      true
+draft:      false
 url:        /blog/minimal-linux.html
 layout:     "post"
 tags:       ["computer technology","embedded"]
