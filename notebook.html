@@ -82,71 +82,121 @@
       <div class="flex flex-col gap-4 w-full">
         <hr />
         <div class="prose prose-invert max-w-full">
-  <h3 :target="_blank" id="计算机技术与嵌入式开发httpsembeddedxymwork"><a href="https://embedded.xym.work"><strong>计算机技术与嵌入式开发</strong></a></h3>
+  <p>我的学习笔记，点击大标题进入查看，笔记状态</p>
 <ul>
-<li><input disabled="" type="checkbox"> MCU 裸机开发，8051、MSP430、arm 内核的 STM32、NXP i.mx rt 等
+<li>⚪ 仅框架，待整理</li>
+<li>🟡 有内容，待完善</li>
+<li>🟢 内容完整</li>
+</ul>
+<h3 id="计算机技术与嵌入式开发httpsembeddedxymwork"><a href="https://embedded.xym.work"><strong>计算机技术与嵌入式开发</strong></a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> 芯片使用，外设，固件库</li>
-<li><input disabled="" type="checkbox"> 裸机软件框架，系统架构，(状态机、订阅发布、事件触发)</li>
+<li>🟡 1-1.编程语言、编译过程、数据结构与算法基础</li>
+<li>🟡 1-2.计算机系统基础 CSAPP</li>
+<li>🟡 1-3.数字电路、计算机组成原理、steam：图灵完备</li>
+<li>🟢 1-4.计算机网络</li>
+<li>🟢 1-5.操作系统原理</li>
+<li>🟡 2-1.裸机开发，arm cortex-m cortex-a7
+<ul>
+<li>⚪ 通信接口</li>
+<li>⚪ arm 芯片开发，基于 IDE、gcc 裸机开发</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> 中等规模系统开发，
+<li>🟡 2-2.中等规模系统开发，编程思维(C 语言 OOP 思想)
 <ul>
-<li><input disabled="" type="checkbox"> 裸机 LVGL 图形库，编程思维(C 语言 OOP 思想)</li>
-<li><input disabled="" type="checkbox"> 基于 rtos 开发，多线程，rt-thread</li>
+<li>⚪ 裸机 LVGL 图形库</li>
+<li>⚪ 裸机开发的软件框架，系统架构，(状态机、订阅发布、事件触发、任务调度)</li>
+<li>🟡 基于 rtos 开发 (rt-thread 和 freeRTOS)</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> ARMv7-M 架构与 RTOS 原理
+<li>🟡 2-3.ARMv7-M 架构与 RTOS 原理
 <ul>
-<li><input disabled="" type="checkbox"> Cortex-M3 内核，指令集、中断、体系结构等</li>
-<li><input disabled="" type="checkbox"> rt-thread 内核、驱动</li>
+<li>🟡 Cortex-M3 内核，指令集、中断、体系结构等</li>
+<li>🟡 rt-thread 内核、驱动</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> linux 应用开发</li>
-<li><input disabled="" type="checkbox"> Linux 驱动开发
+<li>⚪ 3-1.linux 应用开发(系统编程+GUI)
 <ul>
-<li><input disabled="" type="checkbox"> linux 系统构建：bootloader、kernel、device tree、root filesystem</li>
-<li><input disabled="" type="checkbox"> 各种驱动框架</li>
+<li>⚪ ubuntu 相关、linux 使用、shell 编程、vim、gcc、makefile</li>
+<li>⚪ linux 系统编程、网络编程、多线程</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> 计算机原理：由逻辑门到计算机，组成原理、上古神机IBM5150(微机原理及单片机)、体系结构</li>
-<li><input disabled="" type="checkbox"> 计算机语言和程序设计：C/C++和汇编、编译过程、数据结构和算法、软件工程，各种基本工具的使用</li>
-<li><input checked="" disabled="" type="checkbox"> 操作系统原理：附着在硬件上的一层软件，Linux 使用</li>
-<li><input disabled="" type="checkbox"> 计算机网络</li>
-</ul>
-<h3 :target="_blank" id="控制理论与机器人开发httpsxymworkrobot"><a href="https://xym.work/robot"><strong>控制理论与机器人开发</strong></a></h3>
+<li>🟢 3-2.linux 镜像构建：bootloader、kernel、root filesystem</li>
+<li>🟡 3-3.linux 驱动开发
 <ul>
-<li><input disabled="" type="checkbox"> 基础数学：微积分、线性代数、概率统计、复变函数与积分变换、常微分方程；</li>
-<li><input disabled="" type="checkbox"> 控制理论基础：经典控制理论、离散系统、非线性初步、状态空间理论初步</li>
-<li><input disabled="" type="checkbox"> 数学进阶：矩阵分析、泛函分析、优化理论</li>
-<li><input disabled="" type="checkbox"> 控制理论进阶：线性系统理论、最优控制、状态估计</li>
-<li><input disabled="" type="checkbox"> 智能控制方法</li>
-<li>移动机器人相关(自主移动机器人导论)
-<ul>
-<li>机器人运动、底盘运动学与逆运动学、运动控制</li>
-<li>感知、定位与地图、规划和导航</li>
-</ul>
-</li>
-<li>机械臂(机器人学导论)
-<ul>
-<li>空间描述与坐标变换，正逆运动学，动力学，轨迹生成</li>
-<li>机械臂控制：线性控制、非线性控制、力控制、力/位置混合控制</li>
-</ul>
-</li>
-<li>机器人开发相关
-<ul>
-<li>ROS，ROS2</li>
-<li>webots、vrep、gazebo</li>
+<li>🟢 字符设备驱动</li>
+<li>🟢 设备树</li>
 </ul>
 </li>
 </ul>
-<h3 :target="_blank" id="电子学基础与电机控制httpsxymworkelectronics"><a href="https://xym.work/electronics"><strong>电子学基础与电机控制</strong></a></h3>
+<h3 id="控制理论与机器人开发httpscontrolxymwork"><a href="https://control.xym.work"><strong>控制理论与机器人开发</strong></a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> 基本元件与电路基本定理；模拟电路基础，信号放大、反馈放大、波形功率等实用电路</li>
-<li><input disabled="" type="checkbox"> 数字电路：布尔代数、组合逻辑、存储电路、时序逻辑；数字和模拟混合电路</li>
-<li><input disabled="" type="checkbox"> 高频、低功耗、传感器与检测技术(测量技术与误差)</li>
-<li><input disabled="" type="checkbox"> 电机原理，电力电子技术：整流、逆变、斩波、变频</li>
-<li><input checked="" disabled="" type="checkbox"> 电机控制技术：DCM双闭环、交流电机FOC</li>
+<li>🟡 基础数学：微积分、线性代数、概率统计、复变函数与积分变换、常微分方程；</li>
+<li>🟢 控制理论基础：经典控制理论、离散系统、非线性初步、状态空间理论初步</li>
+<li>🟡 数学进阶：矩阵分析、泛函分析、优化理论、数值分析</li>
+<li>🟡 控制理论进阶：线性系统理论、最优控制、状态估计</li>
+<li>⚪ 智能控制方法</li>
+<li>🟡 自主移动机器人，运动学、运动控制，感知、定位、规划、导航初步</li>
+<li>🟡 机器人学导论
+<ul>
+<li>🟢 空间描述与坐标变换，正逆解</li>
+<li>🟢 雅可比矩阵，机械臂动力学</li>
+<li>🟡 轨迹生成，机械臂控制</li>
+</ul>
+</li>
+<li>🟡 机器人开发相关技术
+<ul>
+<li>🟡 仿真工具 webots</li>
+<li>🟡 ROS, ROS2</li>
+</ul>
+</li>
+<li>⚪ 开发实例</li>
+</ul>
+<h3 id="电子学基础与电机控制httpselectronicsxymwork"><a href="https://electronics.xym.work"><strong>电子学基础与电机控制</strong></a></h3>
+<ul>
+<li>🟡 1.基本元件与电路基本定理(电路分析初步)
+<ul>
+<li>🟡 电路模型、纯电阻电路、电路定理</li>
+<li>🟡 储能元件一阶二阶电路瞬态分析*(二阶控制系统实例)</li>
+<li>⚪ <em>交流电路</em>、<em>正弦稳态电路</em>、<em>三相电路</em></li>
+<li>🟡 半导体器件：二极管、晶体管、场效应管</li>
+</ul>
+</li>
+<li>🟡 2.模拟电路基础*
+<ul>
+<li>🟢 小信号放大：晶体管放大、场效应管放大、集成运放放大</li>
+<li>🟡 自动控制的思想：频率响应、信号放大中的反馈(自控精髓，模电核心，也是控制系统的实例)</li>
+<li>⚪ 实用电路：信号运算、波形发生、信号转换、功率放大、直流电源</li>
+</ul>
+</li>
+<li>⚪ 3.数字电路
+<ul>
+<li><input disabled="" type="checkbox"> 基础知识：数制码制和布尔代数、逻辑门</li>
+<li><input disabled="" type="checkbox"> 组合逻辑电路分析和设计方法(模块化与分层设计在硬件上的可视化)
+<ul>
+<li><input disabled="" type="checkbox"> 常用模块：编码器、译码器、加法器</li>
+<li><input disabled="" type="checkbox"> 存储电路：锁存器、触发器、寄存器、存储器</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 时序逻辑电路分析和设计方法(程序也是状态机)
+<ul>
+<li><input disabled="" type="checkbox"> 常用模块：移位寄存器、计数器、脉冲发生</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>⚪ 4.数字和模拟(I/O接口后面的东西)
+<ul>
+<li><input disabled="" type="checkbox"> 数字电路里的模拟因素：门电路实现、CMOS和TTL、传输线问题</li>
+<li><input disabled="" type="checkbox"> 模拟与数字的转换(物理世界与计算机的桥梁)</li>
+<li><input disabled="" type="checkbox"> 常见模数混合电路：施密特触发、单稳态、多谐震荡、555定时器、锁相环、伪随机比特</li>
+</ul>
+</li>
+<li>🟢 5.电机与电机控制
+<ul>
+<li>🟢 直流电机控制：电机特性、开环控制、转速闭环、转速电流双闭环</li>
+<li>🟢 交流电机控制，异步电机、同步电机 FOC 控制</li>
+</ul>
+</li>
 </ul>
 
 </div>
