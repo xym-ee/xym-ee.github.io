@@ -9,8 +9,9 @@ url: "/about.html"
 
 <!-- 单页 -->
 
+&nbsp;
 
-### 教育与工作经历
+#### 教育与工作经历
 
 |<img src="./images/about/timeline.svg" height="20px" />|<img src="./images/about/id-card.svg" height="20px" />|<img src="./images/about/info.svg" height="20px" />|
 |:-:|:-:|:-:|
