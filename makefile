@@ -7,10 +7,3 @@ pub:
 	hugo --baseURL="https://xym.work"
 
 
-dir:
-	mkdir -p layouts/partials/third_party_js
-
-
-
-
-
