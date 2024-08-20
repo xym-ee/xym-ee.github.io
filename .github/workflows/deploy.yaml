@@ -1,0 +1,30 @@
+
+name: Deploy Hugo site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - hugodev  # 触发部署的分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.131.0'  # 或者指定版本，例如 '0.88.1'
+
+    - name: Build the website
+      run: hugo --baseURL="https://xym.work"  # 生成静态文件
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: pub  # 部署到的分支
+        publish_dir: ./public  # Hugo 生成的静态文件目录
