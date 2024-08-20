@@ -2,6 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xym.work/blog/hugowebsite.html</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/computer-technology/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/frp/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/git/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/hugo/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/nat/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/network/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/nginx/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/openwrt/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/post/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/shell/</loc>
+    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://xym.work/about.html</loc>
     <lastmod>2024-03-28T15:00:00+00:00</lastmod>
   </url><url>
@@ -22,9 +55,6 @@
   </url><url>
     <loc>https://xym.work/blog/</loc>
     <lastmod>2024-03-28T15:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://xym.work/tags/computer-technology/</loc>
-    <lastmod>2023-07-17T19:01:48+05:30</lastmod>
   </url><url>
     <loc>https://xym.work/tags/embedded/</loc>
     <lastmod>2023-07-17T19:01:48+05:30</lastmod>

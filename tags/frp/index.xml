@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Frp on xym-ee</title>
+    <link>https://xym.work/tags/frp/</link>
+    <description>Recent content in Frp on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Aug 2024 13:00:00 +0800</lastBuildDate>
+    <atom:link href="https://xym.work/tags/frp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[post]静态网站搭建中有关计算机网络相关的内容</title>
+      <link>https://xym.work/blog/hugowebsite.html</link>
+      <pubDate>Tue, 20 Aug 2024 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/hugowebsite.html</guid>
+      <description>0. 介绍 需求 1：我需要有个个人网站 hugo 、github pages 需求 2：我需要在局域网中开发和调试 端口转发，NAT 需求 3：我想要更快的访问速度 云服务器部署网页，nginx 需求 4：我想在外网访问内网的机器开发和调试 内网穿透，frp 需求 5: 我还想要更好的体验 软路由、定时任务。问问 chatgpt 1. hogo 生成静态页面 在 ubuntu 环境下开发，ubuntu 安装于虚拟机中，采用桥接网卡方式上网。IP 10.0.0.22&#xA;使用了 terminal-hugo-theme 主题，按照 README 中的说明，在本地生成静态页面并启动一个本地的网页服务器，&#xA;hugo server --buildDrafts --disableFastRender --gc --ignoreCache --noHTTPCache --forceSyncStatic --verbose -w 指令的参数&#xA;--buildDrafts: 生成静态页面时为草稿的内容 --disableFastRender: 禁用快速渲染(只会重新生成发生变化的部分)，确保在每次更改时全部重新生成 --gc: 垃圾回收，清理未使用的文件 --ignoreCache: 强制忽略缓存并重新构建所有文件，确保生成的时最新的 --noHTTPCache: 禁用 HTTP 缓存，强制浏览器从服务器加载站点，确保从浏览器看的到是最新的 --forceSyncStatic: 强制同步静态文件（例如图片、CSS、JS），即使 Hugo 认为它们没有更改。确保所有静态资源都是最新的 --verbose: 输出更多信息 -w: 是 --watch 的缩写，监视文件系统的更改，并在文件修改时自动重新构建站点 hugo 的本地网页服务器监听 1313 端口，生成后，在 ubuntu 的浏览器中访问 http://127.</description>
+    </item>
+  </channel>
+</rss>
