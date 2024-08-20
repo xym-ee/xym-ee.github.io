@@ -85,7 +85,7 @@
         
           <p>🔄 2024-08-20</p>
         
-        <p>⌚ Reading time: 4 min</p>
+        <p>⌚ Reading time: 5 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -115,6 +115,9 @@
   
     <a href='/tags/git'
     class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">git</a>
+  
+    <a href='/tags/github'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">github</a>
   
     <a href='/tags/shell'
     class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">shell</a>
@@ -171,10 +174,46 @@
 <li><strong><code>-w</code></strong>: 是 <code>--watch</code> 的缩写，监视文件系统的更改，并在文件修改时自动重新构建站点</li>
 </ul>
 <p>hugo 的本地网页服务器监听 1313 端口，生成后，在 ubuntu 的浏览器中访问 <code>http://127.0.0.1:1313</code> 可以看到网页内容。</p>
-<h2 id="2-github-pages-网页部署">2. GitHub pages 网页部署</h2>
+<h2 id="2-github-网页部署">2. GitHub 网页部署</h2>
 <p>生成最终要发布的网页的指令</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>hugo --baseURL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://xym.work&#34;</span>
 </span></span></code></pre></div><p>在 public 文件夹里就生成了网站所有的内容。将里面的内容 push 到 github 上去，在仓库设置里选择将根目录作为要发布的网站，即可在 <code>https://xxxx.github.io</code> 看到内容。我使用了自己的域名，在域名控制台添加了一个 CNAME 解析到了 xxxx.github.io。然后再 github 中设置一下即可。</p>
+<p>网站源码也有托管的需求，因此我的网站的源码仓库有两个分支 <code>hugodev</code> 和 <code>pub</code>。hugodev 存放了生成静态网站的原始内容，pub 分支为生成的静态网站资源。github 有 github actions 机制，可以将一些工作自动化完成。</p>
+<p>我的需求：在 hugodev 分支 push 新内容上去以后，自动运行 hugo 生成静态网站，并发布到 pub 分支完成部署。</p>
+<p>在 hugodev 分支下创建一个 action 工作流</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Hugo site to GitHub Pages</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">on</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">push</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">branches</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">hugodev </span> <span style="color:#75715e"># 触发部署的分支</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">deploy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-22.04</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout the repository</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Hugo</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peaceiris/actions-hugo@v2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">hugo-version</span>: <span style="color:#e6db74">&#39;0.131.0&#39;</span>  <span style="color:#75715e"># 或者指定版本，例如 &#39;0.88.1&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build the website</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">hugo --baseURL=&#34;https://xym.work&#34; </span> <span style="color:#75715e"># 生成静态文件</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Copy CNAME file</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">run</span>: <span style="color:#ae81ff">cp CNAME public/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy to GitHub Pages</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">peaceiris/actions-gh-pages@v3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">with</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">github_token</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">publish_branch</span>: <span style="color:#ae81ff">pub </span> <span style="color:#75715e"># 部署到的分支</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">publish_dir</span>: <span style="color:#ae81ff">./public </span> <span style="color:#75715e"># Hugo 生成的静态文件目录</span>
+</span></span></code></pre></div><p>然后只需要在本地修改好网页，预览没问题后，push 原始内容到 hugodev 分支即可。</p>
 <h2 id="3-调试需求内网中访问网站">3. 调试需求：内网中访问网站</h2>
 <p>我通常使用 windows 下的 vscode ssh 到虚拟机的 ubuntu 来编辑文字。windows 主机和虚拟机 ubuntu 在同一个子网。windows ip 为 <code>10.0.0.10/24</code> ，ubuntu ip 为  <code>10.0.0.22/24</code>，在 windows 终端中 <code>ssh user@10.0.0.22</code> 即可。</p>
 <p>为了能直接在 windows 的浏览器中访问到网页的内容，hugo 启动命令还需要增加一个参数</p>
@@ -281,8 +320,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 重启应用</span>
 </span></span><span style="display:flex;"><span>sudo systemctl restart nginx
 </span></span></code></pre></div><p>这里也要给相应的权限。</p>
-<p>然后就可以在 <code>http://ip</code> 直接看到网页内容了。</p>
-<p>有域名的话，可以将域名解析到服务器 ip，但是需要完成备案。</p>
+<p>然后就可以在 <code>http://ip</code> 直接看到网页内容了。有域名的话，可以将域名解析到服务器 ip，但是需要完成备案。</p>
+<p>网站源码以及生成的静态页面可以托管在 github，只需要让托管网站静态页面有新的 push 动作时，云服务自动同步就可以实现全自动的更新。这个事情可以使用 github webhook 实现。等我的网站备案完成后再试试，这个事情应该是可以做的。</p>
+<p>这样就可以实现我在本地更改网站内容，然后本地预览，确认没问题后，push 到github，然后github完成静态内容生成，并通知云服务器同步内容。</p>
 <h2 id="5-强行创造的调试需求在公网访问内网的-hugo-server">5. 强行创造的调试需求：在公网访问内网的 hugo server</h2>
 <p>新的需求：如果回家了以后，还想像在学校一样 ssh 到教研室电脑，然后直接用教育网的 ip 访问网页，该怎么办呢？</p>
 <p>这时候其实源码放在 github ，搭另一套环境可能是比较好的选择。但是买了云服务器，强行创造这个需求：公网 ssh 内网的机器。</p>
