@@ -15,12 +15,12 @@ mv ./public ../
 
 git switch pub
 
-cp -f ../public/* ./
+cp -rf ../public/* ./
 
 git add .
 git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
 git push
 
-
+git switch pub 
 
 
