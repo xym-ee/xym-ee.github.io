@@ -3,9 +3,9 @@ title:      "[post]静态网站搭建中有关计算机网络相关的内容"
 date:       "2024-08-20T13:00:00+05:30"
 lastmod:    "2024-08-20T13:00:00+05:30"
 draft:      false
-url:        /blog/hugo-website.html
+url:        /blog/hugowebsite.html
 layout:     "post"
-tags:       ["post","computer technology","network","hugo","NAT","frp","nginx"，"git","shell","openwrt"]
+tags:       ["post","computer technology","network","hugo","NAT","frp","nginx","git","shell","openwrt"]
 ---
 
 ## 0. 介绍
