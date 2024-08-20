@@ -1,13 +1,22 @@
 #!/bin/sh
 
+
+# deploy
+git switch hugodev
+
 git add .
 git commit -m "update"
+git push
 
+mv ./public ../
 
+git switch pub
 
+cp -f ../public/* ./
 
-
-
+git add .
+git commit -m "$(date +'%Y-%m-%d %H:%M:%S')"
+git push
 
 
 
