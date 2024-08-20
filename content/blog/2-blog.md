@@ -5,7 +5,7 @@ lastmod:    "2024-08-20T13:00:00+08:00"
 draft:      false
 url:        /blog/hugowebsite.html
 layout:     "post"
-tags:       ["post","computer technology","network","hugo","NAT","frp","nginx","git","shell","openwrt"]
+tags:       ["post","computer technology","network","hugo","NAT","frp","nginx","git","github","shell","openwrt"]
 ---
 
 ## 0. 介绍
@@ -44,7 +44,7 @@ hugo server --buildDrafts --disableFastRender --gc --ignoreCache --noHTTPCache -
 
 hugo 的本地网页服务器监听 1313 端口，生成后，在 ubuntu 的浏览器中访问 `http://127.0.0.1:1313` 可以看到网页内容。
 
-## 2. GitHub pages 网页部署
+## 2. GitHub 网页部署
 
 生成最终要发布的网页的指令
 
@@ -53,6 +53,49 @@ hugo --baseURL="https://xym.work"
 ```
 
 在 public 文件夹里就生成了网站所有的内容。将里面的内容 push 到 github 上去，在仓库设置里选择将根目录作为要发布的网站，即可在 `https://xxxx.github.io` 看到内容。我使用了自己的域名，在域名控制台添加了一个 CNAME 解析到了 xxxx.github.io。然后再 github 中设置一下即可。
+
+网站源码也有托管的需求，因此我的网站的源码仓库有两个分支 `hugodev` 和 `pub`。hugodev 存放了生成静态网站的原始内容，pub 分支为生成的静态网站资源。github 有 github actions 机制，可以将一些工作自动化完成。
+
+我的需求：在 hugodev 分支 push 新内容上去以后，自动运行 hugo 生成静态网站，并发布到 pub 分支完成部署。
+
+在 hugodev 分支下创建一个 action 工作流
+
+```yaml
+name: Deploy Hugo site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - hugodev  # 触发部署的分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.131.0'  # 或者指定版本，例如 '0.88.1'
+
+    - name: Build the website
+      run: hugo --baseURL="https://xym.work"  # 生成静态文件
+
+    - name: Copy CNAME file
+      run: cp CNAME public/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: pub  # 部署到的分支
+        publish_dir: ./public  # Hugo 生成的静态文件目录
+```
+
+然后只需要在本地修改好网页，预览没问题后，push 原始内容到 hugodev 分支即可。
 
 ## 3. 调试需求：内网中访问网站
 
@@ -172,9 +215,11 @@ sudo systemctl restart nginx
 
 这里也要给相应的权限。
 
-然后就可以在 `http://ip` 直接看到网页内容了。
+然后就可以在 `http://ip` 直接看到网页内容了。有域名的话，可以将域名解析到服务器 ip，但是需要完成备案。
 
-有域名的话，可以将域名解析到服务器 ip，但是需要完成备案。
+网站源码以及生成的静态页面可以托管在 github，只需要让托管网站静态页面有新的 push 动作时，云服务自动同步就可以实现全自动的更新。这个事情可以使用 github webhook 实现。等我的网站备案完成后再试试，这个事情应该是可以做的。
+
+这样就可以实现我在本地更改网站内容，然后本地预览，确认没问题后，push 到github，然后github完成静态内容生成，并通知云服务器同步内容。
 
 ## 5. 强行创造的调试需求：在公网访问内网的 hugo server
 
