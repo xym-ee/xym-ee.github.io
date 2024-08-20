@@ -1,9 +1,9 @@
 ---
 title:      "[post]静态网站搭建中有关计算机网络相关的内容"
-date:       "2024-08-20T19:01:48+05:30"
-lastmod:    "2024-08-20T19:01:48+05:30"
+date:       "2024-08-20T13:00:00+05:30"
+lastmod:    "2024-08-20T13:00:00+05:30"
 draft:      false
-url:        /blog/frp.html
+url:        /blog/hugo-website.html
 layout:     "post"
 tags:       ["post","computer technology","network","hugo","NAT","frp","nginx"，"git","shell","openwrt"]
 ---
@@ -295,4 +295,8 @@ gpt 可以提高工作效率。在 nginx 配置时，遇到了问题，服务器
 向 gpt 提出合适的问题，会大大提高工作效率。
 
 好像南京联通宽带能免费给个公网 ip，看来明年的宽带要换联通了。
+
+黑神话悟空今天上线了，国产之光，下载的时候再去刷刷视频。
+
+
 
