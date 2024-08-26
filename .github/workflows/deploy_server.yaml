@@ -1,0 +1,18 @@
+name: Deploy to Server
+
+# 当 `pub` 分支发生 push 操作时触发
+on:
+  push:
+    branches:
+      - pub
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Pull the latest changes
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@150.158.9.107 "cd cd /home/ubuntu/xym-ee.github.io && git pull origin pub && systemctl reload nginx"
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
