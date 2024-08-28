@@ -5,7 +5,8 @@ on:
   push:
     branches:
       - hugodev  # 触发部署的分支
-
+  workflow_dispatch:  # 允许手动触发
+  
 jobs:
   deploy:
     runs-on: ubuntu-22.04
