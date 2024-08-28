@@ -1525,3 +1525,20 @@ svg {
     width: 66.666667%;
   }
 }
+
+.tooltip {
+  position: absolute;
+  display: none; /* 初始状态下隐藏 */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.tooltip img {
+  width: 200px; /* 可以根据需要调整图片大小 */
+  height: auto;
+}
+
+

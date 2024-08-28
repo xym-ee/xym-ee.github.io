@@ -1,0 +1,41 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon1 = document.getElementById('svgwechat');
+      const tooltip1 = document.getElementById('wechattip');
+
+      icon1.addEventListener('mouseenter', function(event) {
+        const rect = icon1.getBoundingClientRect();
+
+        // 设置悬浮窗显示在SVG图标正下方
+        tooltip1.style.left = `${rect.left + window.scrollX - 100}px`;
+        tooltip1.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip1.style.display = 'block';
+      });
+
+      icon1.addEventListener('mouseleave', function() {
+        tooltip1.style.display = 'none';
+      });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon2 = document.getElementById('svgqq');
+      const tooltip2 = document.getElementById('qqtip');
+
+      icon2.addEventListener('mouseenter', function(event) {
+        const rect = icon2.getBoundingClientRect();
+
+        // 设置悬浮窗显示在SVG图标正下方
+        tooltip2.style.left = `${rect.left + window.scrollX -100 }px`;
+        tooltip2.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip2.style.display = 'block';
+      });
+
+      icon2.addEventListener('mouseleave', function() {
+        tooltip2.style.display = 'none';
+      });
+    });
+</script>
