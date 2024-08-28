@@ -2,6 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xym.work/blog/data-collector-rt.html</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/iot/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/project/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/rt-thread/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/sensor/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/socket/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/stm32/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/w5500/</loc>
+    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://xym.work/blog/hugowebsite.html</loc>
     <lastmod>2024-08-20T13:00:00+08:00</lastmod>
   </url><url>

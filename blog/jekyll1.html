@@ -107,7 +107,10 @@
 <p>为什么我会想搭一个自己的网站呢？</p>
 <p>首先是经验积累。把做过的东西像集卡游戏一样收集起来也是一件挺好玩的事情。其次内容洁癖，要对自己的内容有绝对的控制权，不允许有广告这种不可控内容出现在自己的页面上。</p>
 <p>基于以上的想法，商业博客基本上就被排除掉了。一开始我用的是GitHub，<code>.md</code>文档可以在GitHub网页上直接展示，有一半博客的功能，而且页面相比CSDN之类的足够干净。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/github_md_doc.jpg" width=400px border=1>
+    <figcaption> 一个小项目总结 </figcaption>
+</figure>
 <p>用了两天以后发现，在网页上只能显示文字和图片，就像上面这样。在本地的VS Code上可以通过插件实现latex公式，然而网页打开就是一串代码，当然截图插入也是个方法，最重要的是，图片大小不可控。在使用GitHub的这几天，我发现有许多人都有基于Github Pages的自己的主页，可以实现各种功能，这就正好和我的需求对上了，于是经过几天试验，有了目前这个网站。</p>
 <h2 id="2整体设计思路">2.整体设计思路</h2>
 <p>我的主页的内容按照下面这几个部分来设计的：</p>
@@ -120,18 +123,24 @@
 <h2 id="3方案实现">3.方案实现</h2>
 <h3 id="31-github-pages是什么">3.1 GitHub Pages是什么</h3>
 <p>我的GitHub ID是<a href="https://github.com/1xyMeng">@1xyMeng</a>{:target=&quot;_blank&quot;}，新建一个名为<a href="https://github.com/1xyMeng/1xyMeng.github.io">1xyMeng.github.io</a>{:target=&quot;_blank&quot;}的仓库，在仓库<strong>Setting</strong>选项卡里的<strong>GitHub Pages</strong>进行如下设置</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/githubpages.jpg" width=360 border=1>
+</figure>
 <p>这时候<a href="">1xyMeng.github.io</a>这个地址已经是一个可以访问的网站了。再新建一个随便什么名字的仓库，和上面一样的设置</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/githubpages1.jpg" width=360 border=1>
+</figure>
 <p>这时候<a href="">1xyMeng.github.io/learning</a>也是一个可以访问的网站了，而且对比一下这两个地址，很有意思，找到一点感觉了。</p>
 <p>这时候如果在1xyMeng.github.io仓库的<code>README.md</code>里面加一行</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>[<span style="color:#f92672">点击跳转</span>](<span style="color:#a6e22e">https://1xyMeng.github.io/learning</span>)
 </span></span></code></pre></div><p>使用浏览器访问<a href="https://1xyMeng.github.io/">1xyMeng.github.io</a>，可以看到多出来的一行内容，点一下果然会跳到learning页面。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/githubpages2.jpg" width=320px border=1 >
+</figure>
 <p>以上就是我的网站的最基本的逻辑。把仓库里的内容变成一个可以访问的网页就是GitHub Pages帮我们办到的事情。</p>
 <blockquote>
 <p>注1：修改了文件后，需要等几分钟，毕竟GitHub Pages帮我们办事情也是要花时间的，在仓库右侧<strong>Environments</strong>可以查看当前状态。
-<!-- raw HTML omitted --></p>
+<img src="../images/deployments.jpg" width=260px border=1></p>
 </blockquote>
 <blockquote>
 <p>注2：markdown语法</p>
@@ -142,7 +151,9 @@
 <blockquote>
 <p>斜体部分暂时不明白没关系，后面还会详细的解释这个思想。</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/跳转设计.jpg" width=330px >
+</figure>
 <p>上图展示了4个Github代码仓库之间的关系，每个代码仓库都对应本地的一个文件夹，因此本地有4个同名文件夹，这里还有个本地与github的同步问题，后面<a href="#5%E5%B7%A5%E4%BD%9C%E6%B5%81">工作流</a>有介绍。</p>
 <p>至于仓库里面的代码，当然是找现成的拿来用，也就是套模板。</p>
 <h2 id="4套模板">4.套模板</h2>
@@ -172,14 +183,21 @@
 <li><code>_config.yml</code>文件保存全局配置数据，包含许多网页自带功能开关设置。</li>
 </ul>
 <p>GitHub pages通过这些文件自动生成一个可以访问的网站，如果编译错误会发个邮件提醒</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/github_build_error.jpg" width=360px border=1>
+    <figcaption>编译出错</figcaption>
+</figure>
 <p>具体的文件里的代码，本来想写点东西的，但是感觉我也完全不懂HTML，还是不乱输出没用的内容了。总之我的方法就是：多试试。删掉以后看看哪里会出问题，那么这块代码基本上就是管这个功能的😂😂😂。</p>
 <h2 id="5工作流">5.工作流</h2>
 <p>这里要说git与Github同步的问题，详细的教程，可以参考这个书：<strong><a href="https://bookos-z1.org/book/2855761/e1777a">《GitHub入门与实践》</a></strong>。</p>
 <p>在实际上手操作之前，先来看看数据流向</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/工作流1.jpg" width=550px >
+</figure>
 <p>Visual Studio Code是我大多数时间面对的窗口，网页里的文字内容修改完成后，使用GitAhead工具把代码同步到Github。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/gitahead.jpg" width=500px >
+</figure>
 <blockquote>
 <p>当然也可以直接使用Visual Studio Code里的终端命令行，甚至直接使用VSC的插件也可以，看个人习惯。</p>
 </blockquote>
@@ -218,19 +236,25 @@
 </table>
 <p>最后去Github仓库里，找到Github Pages设置，找到<strong>Custom domain</strong>，输入你注册的域名保存以后，等等，要有耐心，这一步得花点时间。</p>
 <p>记得勾选<strong>Enforce HTTPS</strong>。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/githubpages3.jpg" width=400px border=1>
+</figure>
 <p>这时候，就可以用新注册的域名访问网页了。</p>
 <h3 id="62-本地预览网页效果">6.2 本地预览网页效果</h3>
 <p>每次小修改都需要commit然后push，效率比较低，还有一种很高效的方法，即在本地直接预览网页效果，全部改好后一次性push到GitHub仓库里。</p>
 <p>需要在本地安装Jekyll，安装好后，进入本地的文件夹执行<code>jekyll serve</code>指令，就可以在地址<code>http://localhost:4000/</code>生成一个预览网页，随时修改随时预览很好。</p>
 <p>这时候数据流大概是这样的</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/工作流2.jpg" width=650px >
+</figure>
 <p>本地预览修改完成后，再用git去push到Github，效果和红色箭头是一样的。</p>
 <h3 id="63-评论功能">6.3 评论功能</h3>
 <p>有些模板是自带的，但是这里可以自己把这个功能缝合上去，也正好拆开来看看模板是怎么改的。</p>
 <p>评论功能有好多，这里我们使用gittalk.</p>
 <p>在缝合代码前，先说一下GitHub的社交属性。在GitHub之前，代码是围绕项目的，人的属性比较弱。有了GitHub后，代码是围绕人的，我们可以很容易的发现一个人在写什么代码，在做什么项目，打开项目如果有Issue标签，我们还可以提问或者评论。我曾经发现一个有意思的项目：<a href="https://github.com/komeiji-satori/Dress">好耶 是女装</a>，这个项目设立的初衷是用来学习克隆项目，创建分支，提交和同步修改，到合并分支请求的整套流程的，但是我们可以在Issues里看到各种各样好玩的程序员的评论。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/issues.jpg" width=345 border=1 />
+</figure>
 <p>这个仓库的社交属性拉满了。也可以认为Issues就是对这个仓库的评论。</p>
 <p>gittalk的本质就是Issues，把Issues的数据拿过来镶嵌到自己的网站里作为评论展示。</p>
 <p>因此需要有两个事情去做：</p>
@@ -320,7 +344,9 @@
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-BASH" data-lang="BASH"><span style="display:flex;"><span>$ jekyll new . --force  <span style="color:#75715e"># 把当前目录初始化为工作区，有其他文件加--force</span>
 </span></span><span style="display:flex;"><span>$ jekyll serve  <span style="color:#75715e"># =&gt; 一个开发服务器将会运行在 http://localhost:4000/</span>
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><figure>
+    <img src="../images/welcome-to-jekyll.jpg" width=500>
+</figure>
 <p>如果运行别人的模板报错，那就缺啥装啥，不行就Google百度，基本上都有对应解决办法。</p>
 <p>比较常见的，缺包，按照下面的格式安装。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-BASH" data-lang="BASH"><span style="display:flex;"><span>    <span style="color:#75715e">#Could not find rake-12.0.0 in any of the sources (Bundler::GemNotFound)</span>

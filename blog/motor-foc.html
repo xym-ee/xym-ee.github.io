@@ -107,7 +107,9 @@
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
           <p><strong>矢量控制</strong>或者<strong>FOC控制</strong>近些年逐渐走进日常消费电器了，在一些洗衣机，电动玩具的广告里甚至可以直接看到这个词，我觉得这对消费者来说要求还是有点高了😂😂。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="/images/ybdjFOC广告.jpg" width = 150 />
+</figure>
 <p>FOC控制大规模的商业应用也能看出这是一种相当成熟的电机控制方法了，这里做一个异步电机的矢量控制仿真总结。</p>
 <h2 id="矢量控制基本思想">矢量控制基本思想</h2>
 <p>矢量控制这个名字的由来是控制方法里有坐标变换（矢量变换），FOC控制的全名是<strong>按照转子磁链定向控制</strong>，其含义是在坐标变换后把旋转坐标系的d轴方向固定在转子磁链方向。往往伴随的还有SVPWM这个词，这是一种调制方法，可以提高电压利用率，矢量控制不一定必须用到SVPWM的调制方法。</p>
@@ -116,7 +118,10 @@
 <p>对于他励式直流电动机来说，接线端子4个，两根为励磁绕组引出，两根电枢绕组引出，磁通和电枢电流可以分开单独控制，磁通恒定后电磁转矩就只和电枢电流有关了。</p>
 <p>对于三相异步交流电机来说，接线端子有6个，如果是接成了Y型不引出中心线，那么端子有3个，这三根线进去的电流有一部分产生磁通，一部分产生电磁转矩，混叠在一起。这也是交流电机控制复杂的原因。</p>
 <p>矢量控制的基本方法是使用<strong>坐标变换</strong>（矢量变换），<strong>核心思路就是把混叠在一起励磁电流和电枢电流分开来</strong>，单独控制励磁电流恒定，这样转矩就可以单独由电枢电流控制，和直流电机一样了。坐标变换只是我们看待问题的视角变了，实际电机物理系统的磁动势和功率是个客观量，因此变换原则是保持磁动势不变。分解出励磁电流和电枢电流后，按照给定值加以控制后，还需要再合成三相电流的给定值，让实际电流跟随三相给定电流。这就是基本的矢量控制思路。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src = "https://xym.work/motor-control/part3/chapter2/images/%E7%94%B5%E6%B5%81%E9%97%AD%E7%8E%AF1.jpg" width=400 />
+    <figcaption>CHBPWM调制矢量控制结构图</figcaption>
+</figure>
 <p>根据上面的描述，关注这几个细节：</p>
 <ol>
 <li>
@@ -163,19 +168,31 @@
 </ul>
 <p>异步电动机的等效结构图</p>
 <p>设置好参数以后，直接通上三相交流电，并在运行稳定后加上额定负载</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/ybdj开环仿真.jpg" width = 400 />
+</figure>
+<figure>
+    <img src="../images/ybdj开环曲线.jpg" width = 500  />
+</figure>
 <h2 id="focchbpwm">FOC/CHBPWM</h2>
 <p>首先使用最基本的方式，数据全部使用电机输出数据，给定磁链幅值和转速，经过控制器后反变换回三相电流给定值，使用电流滞环跟踪PWM(CHBPWM)，仿真原理图</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/ybdjFOC1.jpg" width=800 />
+</figure>
 <p>空载启动，在0.4秒加上额定负载，0.6秒制动，转速、转矩曲线</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/ybdjFOC2.jpg" width=600 />
+</figure>
 <p>因为转子磁链计算使用的是真实值，所以效果还是不错的，ASR、ATR使用PI控制，参数随便给的，可以明显的看到和直流电机电流、电压闭环效果很接近，启动时有一段恒转矩（角加速度）时期，转速直线上升，制动的时候也是到了反向最大允许的电流。</p>
 <p>三相电流</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/ybdjFOC4.jpg" width=600 />
+</figure>
 <p>额定电流6.9A，这个过载倍数应该是可以接受的，当然过载也可以由积分限幅值根据实际电机性能、系统动态响应要求去调整。</p>
 <p>观测到刚启动时转子磁链</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/ybdjFOC3.jpg" width=200 />
+</figure>
 <h2 id="focchbpwm转子磁链直接定向">FOC/CHBPWM/转子磁链直接定向</h2>
 <p>上面这个系统实际是没法用的，因为转子磁链这个东西没有直接的传感器可以测量，仿真的时候MATLAB里是直接给出来了，因此需要一种实际可用的找到转子磁链的方法。这就是转子磁链定向问题，有直接定向和间接定向。直接定向就是用能测量到的物理量算出来，直接定向方法由基于电流的和基于电压的。</p>
 

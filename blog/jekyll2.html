@@ -675,8 +675,11 @@ $$</p>
 \right]
 $$</p>
 <h2 id="复杂表格">复杂表格</h2>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<script>
+|:-----:|:-----:|:-----:|:-----:|
+| (0,0) | (0,1) | (0,2) | (0,3) |
+|     (1,0)    || ^^    | (1,3) |
+</script>
 <p>|:&mdash;&ndash;:|:&mdash;&ndash;:|:&mdash;&ndash;:|:&mdash;&ndash;:| &mdash;- |
 | (0,0) | (0,1) | (0,2) | (0,3) |      |
 |     (1,0)    || ^^    | (1,3) |      |</p>
@@ -750,7 +753,7 @@ $$</p>
 <tbody>
 <tr>
 <td>:       :</td>
-<td>:  <!-- raw HTML omitted --> &lt; Normal HTML Block &gt; <!-- raw HTML omitted --> :</td>
+<td>:  <div style="color: red;"> &lt; Normal HTML Block &gt; </div> :</td>
 <td></td>
 <td></td>
 </tr>
@@ -909,7 +912,7 @@ Alice -&raquo; Bob: Hello Bob, how are you?
 Bob&ndash;&raquo;John: How about you John?
 Bob&ndash;x Alice: I am good thanks!
 Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<!-- raw HTML omitted -->long time, so long<!-- raw HTML omitted -->that the text does<!-- raw HTML omitted -->not fit on a row.</p>
+Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.</p>
 <p>Bob&ndash;&gt;Alice: Checking with John&hellip;
 Alice-&gt;John: Yes&hellip; John, how are you?
 @endmermaid</p>
@@ -954,7 +957,7 @@ Crash --&gt; [*]
 <p><img src="https://www.dailymotion.com/video/x7bur2y" alt=""></p>
 <p><img src="//www.html5rocks.com/en/tutorials/video/basics/devstories.webm" alt="video"></p>
 <p>1.直接使用B站的嵌入代码，加上宽高属性。</p>
-<!-- raw HTML omitted -->
+<iframe src="//player.bilibili.com/player.html?aid=414296136&bvid=BV1rV411U78f&cid=226129926&page=1" height="320px" width="480px" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 <p>2.使用Markdown链接语法</p>
 <p><img src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" alt="Flower"></p>
 <p><img src="//www.youtube.com/watch?v=Ptk_1Dc2iPY" alt=""></p>

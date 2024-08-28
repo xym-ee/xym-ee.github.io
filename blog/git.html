@@ -110,10 +110,14 @@
 <h2 id="前言">前言</h2>
 <p>在本科参加比赛的时候，我和我的队友们一共3个人，每个比赛也都算是一个小项目，使用C语言开发单片机，当时还没有项目版本管理的概念。合作方式是基于压缩包与U盘的，分支靠文件夹重命名，合并就是复制替换。</p>
 <p>在搞毕业设计的时候，也有一种类似的文档版本管理方式：</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/论文版本.jpg" width = 400 />
+</figure>
 <p>这大概就是版本管理的初级设想吧。</p>
 <p>git就是这样一个工具，可以实现<strong>本地</strong>的、细致到字符级别的版本管理。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/git.jpg" width = 350 />
+</figure>
 <p>比如git记录了我对一个文档的第176行指令的修改。</p>
 <p>Github是另一个东西，云端，和本地照片备份到云端是一个性质。也就是说如果写代码只是自己一个人写着玩玩，也不需要合作，也不想给别人看，只有个git就可以实现版本管理了。同步到云端Github会让所有人看到具体内容，有了更多的社交属性在里面。</p>
 <h2 id="从github下载上传到github">从Github下载、上传到Github</h2>
@@ -125,7 +129,9 @@
 <p>先尝试从Github（云端）下载一些东西下来。比如说我在云端有个代码库叫<code>learning</code>，首先打开gitahead，需要登录自己的GitHub账号。中间巨大的<strong>Add Github account</strong>，也可以点击左下角的“+”也有这个选项。</p>
 <p>弹出窗口的Username就是Github的用户ID，但是密码不是登陆密码，这个类似于邮箱二次验证。去Github网页端进入设置页面，在<strong>Developer settings</strong>里，找到<strong>Personal access tokens</strong>，生成一个新的长密码就行，下面所有的框全选上，可以选择长期有效。用新生成的密码就可以登录gitahead了。</p>
 <p><strong>登陆后，要在tools-options里填上自己的邮箱地址</strong>。</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/gitahead左列.jpg" width = 180 border = 1 />
+</figure>
 <p>这时候左列出现了云端的东西，可以直接下载。这就有网盘的感觉了，还挺好使。</p>
 <p>现在要往<code>learning</code>这个云端仓库上传一个文件试试，去刚下载下来的这个learning里面，新建一个<code>新建文本文档.txt</code>，也可以打开随便写点东西保存后来上传。</p>
 <p>上传稍稍有点不一样，要多操作几步（后面会拆开来说原因），左边选中Uncommitted changes，上边的框框点击Stage All，然后点击Commit，最后工具栏里会多出一个红色的1，鼠标移过去显示“Push”，点一下就完成上传了。</p>

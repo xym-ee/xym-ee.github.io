@@ -107,9 +107,13 @@
 <p>平衡车和倒立摆的原理基本一致，可以参考另一个倒立摆 MATLAB 仿真的文章。</p>
 <h2 id="pid-离散表达">PID 离散表达</h2>
 <p>一个使用 PID 控制器的控制系统结构如图</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/pidinc/1.png" width=260>
+</figure>
 <p>其中 PID 控制器串在前向通路上，所以这是一个串联校正装置。PID 控制器内部的结构如下图</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/pidinc/2.png" width=200>
+</figure>
 <p>数学表达式为</p>
 <p>$$
 u(t) = K_p e(t) + K_i \int e(t) \text{d}t + K_p \frac{\text{d}e(t)}{\text{d}t}
@@ -154,7 +158,9 @@ $$</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>准备工作就这些。</p>
 <p>在实际的控制程序中，还需要一个函数来实现框中的部分，及算法本身：</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/pidinc/3.png" width=380>
+</figure>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">pid_control</span>(<span style="color:#66d9ef">pid_t</span> <span style="color:#f92672">*</span>pid, <span style="color:#66d9ef">double</span> ref, <span style="color:#66d9ef">double</span> feedback)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    pid<span style="color:#f92672">-&gt;</span>feedback <span style="color:#f92672">=</span> feedback;
@@ -235,7 +241,9 @@ $$</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>控制效果如下：</p>
-<!-- raw HTML omitted -->
+<figure>
+    <img src="../images/pidinc/4.gif" width=400>
+</figure>
 <p>控制效果还是可以的。</p>
 <h2 id="其他">其他</h2>
 <p>上面只是实现了基本的位置式 PID 控制器。还有增量式的没有写。此外还有许多改进的 PID 算法如积分分离、微分先行等。</p>
