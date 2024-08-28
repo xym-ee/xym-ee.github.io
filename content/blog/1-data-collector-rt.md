@@ -11,6 +11,8 @@ tags:       ["project","rt-thread","stm32","w5500","IoT","sensor","socket"]
 
 ## 0. 介绍
 
+<img src="https://github.com/xym-ee/data-collector-rt/blob/main/images/3.png?raw=true" width="300" style="display: block; margin: auto;">
+
 这是一个物联网项目，合作公司的主要业务是使用无人机进行密闭环境的无人检测，如船舶、大型锅炉、化工厂储罐等内部观察检测。该项目需要开发一套用于密闭环境近观检测的无人机系统，涵盖硬件设计、软件开发与系统集成。该系统由无人机端、地面监控端和数据传输与系留供电模块组成，专门用于密闭空间内的精细检测任务。无人机端搭载高清相机、飞控系统，以及**一个基于 STM32F407 的环境数据采集与上报模块**。该模块通过外挂的 W5500 芯片与无人机局域网内的机载工控机进行通信，采用 UDP 协议实现数据传输。
 
 **我负责环境数据采集与上报模块的所有软件功能开发**。
@@ -18,6 +20,8 @@ tags:       ["project","rt-thread","stm32","w5500","IoT","sensor","socket"]
 [**源码仓库**](https://github.com/xym-ee/data-collector-rt)
 
 ## 1. 硬件方案
+
+<img src="https://github.com/xym-ee/data-collector-rt/blob/main/images/1-2.png?raw=true" width="200" style="display: block; margin: auto;">
 
 此项目我不负责硬件设计部分，但这里也简单介绍一下硬件方案。
 
