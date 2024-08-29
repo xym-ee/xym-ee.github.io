@@ -392,7 +392,15 @@
         <script type="text/javascript" src="/js/navbar.min.a2e7a3db4f1b58e7616cfd31a099340a207d5b99d96df87f525f17c604e184c1.js" integrity="sha256-ouej208bWOdhbP0xoJk0CiB9W5nZbfh/Ul8XxgThhME=" crossorigin="anonymous"></script>
 
   <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
     document.addEventListener('DOMContentLoaded', function() {
       const icon1 = document.getElementById('svgwechat');
       const tooltip1 = document.getElementById('wechattip');

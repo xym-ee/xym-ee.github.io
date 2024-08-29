@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>[project]2023 年电子设计竞赛：运动控制与目标追踪系统的设计 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.ce97201a436e89554f6444624e62d4b32a48d70d124d557a1852401701ab43bc.css" type="text/css" integrity="sha256-zpcgGkNuiVVPZERiTmLUsypI1w0STVV6GFJAFwGrQ7w=" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">[project]2023 年电子设计竞赛：运动控制与目标追踪系统的设计</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2024-08-29</p>
+        
+          <p>🔄 2024-08-29</p>
+        
+        <p>⌚ Reading time: 7 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/tags/project'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">project</a>
+  
+    <a href='/tags/rt-thread'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">rt-thread</a>
+  
+    <a href='/tags/stm32'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">stm32</a>
+  
+    <a href='/tags/%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">运动控制</a>
+  
+    <a href='/tags/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">伺服电机</a>
+  
+    <a href='/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">图像处理</a>
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <h2 id="0简介">0.简介</h2>
+<p>来源于 2023 年大学生电子设计竞赛的题目。导师正好是电赛的指导老师，我参加过2019年电赛，然后就帮忙一起指导一下。</p>
+<p>出方案，方法验证，分工。</p>
+<p>设计制作一个运动目标控制与自动追踪系统。</p>
+<img src="./images/laser-track-1.png" width="500" style="display: block; margin: auto;">
+<p>需要做两套系统，两套系统之间无通信</p>
+<ul>
+<li>位置控制系统，红色激光模拟目标运动，激光点画出指定的矩形</li>
+<li>自动追踪系统，绿色激光用来指示，绿色激光点跟踪红色激光运动</li>
+</ul>
+<p>自动追踪系统只在完成提高题时需要。</p>
+<h2 id="1赛题分析与方案设计">1.赛题分析与方案设计</h2>
+<p>根据题目，有这几个比较重要的需要实现的功能</p>
+<ul>
+<li>1.红色激光点能做一个固定大小的矩形运动</li>
+<li>2.黑色胶带贴一个矩形框，红色激光点可以沿着黑框运行</li>
+<li>3.绿色激光点追踪红色激光点运行</li>
+</ul>
+<p>第 1 点，基础题的要求，激光点可以跟着铅笔线画一个方框。可以肯定的是铅笔线肯定不是用来做图像识别的，而且位置控制系统和屏幕的摆放都有严格的距离要求，那么在红激光点的位置上不需要做闭环控制，根据几何参数做计算，找到屏幕坐标系中点的位置和云台两个电机转角的关系，直接开环运动即可。需要在硬件上下点功夫，精度严重依赖几何参数，可以直接做一个架子，云台和屏幕都固定死了，😂，这种应试的项目不要不违反要求都是能做的。此功能要实现的代码的功能</p>
+<ul>
+<li>实现指定两点之间的直线运动</li>
+</ul>
+<p>第 2 点，黑胶带显然是要做视觉识别的，矩形运动比较关键的位置是 4 个顶点。有了 4 个点其实就可以计算出矩形边上所有的点了。这个目标的思路，一个也是纯开环控制，和功能 1 一样 ，有了四个点以后，有没有黑框就不重要了。</p>
+<ul>
+<li>需要一个能给我发送矩形 4 个点的传感器(矩形 4 点传感器)
+<ul>
+<li>具体是 openmv 、linux 板用 opencv 不重要</li>
+<li>只要能按顺序发来 ABCD 在屏幕上的坐标位置就行</li>
+</ul>
+</li>
+</ul>
+<p>第 3 点，位置控制系统(红色激光)不需要大的功能上的改动了。考虑目标追踪系统该如何设计。可以肯定的是要做一个位置上的闭环控制，目标点是红色激光的位置，一个容易想到的思路是识别绿色激光点的位置，这就就有了两个点的位置误差。但是这样的话要在一块板上同时处理红绿两个点实现起来可能要花点时间。我的思路：直接将摄像头固定到云台上，控制目标是将红色激光点保持在视野中央，有没有绿激光点不重要，绿激光只是给人看的指示云台指向位置的一个挂件。可以吧绿色激光调到足够暗，人勉强看到就好了，😂，应试项目，所有的处理都是符合规则的。这样的话为视觉识别那一块的要求就不高了。甚至如果是闭环控制的话，不需要红激光点在屏幕上的真实坐标，像素坐标位置就可以了</p>
+<ul>
+<li>需要一个固定在云台上的激光点位置传感器
+<ul>
+<li>同样用什么方法实现、什么设备实现的不重要</li>
+<li>只要能发回来红色激光点的像素坐标 (x,y) 就行</li>
+</ul>
+</li>
+</ul>
+<p>那么设计方案就出来了。两个系统都分为运动控制部分 + 视觉检测部分，两个部分相对独立，可以使用串口来完成通信。</p>
+<p>云台使用伺服电机，可以接收位置控制指令或速度控制指令，使用 MCU 实现运动控制。</p>
+<p>位置控制系统(红色激光点)的摄像头不需要安装在云台，但是相对于屏幕的位置要固定，视觉检测部分和运动控制部分的通信内容：矩形 ABCD 四个顶点在屏幕上的坐标。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">point_t</span> rectangle[<span style="color:#ae81ff">4</span>];
+</span></span></code></pre></div><p>目标追踪系统的摄像头要安装到云台上，视觉检测部分和运动控制部分的通信内容：红色激光点的像素坐标</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">pix_t</span> red_point_pix;
+</span></span></code></pre></div><p>通过串口发送时，加上帧头帧尾和校验字节，方便解析、防止传输出错。</p>
+<p>电赛三人小队可分工一人负责控制部分，另一人负责图像处理部分，各自对接通信协议即可。</p>
+<p>相对来说，位置控制系统的视觉检测部分需要处理的东西会多一些，可以使用 linux 开发板跑调 OpenCV 库，跟踪系统的视觉检测部分只需要识别一个激光点，OpenMV 也可以胜任。</p>
+<p>原理上是可行的，还有一些结构或硬件上小细节的设计，方便软件的设计</p>
+<ul>
+<li>红激光点在符合规则的情况下尽量的大，光晕也大一些</li>
+<li>绿激光点是给人看的，勉强能看到就行，减小对图像算法的影响</li>
+<li>结构上的设计，激光安装在云台两个轴的交点处，方便坐标转换的计算</li>
+</ul>
+<h2 id="2控制方法与仿真">2.控制方法与仿真</h2>
+<h3 id="功能-1-和功能-2-的控制方法">功能 1 和功能 2 的控制方法</h3>
+<p>功能 1 和功能 2 在控制上没有区别，只不过功能 1 的跟踪矩形的 4 个点是写死在程序里的，功能 2 的矩形点是视觉检测部分通过串口发来的。</p>
+<p>这里以功能 1 为例。只展示控制部分的想法和控制算法的代码。</p>
+<p>开环控制的思路：</p>
+<p>云台有俯仰角 $ \theta $ 和偏转角 $ \varphi $，用一个向量表示云台的转角 $ \Theta = [\theta, \varphi] ^T $。任意两个角度都对应了屏幕上的一个点 $ P = [x, y] ^T $，考虑云台的角度范围限制，也即 $ P = g(\Theta) $。那么凭着原始朴素的直观感觉不加证明的下一个结论：每个一个屏幕上的点 $ P $，一定可以找到唯一一个对应的云台转角 $ \Theta $，在云台允许的范围内这是个一一映射，即找一个函数 $ f = g^{-1} $ ，使得</p>
+<p>$$
+\Theta = f(P)
+$$</p>
+<p>然后只有有一个 $ P $，就可以计算出 $ \Theta $ 发送给云台的两个伺服电机。</p>
+<p>这样屏幕上的每个点就都能到了，两点确定一条直线，画一条线只需要首两个点就行，在两个点之间插入足够多的点，按顺序发送每个点的转角指令看起来就实现直线运行效果了。</p>
+<p>接下来就是找出这个函数 $ f $。</p>
+<img src="./images/laser-track-2.png" width="500" style="display: block; margin: auto;">
+<p>首先用一个数学问题的方式来描述，云台和屏幕的几何位置关系如图。$ {T} $ 为屏幕坐标系，$ {B} $ 为云台坐标系。</p>
+<p>一个点的像素坐标为 $ (u,v) $，通过相机和合理安装，用比较简单的方式可以得到像素坐标上的点在屏幕坐标的位置</p>
+<p>$$ ^T P = T_1 \cdot [u, v]^T $$</p>
+<p>有了屏幕坐标系上点的坐标 去计算云台坐标系里的坐标</p>
+<p>$$ ^B P =  {^B_T T} \cdot \ ^T P $$</p>
+<p>最后根据 $ ^B P $ 用一些三角函数计算就能算出需要的角度了。</p>
+<p>T 到 B 的变换是一个比较简单的齐次变换，不需要考虑旋转，只有平移，比较容易写出</p>
+<p>$$
+^B_T T =<br>
+\left [
+\begin{array}{}
+I &amp; p_{TB} \\
+0   &amp; 1   \\
+\end{array}
+\right ] =
+\left [
+\begin{array}{}
+1 &amp; 0 &amp; 0 &amp; -l \\
+0 &amp; 1 &amp; 0 &amp; H_1 + H_2 - h_1 \\
+0 &amp; 0 &amp; 1 &amp; -d \\
+0 &amp; 0 &amp; 0 &amp; 1   \\  <br>
+\end{array}
+\right ]
+$$</p>
+<p>也即</p>
+<p>$$
+\ ^B P = \ ^B_T T  \ ^T P =<br>
+\left [
+\begin{array}{}
+1 &amp; 0 &amp; 0 &amp; -l \\
+0 &amp; 1 &amp; 0 &amp; H_1 + H_2 - h_1 \\
+0 &amp; 0 &amp; 1 &amp; -d \\
+0 &amp; 0 &amp; 0 &amp; 1   \\
+\end{array}
+\right ]
+\left [
+\begin{array}{}
+^T x  \\
+^T y  \\
+0 \\
+1 \\
+\end{array}
+\right ]
+$$</p>
+<p>就能计算出出屏幕上用 T 坐标系表示的点在云台上 B 坐标系的坐标值了。(其实对于这个比较简单的关系，硬看也能看出来下面的结论，但是齐次坐标变换是一种解决这类问题的通用思路)</p>
+<p>$$
+\left {
+\begin{array}{l}
+^B x = \ ^T x  - l \\
+^B y = \ ^T y + H_1 + H_2 - h_1 \\
+^B z = -d \\  <br>
+\end{array}
+\right .
+$$</p>
+<p>一个细节，激光笔安装的时候要位于云台两个轴的交点上，这样电机的转角直接就是激光束的转角，这个坐标系x轴和俯仰转轴重合，y轴和左右转轴重合，如下图</p>
+<img src="./images/laser-track-3.png" width="300" style="display: block; margin: auto;">
+<p>此时有了上面的 $ ( ^B x, \ ^B y, \ ^B z) $ 就能计算两个角了。</p>
+<p>由三角函数关系</p>
+<p>$$
+\tan \theta = \frac{y}{\sqrt{ x^2 + y^2 }}
+$$</p>
+<p>$$
+\cos \varphi = \frac{z}{\sqrt{ x^2 + z^2 }}
+$$</p>
+<p>就能计算出</p>
+<p>$$
+\theta = \arctan \frac{y}{\sqrt{ x^2 + y^2 }}
+$$</p>
+<p>$$
+\varphi = \arccos \frac{z}{\sqrt{ x^2 + z^2 }}
+$$</p>
+<p>至此实现了把点的像素坐标转换到两个电机转角。</p>
+<p>然后就是处理走直线的问题，这个也很简单，给出 2 个点 $ A(x_A, y_A) $ 和 $ B(x_B, y_B) $，求解的参数坐标表示，然后从 A 点开始控制参数，使得一点点向 B 点运动。</p>
+<h3 id="功能-1-和-2-仿真">功能 1 和 2 仿真</h3>
+<p>先看效果</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-1.mp4" type="video/mp4">
+</video>
+<p>有了前面的理论，接下来就是用代码实现了，这里我使用了 webots 仿真，由于控制算法由 MCU 来实现，因此我使用 C 语言实现了仿真的控制算法。</p>
+<p>一个点定义为</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> y;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> z;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">point_t</span>;
+</span></span></code></pre></div><p>通过串口收到的为屏幕坐标下的矩形的 4 个坐标点，因此需要按照上述思路做变换，就按照上面的流程实现 T 到 B 和 B 到 角度的变换函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">T_to_B</span>(<span style="color:#66d9ef">point_t</span><span style="color:#f92672">*</span> in, <span style="color:#66d9ef">point_t</span><span style="color:#f92672">*</span> out)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    out<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">=</span> in<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">+</span> H1 <span style="color:#f92672">+</span> H2 <span style="color:#f92672">-</span> h1;
+</span></span><span style="display:flex;"><span>    out<span style="color:#f92672">-&gt;</span>z <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>d;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">B_to_angle</span>(<span style="color:#66d9ef">point_t</span><span style="color:#f92672">*</span> in, <span style="color:#66d9ef">ptz_t</span> <span style="color:#f92672">*</span>out)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> yaw, pit;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> a <span style="color:#f92672">=</span> <span style="color:#a6e22e">sqrt</span>(in<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">*</span> in<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">+</span> in<span style="color:#f92672">-&gt;</span>z <span style="color:#f92672">*</span> in<span style="color:#f92672">-&gt;</span>z);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    yaw <span style="color:#f92672">=</span> <span style="color:#a6e22e">acos</span>(<span style="color:#f92672">-</span>in<span style="color:#f92672">-&gt;</span>z <span style="color:#f92672">/</span> a);
+</span></span><span style="display:flex;"><span>    pit <span style="color:#f92672">=</span> <span style="color:#a6e22e">atan</span>(in<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">/</span> a);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 数学计算上的符号处理 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (in<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        out<span style="color:#f92672">-&gt;</span>yaw <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>yaw;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        out<span style="color:#f92672">-&gt;</span>yaw <span style="color:#f92672">=</span> yaw;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    out<span style="color:#f92672">-&gt;</span>pit <span style="color:#f92672">=</span> pit;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>有些常数使用宏定义，参考完整源码。</p>
+<p>有了坐标变换，就可以直接实现一个从 A 运动到 B 的函数了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 从A点移动到B点，times为中间插入的目标点个数 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">move</span>(<span style="color:#66d9ef">point_t</span> A, <span style="color:#66d9ef">point_t</span> B, <span style="color:#66d9ef">int</span> times)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">point_t</span> target;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> x_length <span style="color:#f92672">=</span> B.x <span style="color:#f92672">-</span> A.x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> y_length <span style="color:#f92672">=</span> B.y <span style="color:#f92672">-</span> A.y;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> times; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        target.x <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">double</span>)i <span style="color:#f92672">/</span> times) <span style="color:#f92672">*</span> x_length <span style="color:#f92672">+</span> A.x;
+</span></span><span style="display:flex;"><span>        target.y <span style="color:#f92672">=</span> ((<span style="color:#66d9ef">double</span>)i <span style="color:#f92672">/</span> times) <span style="color:#f92672">*</span> y_length <span style="color:#f92672">+</span> A.y;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">T_to_B</span>(<span style="color:#f92672">&amp;</span>target, <span style="color:#f92672">&amp;</span>target);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">B_to_angle</span>(<span style="color:#f92672">&amp;</span>target);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ptz_set</span>(target);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 延时等待转到位 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wait</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//output(target);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里的 <code>ptz_set</code> 传入的参数会直接发送给伺服电机运行。这里的运行函数还有个参数数 times，这个参数是我设计用来控制两点之间的插入点个数的，传入的参数是屏幕坐标系下的坐标值。</p>
+<p>ptz_set 函数的实现依赖于实际硬件，在 webots 里，我是这样实现的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;device.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* motor init */</span>
+</span></span><span style="display:flex;"><span>WbDeviceTag motor_yaw, motor_pit;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">motor_init</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    motor_yaw <span style="color:#f92672">=</span> <span style="color:#a6e22e">wb_robot_get_device</span>(<span style="color:#e6db74">&#34;motor_yaw&#34;</span>);
+</span></span><span style="display:flex;"><span>    motor_pit <span style="color:#f92672">=</span> <span style="color:#a6e22e">wb_robot_get_device</span>(<span style="color:#e6db74">&#34;motor_pit&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 以弧度值设置云台转角，p.x 为偏转角，p.y 为俯仰角 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ptz_set</span>(<span style="color:#66d9ef">ptz_t</span> ptz)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wb_motor_set_position</span>(motor_yaw, ptz.yaw);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wb_motor_set_position</span>(motor_pit, ptz.pit);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">device_init</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wb_robot_init</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">motor_init</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这部分参考 webots 的手册，通过名称获得电机的描述符，然后就可以通过描述符以及 webots 提供的 api 向仿真环境的电机发送指令了。</p>
+<p>那么完成功能的实现也就有思路了，节选主函数的代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#75715e">/* 画外框 坐标值为{T}坐标系，可用串口接收 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">point_t</span> recive[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.0</span>},
+</span></span><span style="display:flex;"><span>        [<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.0</span>},
+</span></span><span style="display:flex;"><span>        [<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0.25</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.0</span>},
+</span></span><span style="display:flex;"><span>        [<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">0.25</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.25</span>,<span style="color:#ae81ff">0.0</span>},
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move</span>(recive[<span style="color:#ae81ff">0</span>], recive[<span style="color:#ae81ff">1</span>], <span style="color:#ae81ff">300</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move</span>(recive[<span style="color:#ae81ff">1</span>], recive[<span style="color:#ae81ff">2</span>], <span style="color:#ae81ff">300</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move</span>(recive[<span style="color:#ae81ff">2</span>], recive[<span style="color:#ae81ff">3</span>], <span style="color:#ae81ff">300</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move</span>(recive[<span style="color:#ae81ff">3</span>], recive[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">300</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 暂停 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">wb_robot_step</span>(TIME_STEP) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这里直接写死了 4 个点，然后调用画线函数即可。</p>
+<p>如果看这段程序的源码，前面还有一些移动到中心点的操作，总的思路都是由屏幕左边计算出两个电机转角，然后向电机发送指令，如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>    <span style="color:#75715e">/*------  移动到中点  --------*/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*  坐标值为 {T} 参考系 */</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">point_t</span> point <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        .x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        .y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        .z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">T_to_B</span>(<span style="color:#f92672">&amp;</span>point, <span style="color:#f92672">&amp;</span>point);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">B_to_angle</span>(<span style="color:#f92672">&amp;</span>point, <span style="color:#f92672">&amp;</span>ptz_output);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ptz_set</span>(ptz_output);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 等待执行到位 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">wait</span>(<span style="color:#ae81ff">100</span>);
+</span></span></code></pre></div><p>要注意的是，由于是开环控制，这里要给电机足够的响应时间。</p>
+<p>实现功能的方法上的核心代码就是这样，还需要根据赛题去基于此实现更多的功能，如按键暂停、按键恢复，以及串口接收 4 个点的坐标的逻辑等。</p>
+<h3 id="功能-3-的控制方法">功能 3 的控制方法</h3>
+<p>这是一个二维平面的位置跟踪控制，按照我的思路，控制目标是红色激光点保持在画面中央。这是一个闭环控制系统，不加证明的凭朴素的直观想法给出结论：x，y 两个轴可以分开独立考虑。只考虑 x 方向的控制框图为</p>
+<img src="./images/laser-track-4.png" width="500" style="display: block; margin: auto;">
+<p>摄像头排到的画面长宽为 (WIDTH, HEIGHT)，控制目标是保持在画面中央。控制器的输出为对应轴的电机速度的给定值，伺服电机在速度控制模式下，积分后就是位移，然后经过视觉部分就是像素坐标值。大概就是这么个思路。</p>
+<p>这部分视觉检测部分通过串口发送红色光电的像素坐标值即可。控制器其实就比例控制器就行。</p>
+<h3 id="功能-3-仿真">功能 3 仿真</h3>
+<p>还是先用 webots 仿真实现一下。先看效果</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-2.mp4" type="video/mp4">
+</video>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-3.mp4" type="video/mp4">
+</video>
+<p>webots 里也有相机，还需要自己实现一个找红色激光点的算法，仿真环境这块很好处理：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">find_red_point</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> image <span style="color:#f92672">=</span> <span style="color:#a6e22e">wb_camera_get_image</span>(camera);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; x <span style="color:#f92672">&lt;</span> IMAGE_WIDTH; x<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; y <span style="color:#f92672">&lt;</span> IMAGE_HEIGH; y<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> <span style="color:#a6e22e">wb_camera_image_get_red</span>(image, IMAGE_WIDTH, x, y);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (r <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                pix.u <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>                pix.v <span style="color:#f92672">=</span> y;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>直接看 r 通道的值就行，😂，毕竟是仿真。</p>
+<p>实际的代码也非常简单</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#a6e22e">wb_robot_step</span>(TIME_STEP) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">find_red_point</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> yaw_v <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">0.05</span> <span style="color:#f92672">*</span> (IMAGE_WIDTH <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> (pix.u <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> pit_v <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span> <span style="color:#f92672">*</span> (IMAGE_HEIGH <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> (pix.v <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">ptz_set_velocity</span>(yaw_v,pit_v);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>找红点找的是第一个符合的像素，这里加了一点点小修正，然后可以看出就是个最简单的比例控制。</p>
+<p><code>ptz_set_velocity</code> 需要根据实际硬件实现。webots 里和位置控制差不多，这里就不放出来了。</p>
+<h2 id="4实物实验">4.实物实验</h2>
+<p>功能 1 和 2 依赖结构上的参数，我没做实物😂，我只做了功能 3 验证控制算法是否可行，做了一个云台，使用 OpenMV 做激光点的识别，然后手持激光笔做测试。</p>
+<p>先看效果</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-4.mp4" type="video/mp4">
+</video>
+<p>OpenMV 中看到的视角</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-5.mp4" type="video/mp4">
+</video>
+<p>关于硬件，云台自制，使用 CAN 总线控制的电机，MCU 开发板选用大疆的 Robomaster A 板，芯片型号为 STM32F429。</p>
+<p>关于 OpenMV：OpenMV Cam是一个可编程的摄像头本身内置了一些图像处理算法，很容易使用。处理芯片为 STM32 H7，简单易用方便快捷，我本身并不做图像处理，对这一块也不熟悉，但是 openmv 也可以比较快的用起来。</p>
+<h3 id="运动控制部分">运动控制部分</h3>
+<p>这部分使用 STM32 实现，基于我熟悉的 rt-thread 开发，不考虑电赛的逻辑，只考虑激光追踪功能本身。除了算法，需要实现的和硬件相关的功能：</p>
+<ul>
+<li>伺服电机的 CAN 通信，实现速度控制的接口</li>
+<li>与 openmv 的通信，接收红色激光点的像素坐标值</li>
+</ul>
+<p>这里使用 rtt 实现的 CAN 驱动来完成和电机的通信，</p>
+<p>两个伺服电机接在一个 CAN 总线上，代码实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">can_tx_thread_entry</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> rt_can_msg msg <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_size_t</span>   size;               <span style="color:#75715e">/* 接收发送状态 */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">rt_int32_t</span> speedControl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 速度帧设置 */</span>
+</span></span><span style="display:flex;"><span>    msg.ide <span style="color:#f92672">=</span> RT_CAN_STDID;         <span style="color:#75715e">/* 标准格式 */</span>
+</span></span><span style="display:flex;"><span>    msg.rtr <span style="color:#f92672">=</span> RT_CAN_DTR;           <span style="color:#75715e">/* 数据帧 */</span>
+</span></span><span style="display:flex;"><span>    msg.len <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;                    <span style="color:#75715e">/* 数据长度为 8 */</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/* 转矩控制的固定数据位 msg.data[4][5] 转矩位 */</span>
+</span></span><span style="display:flex;"><span>	msg.data[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0xA2</span>;             <span style="color:#75715e">/* 操作码 */</span>
+</span></span><span style="display:flex;"><span>	 
+</span></span><span style="display:flex;"><span>	msg.data[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00</span>;
+</span></span><span style="display:flex;"><span>	msg.data[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00</span>; 
+</span></span><span style="display:flex;"><span>	msg.data[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00</span>;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>		speedControl <span style="color:#f92672">=</span> motor.pit.control.speed;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		msg.id   <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x142</span>;	
+</span></span><span style="display:flex;"><span>		msg.data[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl);
+</span></span><span style="display:flex;"><span>		msg.data[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        msg.data[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>        msg.data[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		size <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_device_write</span>(can_dev, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>msg, <span style="color:#66d9ef">sizeof</span>(msg));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">RT_UNUSED</span>(size);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">rt_thread_mdelay</span>(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		speedControl <span style="color:#f92672">=</span> motor.yaw.control.speed;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		msg.id      <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x141</span>;
+</span></span><span style="display:flex;"><span>		msg.data[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl);
+</span></span><span style="display:flex;"><span>		msg.data[<span style="color:#ae81ff">5</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        msg.data[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>        msg.data[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>speedControl)<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		size <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_device_write</span>(can_dev, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>msg, <span style="color:#66d9ef">sizeof</span>(msg));
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_thread_mdelay</span>(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>motor.yaw.control.speed 位全局变量，控制器直接写这个值即可。</p>
+<p>与 openmv 的通信为 UART 接口，使用 rtt 提供的驱动来通信，串口消息接收使用 DMA + 串口空闲中断的方式。使用 rtt 提供的<strong>消息队列机制</strong>来实现串口接收中断回调函数和接收数据处理线程的同步。当一批数据接收完成，进入接收中断回调函数中发送一个消息。数据处理线程阻塞等待接收消息队列中的消息。写入 <code>pix_t pix</code> 全局变量。</p>
+<p>数据处理线程</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openmv_thread_entry</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> rx_msg msg;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_err_t</span> result;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint32_t</span> rx_length;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> rx_buffer[RT_SERIAL_RB_BUFSZ <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span><span style="color:#f92672">*</span> byte <span style="color:#f92672">=</span> rx_buffer;                   <span style="color:#75715e">/* 缓冲区别名 */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_memset</span>(<span style="color:#f92672">&amp;</span>msg, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(msg));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 从消息队列中读取消息*/</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_mq_recv</span>(<span style="color:#f92672">&amp;</span>rx_mq, <span style="color:#f92672">&amp;</span>msg, <span style="color:#66d9ef">sizeof</span>(msg), RT_WAITING_FOREVER);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> RT_EOK)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/* 从串口读取数据*/</span>
+</span></span><span style="display:flex;"><span>            rx_length <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_device_read</span>(msg.dev, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>rx_buffer[data_count], msg.size);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			data_count <span style="color:#f92672">=</span> data_count <span style="color:#f92672">+</span> rx_length;
+</span></span><span style="display:flex;"><span>                        
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/* 可以使用状态机解包 */</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (byte[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x55</span> <span style="color:#f92672">&amp;&amp;</span> byte[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#ae81ff">0x55</span> <span style="color:#f92672">&amp;&amp;</span> byte[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">==</span><span style="color:#ae81ff">0xAA</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">/* 满足帧头才判断帧长 */</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (data_count <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">5</span>) 
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    pix.u <span style="color:#f92672">=</span> byte[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>                    pix.v <span style="color:#f92672">=</span> byte[<span style="color:#ae81ff">3</span>];
+</span></span><span style="display:flex;"><span>                    					
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* 准备下一数据帧接收 */</span>
+</span></span><span style="display:flex;"><span>                    data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#75715e">/*帧头不对，重新接收等待帧头*/</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>由此可以看出通信协议的格式为</p>
+<p>55 55 pix.u pix.v AA</p>
+<p>Openmv 图像的长宽都小于 255，因此用一个字节就可以了。</p>
+<p>最重要的运动控制线程</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">motion_thread_entry</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 偏转控制器 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">controller_t</span> yaw_controller;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controller_set_pid_parameter</span>(<span style="color:#f92672">&amp;</span>yaw_controller, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controller_set_output_limit</span>(<span style="color:#f92672">&amp;</span>yaw_controller, <span style="color:#ae81ff">5000</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 俯仰控制器 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">controller_t</span> pit_controller;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controller_set_pid_parameter</span>(<span style="color:#f92672">&amp;</span>pit_controller, <span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">controller_set_output_limit</span>(<span style="color:#f92672">&amp;</span>pit_controller, <span style="color:#ae81ff">5000</span>);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 自动控制 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 这里的数字时偏转角和俯仰角的目标值，为像素坐标 */</span>
+</span></span><span style="display:flex;"><span>        motor.yaw.control.speed <span style="color:#f92672">=</span> <span style="color:#a6e22e">controller_output</span>(<span style="color:#f92672">&amp;</span>yaw_controller, <span style="color:#ae81ff">180</span>, pix.u);
+</span></span><span style="display:flex;"><span>        motor.pit.control.speed <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">controller_output</span>(<span style="color:#f92672">&amp;</span>pit_controller, <span style="color:#ae81ff">180</span>, pix.v);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">rt_thread_mdelay</span>(<span style="color:#ae81ff">25</span>);
+</span></span><span style="display:flex;"><span>    }	
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里我自己写了一个通用的 PID 控制器，但是只给了比例系数为 120，并且做了控制器的输出限幅。</p>
+<p>PID 控制器的实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">controller_output</span>(<span style="color:#66d9ef">controller_t</span> <span style="color:#f92672">*</span>controller, <span style="color:#66d9ef">double</span> ref, <span style="color:#66d9ef">double</span> feedback)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    controller<span style="color:#f92672">-&gt;</span>feedback <span style="color:#f92672">=</span> feedback;
+</span></span><span style="display:flex;"><span>    controller<span style="color:#f92672">-&gt;</span>ref <span style="color:#f92672">=</span> ref;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>ref <span style="color:#f92672">-</span> controller<span style="color:#f92672">-&gt;</span>feedback;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 积分分离，误差过大不积分 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">&gt;</span> controller<span style="color:#f92672">-&gt;</span>int_boundary <span style="color:#f92672">||</span> controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>controller<span style="color:#f92672">-&gt;</span>int_boundary)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        controller<span style="color:#f92672">-&gt;</span>err_sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        controller<span style="color:#f92672">-&gt;</span>err_sum <span style="color:#f92672">+=</span> controller<span style="color:#f92672">-&gt;</span>err;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/* 误差低通滤波 */</span>
+</span></span><span style="display:flex;"><span>	controller<span style="color:#f92672">-&gt;</span>err_lpf <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>err_lpf1 <span style="color:#f92672">+</span> LPF_alpha<span style="color:#f92672">*</span>(controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">-</span> controller<span style="color:#f92672">-&gt;</span>err_lpf1);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/* pid 控制器输出 */</span>
+</span></span><span style="display:flex;"><span>    controller<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>kp <span style="color:#f92672">*</span> controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                         controller<span style="color:#f92672">-&gt;</span>ki <span style="color:#f92672">*</span> controller<span style="color:#f92672">-&gt;</span>err_sum <span style="color:#f92672">+</span> \
+</span></span><span style="display:flex;"><span>                         controller<span style="color:#f92672">-&gt;</span>kd <span style="color:#f92672">*</span> (controller<span style="color:#f92672">-&gt;</span>err <span style="color:#f92672">-</span> controller<span style="color:#f92672">-&gt;</span>err1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    controller<span style="color:#f92672">-&gt;</span>err1 <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>err;
+</span></span><span style="display:flex;"><span>	controller<span style="color:#f92672">-&gt;</span>err_lpf1 <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>err_lpf;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 输出限幅 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (controller<span style="color:#f92672">-&gt;</span>out_lim <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1e-8</span>)	<span style="color:#75715e">/* 输出限幅值不为0 */</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (controller<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">&gt;</span> controller<span style="color:#f92672">-&gt;</span>out_lim)
+</span></span><span style="display:flex;"><span>            controller<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">=</span> controller<span style="color:#f92672">-&gt;</span>out_lim;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (controller<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">&lt;</span> <span style="color:#f92672">-</span>controller<span style="color:#f92672">-&gt;</span>out_lim)
+</span></span><span style="display:flex;"><span>            controller<span style="color:#f92672">-&gt;</span>output <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>controller<span style="color:#f92672">-&gt;</span>out_lim;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> controller<span style="color:#f92672">-&gt;</span>output;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里还考虑了误差的低通滤波，使用位置式 PID 控制器实现。</p>
+<h3 id="视觉检测部分">视觉检测部分</h3>
+<p>这部分比较简单，细节参考 openmv 的手册</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>import sensor, image, time, pyb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">reset</span>()
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">set_pixformat</span>(sensor.RGB565)
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">set_framesize</span>(sensor.QVGA)
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">set_windowing</span>((<span style="color:#ae81ff">180</span>, <span style="color:#ae81ff">180</span>))
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">skip_frames</span>(time <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>)
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">set_auto_gain</span>(False)
+</span></span><span style="display:flex;"><span>sensor.<span style="color:#a6e22e">set_auto_whitebal</span>(False)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>clock <span style="color:#f92672">=</span> time.<span style="color:#a6e22e">clock</span>()                <span style="color:#960050;background-color:#1e0010">#</span> Create a clock object to track the FPS.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>led     <span style="color:#f92672">=</span> pyb.<span style="color:#a6e22e">LED</span>(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>uart    <span style="color:#f92672">=</span> pyb.<span style="color:#a6e22e">UART</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">115200</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>red_point <span style="color:#f92672">=</span> (<span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">127</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">128</span>, <span style="color:#ae81ff">127</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># red_point = (30, 100, 20, 127, -128, 127)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(True)<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    clock.<span style="color:#a6e22e">tick</span>()                    <span style="color:#960050;background-color:#1e0010">#</span> Update the FPS clock.
+</span></span><span style="display:flex;"><span>    img <span style="color:#f92672">=</span> sensor.<span style="color:#a6e22e">snapshot</span>()         <span style="color:#960050;background-color:#1e0010">#</span> Take a picture and <span style="color:#66d9ef">return</span> the image.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    blobs <span style="color:#f92672">=</span> img.<span style="color:#a6e22e">find_blobs</span>([red_point])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> blobs:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> b in blobs:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 坐标旋转
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            x <span style="color:#f92672">=</span> <span style="color:#ae81ff">179</span> <span style="color:#f92672">-</span> b.<span style="color:#a6e22e">cy</span>()
+</span></span><span style="display:flex;"><span>            y <span style="color:#f92672">=</span> b.<span style="color:#a6e22e">cx</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 串口输出
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            uart_output <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%c%c%c%c%c&#34;</span> <span style="color:#f92672">%</span> (<span style="color:#ae81ff">0x55</span>, <span style="color:#ae81ff">0x55</span>, x, y, <span style="color:#ae81ff">0xAA</span>)
+</span></span><span style="display:flex;"><span>            uart.<span style="color:#a6e22e">write</span>(uart_output)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        led.<span style="color:#a6e22e">off</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 串口输出
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        uart_output <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%c%c%c%c%c&#34;</span> <span style="color:#f92672">%</span> (<span style="color:#ae81ff">0x55</span>, <span style="color:#ae81ff">0x55</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">0xAA</span>)
+</span></span><span style="display:flex;"><span>        uart.<span style="color:#a6e22e">write</span>(uart_output)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(clock.fps()) # 注意: 你的OpenMV连到电脑后帧率大概为原来的一半
+</span></span></span></code></pre></div><p>总共不到 50 行代码，一些细节，摄像头是横着安装的，做了一个坐标的旋转变换。此外在没有找到激光点时，返回 90，90，即误差为0，效果是让云台停止运行。</p>
+<h2 id="6总结">6.总结</h2>
+<p>仿真的重要性，以及算法设计时对移植性的考虑。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/laser-track.html";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.a2e7a3db4f1b58e7616cfd31a099340a207d5b99d96df87f525f17c604e184c1.js" integrity="sha256-ouej208bWOdhbP0xoJk0CiB9W5nZbfh/Ul8XxgThhME=" crossorigin="anonymous"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon1 = document.getElementById('svgwechat');
+      const tooltip1 = document.getElementById('wechattip');
+
+      icon1.addEventListener('mouseenter', function(event) {
+        const rect = icon1.getBoundingClientRect();
+
+        
+        tooltip1.style.left = `${rect.left + window.scrollX - 100}px`;
+        tooltip1.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip1.style.display = 'block';
+      });
+
+      icon1.addEventListener('mouseleave', function() {
+        tooltip1.style.display = 'none';
+      });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon2 = document.getElementById('svgqq');
+      const tooltip2 = document.getElementById('qqtip');
+
+      icon2.addEventListener('mouseenter', function(event) {
+        const rect = icon2.getBoundingClientRect();
+
+        
+        tooltip2.style.left = `${rect.left + window.scrollX -100 }px`;
+        tooltip2.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip2.style.display = 'block';
+      });
+
+      icon2.addEventListener('mouseleave', function() {
+        tooltip2.style.display = 'none';
+      });
+    });
+</script>
+
+</body>
+
+</html>
