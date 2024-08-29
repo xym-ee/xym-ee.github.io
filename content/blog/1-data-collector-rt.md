@@ -11,7 +11,7 @@ tags:       ["project","rt-thread","stm32","w5500","IoT","sensor","socket"]
 
 ## 0. 介绍
 
-<img src="https://github.com/xym-ee/data-collector-rt/blob/main/images/3.png?raw=true" width="300" style="display: block; margin: auto;">
+<img src="./images/data-collector-rt-3.png" width="300" style="display: block; margin: auto;">
 
 这是一个物联网项目，合作公司的主要业务是使用无人机进行密闭环境的无人检测，如船舶、大型锅炉、化工厂储罐等内部观察检测。该项目需要开发一套用于密闭环境近观检测的无人机系统，涵盖硬件设计、软件开发与系统集成。该系统由无人机端、地面监控端和数据传输与系留供电模块组成，专门用于密闭空间内的精细检测任务。无人机端搭载高清相机、飞控系统，以及**一个基于 STM32F407 的环境数据采集与上报模块**。该模块通过外挂的 W5500 芯片与无人机局域网内的机载工控机进行通信，采用 UDP 协议实现数据传输。
 
@@ -21,7 +21,7 @@ tags:       ["project","rt-thread","stm32","w5500","IoT","sensor","socket"]
 
 ## 1. 硬件方案
 
-<img src="https://github.com/xym-ee/data-collector-rt/blob/main/images/1-2.png?raw=true" width="200" style="display: block; margin: auto;">
+<img src="./images/data-collector-rt-1-2.png" width="200" style="display: block; margin: auto;">
 
 此项目我不负责硬件设计部分，但这里也简单介绍一下硬件方案。
 
@@ -40,6 +40,12 @@ W5500([datasheet](https://atta.szlcsc.com/upload/public/pdf/source/20230714/E10C
 
 此外，还有共 20 个 GPIO 用来控制灯光、电源的开关。
 
+
+| 激光测距传感器 | 可燃气体浓度传感器 | 高精度温度传感器 |
+|-|-|-|
+| <img src="./images/data-collector-rt-2-2.png" width="200" style="display: block; margin: auto;"> | <img src="./images/data-collector-rt-2-3.png" width="100" style="display: block; margin: auto;"> | <img src="./images/data-collector-rt-2-4.png" width="200" style="display: block; margin: auto;"> |
+
+
 ## 2. 软件开发情况总体介绍
 
 ### RTOS 选择: rt-thread
@@ -53,8 +59,8 @@ W5500([datasheet](https://atta.szlcsc.com/upload/public/pdf/source/20230714/E10C
 rtt 可以使用 Keil、IAR、RT-Thread Studio、makefile 来开发，我使用 Keil 来开发。整个软件的开发流程
 
 ```
-BSP 开发 -->  传感器驱动开发  -> 传感器驱动测试   ---> 业务功能开发 -> 业务功能测试 -> 整机测试 -> 生产环境测试
-        \ -> 网络通信功能开发 -> 网络通信功能测试 / 
+BSP 开发 --->  传感器驱动开发  -> 传感器驱动测试    ---> 业务功能开发 -> 业务功能测试 -> 整机测试 -> 生产环境测试
+          \--> 网络通信功能开发 -> 网络通信功能测试 -/ 
 ```
 
 rt-thread 现在也比较成熟了，对 arm cortex-m 内核、STM32 系列支持的都挺好，不需要做 kernel 的移植和外设驱动的开发了。但是这个板是自己设计的，因此还是要做一下板级适配，需要适配的地方也不多，参考[官方说明文档关于 BSP 开发的部分](https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/tutorial/make-bsp/stm32-bsp/STM32%E7%B3%BB%E5%88%97BSP%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B)
