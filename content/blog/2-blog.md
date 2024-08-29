@@ -217,9 +217,25 @@ sudo systemctl restart nginx
 
 然后就可以在 `http://ip` 直接看到网页内容了。有域名的话，可以将域名解析到服务器 ip，但是需要完成备案。
 
-网站源码以及生成的静态页面可以托管在 github，只需要让托管网站静态页面有新的 push 动作时，云服务自动同步就可以实现全自动的更新。这个事情可以使用 github webhook 实现。等我的网站备案完成后再试试，这个事情应该是可以做的。
+网站源码以及生成的静态页面可以托管在 github，只需要让托管网站静态页面有新的 push 动作时，云服务自动同步就可以实现全自动的更新。这个事情可以使用 github webhook 或者 github actions 实现。等我的网站备案完成后再试试，这个事情应该是可以做的。这样就可以实现我在本地更改网站内容，然后本地预览，确认没问题后，push 到 github，然后github完成静态内容生成，并通知云服务器同步内容。
 
-这样就可以实现我在本地更改网站内容，然后本地预览，确认没问题后，push 到github，然后github完成静态内容生成，并通知云服务器同步内容。
+
+关于云服务器的同步，我使用了 github actions，在前面部署到 github pages 的工作流里，后面在加一条
+
+```yaml
+- name: SSH to server and pull latest changes
+  uses: appleboy/ssh-action@v0.1.7
+  with:
+    host: ${{ secrets.SERVER_HOST }}
+    username: ${{ secrets.SERVER_NAME }}
+    key: ${{ secrets.SSH_KEY }}
+    script: |
+      cd /home/ubuntu/xym-ee.github.io
+      git pull origin pub
+      sudo systemctl reload nginx
+```
+
+直接远程执行一条 git 的拉取命令即可实现同步。
 
 ## 5. 强行创造的调试需求：在公网访问内网的 hugo server
 

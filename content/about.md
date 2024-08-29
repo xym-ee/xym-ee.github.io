@@ -21,53 +21,7 @@ url: "/about.html"
 | 2016.9 - 2020.6 | 本科在读 | 电气工程及其自动化专业，电力电子与电机方向 |
 
 
-<style>
-    /* 按钮样式 */
-    .button {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        position: relative;
-    }
 
-    /* 悬浮窗容器样式 */
-    .tooltip {
-        display: none;
-        position: absolute;
-        top: 100%; /* 显示在按钮下方 */
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 10px;
-        padding: 10px;
-        background-color: #333;
-        border-radius: 5px;
-        z-index: 1000;
-    }
-
-    /* 悬浮窗中的图片样式 */
-    .tooltip img {
-        max-width: 200px; /* 限制图片最大宽度 */
-        border-radius: 5px;
-    }
-
-    /* 当鼠标悬停在按钮上时，显示悬浮窗 */
-    .button:hover .tooltip {
-        display: block;
-    }
-</style>
-
-
-<button class="button">
-    Hover over me
-    <!-- 悬浮窗内容 -->
-    <div class="tooltip">
-        <img src="/images/wechat.png" alt="Description">
-    </div>
-</button>
 
 <!--
 熟练使用C语言开发，嵌入式系统设计，中低速PCB设计，运动控制。
