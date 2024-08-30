@@ -2,16 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://xym.work/blog/laser-track.html</loc>
-    <lastmod>2024-08-29T23:30:30+08:00</lastmod>
+    <loc>https://xym.work/blog/servo-system.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/project/</loc>
-    <lastmod>2024-08-29T23:30:30+08:00</lastmod>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/rt-thread/</loc>
-    <lastmod>2024-08-29T23:30:30+08:00</lastmod>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/sensor/</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/socket/</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/stm32/</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/laser-track.html</loc>
     <lastmod>2024-08-29T23:30:30+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA/</loc>
@@ -27,12 +36,6 @@
     <lastmod>2024-08-28T13:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/iot/</loc>
-    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://xym.work/tags/sensor/</loc>
-    <lastmod>2024-08-28T13:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://xym.work/tags/socket/</loc>
     <lastmod>2024-08-28T13:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/w5500/</loc>

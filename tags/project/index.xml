@@ -6,10 +6,17 @@
     <description>Recent content in Project on xym-ee</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Aug 2024 23:30:30 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 30 Aug 2024 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://xym.work/tags/project/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>[project]2023 年电子设计竞赛：运动控制与目标追踪系统的设计</title>
+      <title>[project] 用于大负载转台驱动的伺服控制系统开发</title>
+      <link>https://xym.work/blog/servo-system.html</link>
+      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/servo-system.html</guid>
+      <description>0.简介 学校项目，用于大负载转台驱动的伺服控制系统开发。要求能实现高精度的转角控制以及对制定目标的跟踪控制。&#xA;使用电机为 PMSM，功率 40 kW，$ U_{IN} = 396 $ ，$ I_{o(eff)} = 73 A $，极对数 4。&#xA;实验室有一套祖传的电机控制板和代码，使用了 DSP + CPLD 的方案。芯片型号&#xA;DSP ：TMS320F28335 CPLD ：AG256SL100 此外还有一个配套的 LabView 的上位机，用来调整控制参数。也即核心控制算法上面，没有什么我需要去实现的，拿来先用。我只需要实现功率部分，然后调试硬件，最后调试控制参数。&#xA;这个项目对我来说算是个硬件设计项目。&#xA;1.PMSM 控制原理与方法 TMS320F28335 这个芯片常用来做电机控制，我看的一些拆车视频中，比亚迪秦、特斯拉 model 3 的电机驱动器用的就是这个型号的芯片。ST 也有专门用来做电机控制的芯片，有些一体化电机用的是 STM32 的芯片，还有好多开源的电机控制学习板也是这款芯片。&#xA;这里简略的介绍下 PMSM 的 FOC 控制算法&#xA;FOC 的核心想法是将定子三相电流通过坐标变换到定子同步旋转坐标系，分解为励磁电流和转矩电流。由于使用的是 PMSM，转子为永磁体，故使用了 $ i_d^* = 0 $ 的控制策略。经过坐标变换后，PMSM 的控制方式就和直流电机类似，励磁电流和转矩电流解耦分别进行控制。&#xA;SVPWM 则是一种发波方法，能提高母线电压的利用率，其本质也是一种三次谐波注入的方式，其更容易使用微控制器实现。&#xA;更细节的方法上的内容可以参考我的电机控制学习笔记。&#xA;2.功率部分设计 方法是这么个方法，从实现上来讲，MCU 需要的需要采集三相电流，转子位置，输出的 PWM 信号需要驱动功率模块。&#xA;一般的，低压部分和高压功率部分，低压部分实现纯逻辑的东西，高压功率部分即驱动板，完成信号的变换、隔离、功率输出。&#xA;此外实际的电机控制还需要考虑保护，比如过压、欠压、过流等功能。这些事情软件也可以做，但实际的电机控制一般都会用硬件实现以更快的实现保护，因此加了一个 FPGA ，在遇到硬件保护触发时，直接切断 PWM 输出，然后向微控制器发送错误代码。&#xA;STM32 的电机开发套件里给了更详细的图。</description>
+    </item>
+    <item>
+      <title>[project] 2023 年电子设计竞赛：运动控制与目标追踪系统的设计</title>
       <link>https://xym.work/blog/laser-track.html</link>
       <pubDate>Thu, 29 Aug 2024 23:30:30 +0800</pubDate>
       <guid>https://xym.work/blog/laser-track.html</guid>
