@@ -150,7 +150,7 @@ $$
 就能计算出出屏幕上用 T 坐标系表示的点在云台上 B 坐标系的坐标值了。(其实对于这个比较简单的关系，硬看也能看出来下面的结论，但是齐次坐标变换是一种解决这类问题的通用思路)
 
 $$
-\left \{
+\left \\{
     \begin{array}{l}
         ^B x = \ ^T x  - l \\\\
         ^B y = \ ^T y + H_1 + H_2 - h_1 \\\\
@@ -634,7 +634,7 @@ double controller_output(controller_t *controller, double ref, double feedback)
 
 这部分比较简单，细节参考 openmv 的手册
 
-```c
+```py
 import sensor, image, time, pyb
 
 sensor.reset()
@@ -648,10 +648,9 @@ sensor.set_auto_whitebal(False)
 clock = time.clock()                # Create a clock object to track the FPS.
 
 led     = pyb.LED(3)
-uart    = pyb.UART(3,115200)
+uart    = pyb.UART(3, 115200)
 
 red_point = (24, 100, 14, 127, -128, 127)
-# red_point = (30, 100, 20, 127, -128, 127)
 
 while(True):
     clock.tick()                    # Update the FPS clock.
@@ -661,20 +660,16 @@ while(True):
 
     if blobs:
         for b in blobs:
-
-            # 坐标旋转
-            x = 179 - b.cy()
+            x = 179 - b.cy()        # 坐标旋转
             y = b.cx()
 
-            # 串口输出
-            uart_output = "%c%c%c%c%c" % (0x55, 0x55, x, y, 0xAA)
+            uart_output = "%c%c%c%c%c" % (0x55, 0x55, x, y, 0xAA)   # 串口输出
             uart.write(uart_output)
+            led.on()
     else:
-        led.off()
-
-        # 串口输出
         uart_output = "%c%c%c%c%c" % (0x55, 0x55, 90, 90, 0xAA)
         uart.write(uart_output)
+        led.off()
 
     #print(clock.fps()) # 注意: 你的OpenMV连到电脑后帧率大概为原来的一半
 ```

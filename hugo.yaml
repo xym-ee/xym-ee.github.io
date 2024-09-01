@@ -9,14 +9,18 @@ menus:
       name: About
       url: /about.html
       weight: 20
+    - identifier: gallery
+      name: Gallery
+      url: /gallery.html
+      weight: 30
     - identifier: blog
       name: Blog
       url: /blog
-      weight: 30
+      weight: 40
     - identifier: notebook
       name: Notebook
       url: /notebook.html
-      weight: 40
+      weight: 50
 paginate: 20
 permalinks:
   blog: "/blog/:slug/"
