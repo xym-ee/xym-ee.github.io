@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+
+<meta name="ICBM" content="19.0760, 72.8777">
+<meta name="geo.position" content="19.0760;72.8777">
+<meta name="geo.region" content="IN-MH">
+<meta name="geo.placename" content="Mumbai">
+<title>[project] 2019 年恩智浦杯大学生智能汽车竞赛，代码 review | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.ce97201a436e89554f6444624e62d4b32a48d70d124d557a1852401701ab43bc.css" type="text/css" integrity="sha256-zpcgGkNuiVVPZERiTmLUsypI1w0STVV6GFJAFwGrQ7w=" crossorigin="anonymous">
+
+</head>
+
+<body class="bg-gradient-to-r from-slate-900 to-slate-800 font-mono text-white">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="text-4xl font-bold hover:text-sky-400 whitespace-nowrap">xym-ee</a>
+      <p>Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-slate-900 max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/about.html">About</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/gallery.html">Gallery</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/blog">Blog</a>
+  </li>
+
+  <li class="font-bold border border-sky-400 px-3 py-2 hover:bg-sky-400 focus:text-sky-400 text-center">
+    <a href="/notebook.html">Notebook</a>
+  </li>
+
+    </ul>
+  </div>
+  <div class="open-dropdown-button lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="white">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </div>
+  <div class="close-dropdown-button hidden z-50">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="white">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </div>
+</nav>
+</header>
+
+  
+  <div class="flex flex-col pt-8 gap-10">
+    
+    <div class="flex flex-col w-full gap-4">
+      <h2 class="text-3xl max-sm:text-2xl font-bold">[project] 2019 年恩智浦杯大学生智能汽车竞赛，代码 review</h2>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2024-08-30</p>
+        
+          <p>🔄 2024-08-30</p>
+        
+        <p>⌚ Reading time: 2 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">🏷️</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/tags/project'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">project</a>
+  
+    <a href='/tags/rt-thread'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">rt-thread</a>
+  
+    <a href='/tags/stm32'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">stm32</a>
+  
+</div>
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose prose-invert max-w-full">
+          <p>效果视频</p>
+<h2 id="0介绍">0.介绍</h2>
+<p>2019 年 7 月分我参加了当年的恩智浦杯智能汽车竞赛，以前叫飞思卡尔杯，对于自动化专业来说，这个比赛还是挺重要的。当时我大三，这个比赛(项目)算是我的第一个完成度比较高的作品。我负责的内容，硬件开发，驱动开发，整个软件框架的开发。</p>
+<p>这辆车也一直放在我身边，当时可能只是感兴趣觉得好玩，现在看起来这应该是我整个嵌入式开发生涯的起点。现在的我能给出更好地方案，更完整的设计，甚至更高效的代码结构。但是让我去评价当年的写这些代码的自己，我觉得做的已经不错了，这是一个项目总结，同时也是一个关于如何写出好代码的一些想法。</p>
+<p>这个车的主控芯片为 NXP imx 的跨界处理器，使用 IAR 完成裸机开发。当时大量的参考了 NXP 官方的源码，虽然是裸机开发但是当时也通过 NXP 例程学习了不少东西，后面的内容我会详细写出来。</p>
+<h2 id="1比赛要求智能车工作原理">1.比赛要求，智能车工作原理</h2>
+<p>固定元素，实现智能车的自动运行。</p>
+<ul>
+<li>赛道上出现的元素
+<ul>
+<li>赛道对比度比较高，摄像头是一定需要的。此外赛道上还铺设了电磁引导线，通着交流电，也可以通过磁场定位。赛道上还有障碍物，是显眼的红色。</li>
+<li>需要摄像头，电磁传感器</li>
+<li>障碍物</li>
+</ul>
+</li>
+<li>底盘控制
+<ul>
+<li>舵机</li>
+<li>两个直流电机</li>
+</ul>
+</li>
+</ul>
+<p>硬件上，要考虑电机、舵机驱动，电磁传感器模拟信号的处理，整车供电。</p>
+<p>车辆控制上，需要考虑通过图像获得智能车相对于赛道的偏差，这部分内容由我的队友负责，通过偏差计算出舵机的控制量，这部分也由我的队友负责。相当于我搭建一个比较可靠的运动平台，并提供控制算法需要的原始数据，然后将控制算法的输出落实到执行机构如电机、舵机。</p>
+<h2 id="2硬件方案设计">2.硬件方案设计</h2>
+<p>我已经有几年不做硬件不画板了，但是这个项目是我比较完整的软硬件都做的项目，这里一定要拿出来介绍一下。</p>
+<p>使用 Altium Designer 来开发。考虑整车的电源设计，驱动板设计，电磁传感器设计，MCU 控制板的设计。</p>
+<h2 id="3软件总体方案设计">3.软件总体方案设计</h2>
+<p>这里由于软件设计上的不完善，只能通过 main 函数主循环的实现来猜测当时的设计想法了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* ---------------------      硬件初始化         -------------------------- */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">system_init</span>();<span style="color:#75715e">/* MCU初始化 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//car_direction_barrier_test();/* 单个功能测试函数位置 */
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">lpuart1_init</span>(<span style="color:#ae81ff">115200</span>);         <span style="color:#75715e">/* 蓝牙发送串口启动 */</span>
+</span></span><span style="display:flex;"><span>  key.<span style="color:#a6e22e">init</span>();                   <span style="color:#75715e">/* 按键启动 */</span>
+</span></span><span style="display:flex;"><span>  led.<span style="color:#a6e22e">init</span>();                   <span style="color:#75715e">/* 指示灯启动 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">NVIC_SetPriorityGrouping</span>(<span style="color:#ae81ff">2</span>);  <span style="color:#75715e">/* 2: 4个抢占优先级 4个子优先级*/</span>
+</span></span><span style="display:flex;"><span>  oled.<span style="color:#a6e22e">init</span>();                   <span style="color:#75715e">/* LCD启动 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//ExInt_Init();                 /* 中断启动 */
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  adc.<span style="color:#a6e22e">init</span>();
+</span></span><span style="display:flex;"><span>  motor.<span style="color:#a6e22e">init</span>();         <span style="color:#75715e">/* 车速PID控制初始化.包含ENC,PWM,PID参数初始化 */</span>       
+</span></span><span style="display:flex;"><span>  img.<span style="color:#a6e22e">init</span>();                   <span style="color:#75715e">/* 相机接口初始化 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">delayms</span>(<span style="color:#ae81ff">200</span>);                 <span style="color:#75715e">/* 必要的延时，等待相机感光元件稳定 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//UI_debugsetting();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">pit_init</span>(kPIT_Chnl_0, <span style="color:#ae81ff">10000</span>);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">/* 10ms中断置位？  */</span>
+</span></span><span style="display:flex;"><span>	  <span style="color:#66d9ef">while</span> (status.interrupt_10ms <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>	  {
+</span></span><span style="display:flex;"><span>        adc.<span style="color:#a6e22e">refresh</span>();      <span style="color:#75715e">/* 更新赛道电磁引导线信息，adc_roadtype数据包更新 */</span>
+</span></span><span style="display:flex;"><span>        adc.<span style="color:#a6e22e">circle_check</span>(); <span style="color:#75715e">/* 圆环检测、偏差检测，转换为电磁引导模式 */</span>
+</span></span><span style="display:flex;"><span>	  }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    key.<span style="color:#a6e22e">barrier_check</span>(); <span style="color:#75715e">/* 路障检查 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 如果图像就绪，图像刷新，道路类型判断 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(kStatus_Success <span style="color:#f92672">==</span> <span style="color:#a6e22e">CAMERA_RECEIVER_GetFullBuffer</span>(<span style="color:#f92672">&amp;</span>cameraReceiver, <span style="color:#f92672">&amp;</span>CameraBufferAddr))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      img.<span style="color:#a6e22e">refresh</span>();            <span style="color:#75715e">/* 更新图像和偏差等控制信息 */</span>
+</span></span><span style="display:flex;"><span>      adc.<span style="color:#a6e22e">error_check</span>();        <span style="color:#75715e">/* 电磁引导线偏差检查 */</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    car.<span style="color:#a6e22e">direction_control</span>();  <span style="color:#75715e">/* 舵机打角更新 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">car_speed_calculate</span>();      <span style="color:#75715e">/* 更新一次左右电机目标速度 */</span>    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 两个电机转速控制 */</span>
+</span></span><span style="display:flex;"><span>    motor.<span style="color:#a6e22e">pidcontrol</span>(<span style="color:#f92672">&amp;</span>motor_speed);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    status_indicator.<span style="color:#a6e22e">light_road</span>();    <span style="color:#75715e">/* 状态灯指示更新 */</span>
+</span></span><span style="display:flex;"><span>    status_indicator.<span style="color:#a6e22e">oled_circle</span>();   <span style="color:#75715e">/* 屏幕显示更新 */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> txt[<span style="color:#ae81ff">16</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">sprintf</span>(txt,<span style="color:#e6db74">&#34;ENC2: %6d &#34;</span>,(<span style="color:#66d9ef">int16_t</span>)<span style="color:#a6e22e">ENC_GetPositionValue</span>(ENC2));
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">LCD_P6x8Str</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">5</span>,(<span style="color:#66d9ef">uint8_t</span><span style="color:#f92672">*</span>)txt);   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 中断复位 */</span>
+</span></span><span style="display:flex;"><span>    status.interrupt_10ms <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>我现在看这段代码已经看不大明白了，好在函数名起的还可以，丢给 chatgpt，他给我的回答</p>
+<blockquote>
+<p>这个代码的控制逻辑通过一个定时中断来驱动，周期性地采集传感器数据、进行路障检测、图像处理和车辆控制。主循环确保每个任务在固定时间间隔内被执行，并根据传感器和相机的数据实时调整车辆的运动状态。</p>
+</blockquote>
+<p>现在看来，主循环代码并没有做到不言自明，可以想到这个代码维护起来很困难，依靠四散在各处的全局变量来实现数据的传递。最主要的是在最上层的主函数并没有充分的体现出应用层的控制逻辑，一些函数的参数也莫名奇妙，比如 <code>motor.pidcontrol(&amp;motor_speed);</code> 传入的参数没有前因后果。非常独立。</p>
+<p>我现在评价这个代码：在形式上模仿了描述符(句柄 or 一个对象)控制一个对象的想法，但是只是参考了形式上的设计。并不知道为什么这么做。</p>
+<h2 id="4关于一些驱动的讨论">4.关于一些驱动的讨论</h2>
+<p>摄像头的型号为 MT9V034，连接到芯片的 CSI 接口，这部分的代码使用了 nxp 官方的例程，里面大量的出现了类似的代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*******************************************************************************
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Variables
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> ******************************************************************************/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">camera_receiver_operations_t</span> csi_ops <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    .init <span style="color:#f92672">=</span> CSI_ADAPTER_Init,
+</span></span><span style="display:flex;"><span>    .deinit <span style="color:#f92672">=</span> CSI_ADAPTER_Deinit,
+</span></span><span style="display:flex;"><span>    .start <span style="color:#f92672">=</span> CSI_ADAPTER_Start,
+</span></span><span style="display:flex;"><span>    .stop <span style="color:#f92672">=</span> CSI_ADAPTER_Stop,
+</span></span><span style="display:flex;"><span>    .submitEmptyBuffer <span style="color:#f92672">=</span> CSI_ADAPTER_SubmitEmptyBuffer,
+</span></span><span style="display:flex;"><span>    .getFullBuffer <span style="color:#f92672">=</span> CSI_ADAPTER_GetFullBuffer,
+</span></span><span style="display:flex;"><span>    .init_ext <span style="color:#f92672">=</span> CSI_ADAPTER_InitExt
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>不得不说，这些示例代码给了我对代码设计的良好启蒙。用我现在的理解来说，这些代码对设备对象和操作做了很好的封装，模块化的设计做的非常好，</p>
+<p>我也做了形式上的模仿如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* LED设备初始化 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_pin_init</span>(<span style="color:#66d9ef">void</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* LED操作 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_on</span>(<span style="color:#66d9ef">led_name_t</span> choose);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_off</span>(<span style="color:#66d9ef">led_name_t</span> choose);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_reverse</span>(<span style="color:#66d9ef">led_name_t</span> color);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_flash_fast</span>(<span style="color:#66d9ef">led_name_t</span> color);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_flash_slow</span>(<span style="color:#66d9ef">led_name_t</span> color);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">led_off_all</span>(<span style="color:#66d9ef">void</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">led_operations_t</span> led_ops <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        .on <span style="color:#f92672">=</span> led_on,
+</span></span><span style="display:flex;"><span>        .off <span style="color:#f92672">=</span> led_off,
+</span></span><span style="display:flex;"><span>        .reverse <span style="color:#f92672">=</span> led_reverse,
+</span></span><span style="display:flex;"><span>        .flash_fast <span style="color:#f92672">=</span> led_flash_fast,
+</span></span><span style="display:flex;"><span>        .flash_slow <span style="color:#f92672">=</span> led_flash_slow,
+</span></span><span style="display:flex;"><span>        .off_a <span style="color:#f92672">=</span> led_off_all,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">led_device_t</span> led <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        .init <span style="color:#f92672">=</span> led_pin_init,
+</span></span><span style="display:flex;"><span>        .ops <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>led_ops
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>具体的实现直接使用 nxp 的库。完整的源码</p>
+<p>当时只做了形式上的模仿，但是也确实通过这个了解到了一些程序设计上的东西。</p>
+<p>这也是我第一次接触这类语法，这对我后面学习 rt-thread 甚至 linux 都很有帮助。linux 内核中这类的表达也很多。</p>
+<h2 id="5关于程序的方法实现">5.关于程序的方法实现</h2>
+<p>目标是运动控制。那么有方法上的东西。</p>
+<p>用编程去实现理论的东西，应用控制算法。</p>
+<p>现在我觉得是我拖了队友的后腿。😂，因为方法都是用 matlab 仿真过的，现在的我看这些控制方法找不出一点毛病，但是看软件实现漏洞百出。事实上，从视频也可以看出来方法在当时就已经有了不错的控制效果。</p>
+<p>通过图像找偏差的具体思路：</p>
+<h2 id="6总结">6.总结</h2>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/2019-nxp-car.html";
+    this.page.identifier = ""; 
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2024. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+  
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.a2e7a3db4f1b58e7616cfd31a099340a207d5b99d96df87f525f17c604e184c1.js" integrity="sha256-ouej208bWOdhbP0xoJk0CiB9W5nZbfh/Ul8XxgThhME=" crossorigin="anonymous"></script>
+
+  <script id="dsq-count-scr" src="//nayanseth.disqus.com/count.js" async></script>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon1 = document.getElementById('svgwechat');
+      const tooltip1 = document.getElementById('wechattip');
+
+      icon1.addEventListener('mouseenter', function(event) {
+        const rect = icon1.getBoundingClientRect();
+
+        
+        tooltip1.style.left = `${rect.left + window.scrollX - 100}px`;
+        tooltip1.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip1.style.display = 'block';
+      });
+
+      icon1.addEventListener('mouseleave', function() {
+        tooltip1.style.display = 'none';
+      });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const icon2 = document.getElementById('svgqq');
+      const tooltip2 = document.getElementById('qqtip');
+
+      icon2.addEventListener('mouseenter', function(event) {
+        const rect = icon2.getBoundingClientRect();
+
+        
+        tooltip2.style.left = `${rect.left + window.scrollX -100 }px`;
+        tooltip2.style.top = `${rect.bottom + window.scrollY + 20}px`;
+
+        tooltip2.style.display = 'block';
+      });
+
+      icon2.addEventListener('mouseleave', function() {
+        tooltip2.style.display = 'none';
+      });
+    });
+</script>
+
+</body>
+
+</html>

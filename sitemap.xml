@@ -2,7 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://xym.work/blog/baremetal.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/2019-nxp-car.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/curved-fire-gun.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/ackerman-chassis.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/ros-chassis.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/mecanum-chassis.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/omni-chassis.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/blog/tracking-robot.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
     <loc>https://xym.work/blog/servo-system.html</loc>
+    <lastmod>2024-08-30T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/tags/post/</loc>
     <lastmod>2024-08-30T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/project/</loc>
@@ -71,9 +98,6 @@
     <loc>https://xym.work/tags/openwrt/</loc>
     <lastmod>2024-08-20T13:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://xym.work/tags/post/</loc>
-    <lastmod>2024-08-20T13:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://xym.work/tags/shell/</loc>
     <lastmod>2024-08-20T13:00:00+08:00</lastmod>
   </url><url>
@@ -93,6 +117,9 @@
     <lastmod>2024-03-28T15:00:00+00:00</lastmod>
   </url><url>
     <loc>https://xym.work/tags/</loc>
+    <lastmod>2024-03-28T15:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://xym.work/gallery.html</loc>
     <lastmod>2024-03-28T15:00:00+00:00</lastmod>
   </url><url>
     <loc>https://xym.work/blog/</loc>

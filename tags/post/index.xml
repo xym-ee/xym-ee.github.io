@@ -6,10 +6,17 @@
     <description>Recent content in Post on xym-ee</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Aug 2024 13:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 30 Aug 2024 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://xym.work/tags/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>[post]静态网站搭建中有关计算机网络相关的内容</title>
+      <title>[post] 使用 gcc 开发 STM32</title>
+      <link>https://xym.work/blog/baremetal.html</link>
+      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/baremetal.html</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>[post] 静态网站搭建中有关计算机网络相关的内容</title>
       <link>https://xym.work/blog/hugowebsite.html</link>
       <pubDate>Tue, 20 Aug 2024 13:00:00 +0800</pubDate>
       <guid>https://xym.work/blog/hugowebsite.html</guid>

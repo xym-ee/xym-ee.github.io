@@ -9,6 +9,13 @@
     <lastBuildDate>Fri, 30 Aug 2024 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://xym.work/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Post</title>
+      <link>https://xym.work/tags/post/</link>
+      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/post/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Project</title>
       <link>https://xym.work/tags/project/</link>
       <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
@@ -139,13 +146,6 @@
       <link>https://xym.work/tags/openwrt/</link>
       <pubDate>Tue, 20 Aug 2024 13:00:00 +0800</pubDate>
       <guid>https://xym.work/tags/openwrt/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Post</title>
-      <link>https://xym.work/tags/post/</link>
-      <pubDate>Tue, 20 Aug 2024 13:00:00 +0800</pubDate>
-      <guid>https://xym.work/tags/post/</guid>
       <description></description>
     </item>
     <item>
