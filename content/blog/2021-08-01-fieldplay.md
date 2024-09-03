@@ -12,7 +12,7 @@ tags:       ["control theory"]
 
 这篇文章介绍了一个平面向量场可视化的网页工具：[fieldpaly](https://anvaka.github.io/fieldplay/)
 
-这里只是介绍了系统相平面可视化实现的代码，给出了我定义的系统**代码标准型**，如果对相平面、非线性系统、状态空间、微分方程解的性质等控制的理论内容感兴趣，可以参考我的笔记：[相平面法-工程中的数学](https://xym.work/math/part2/chapter3/1%E7%9B%B8%E5%B9%B3%E9%9D%A2.html)
+这里只是介绍了系统相平面可视化实现的代码，给出了我定义的系统**代码标准型**，如果对相平面、非线性系统、状态空间、微分方程解的性质等控制的理论内容感兴趣，可以参考我的笔记：[相平面法-工程中的数学](https://control.xym.work/2_control)
 
 从纯数学的角度来讲，这是一个画二维向量场的网站。二维向量场的数学表达：
 
@@ -63,7 +63,7 @@ vec2 get_velocity(vec2 r) {
 电场的可视化效果
 
 <figure>
-  <img  src="../images/fieldplay/点电荷电场.gif" width = 200 />
+  <img  src="./images/fieldplay/点电荷电场.gif" width = 200 />
 </figure>
 
 注意这些粒子并不是试探电荷真实的运动，这里的速度是个抽象速度，“速度”反映了场的强度。截屏录制动画的时候不太清晰，实际上还可以通过颜色判断场的强度的。可以看出越靠近中心，强度越高。
@@ -119,7 +119,7 @@ $$ \mid sI-A \mid = (s+1)(s-1) = 0 $$
 根据经典控制理论，有一个在右半平面的极点，因此不稳定，然后看看相轨迹图：
 
 <figure>
-  <img  src="../images/fieldplay/状态空间画相轨迹.gif" width = 200 />
+  <img  src="./images/fieldplay/状态空间画相轨迹.gif" width = 200 />
 </figure>
 
 可以看出，是个不稳定的鞍点。代码实现如下，很简单的线性方程组的对应关系，这里参数名用的就是位置和速度，用抽象速度去理解相轨迹也是个很有意思的思路。
@@ -275,7 +275,7 @@ vec2 get_velocity(vec2 p) {
 }
 ```
 <figure>
-  <img  src="../images/fieldplay/非线性相轨迹1.gif" width=260 />
+  <img  src="./images/fieldplay/非线性相轨迹1.gif" width=260 />
 </figure>
 
 这是胡寿松第六版自动控制原理375页的例题。系统的两个奇点$$ (0,0) $$和$$ (-2,0) $$。
@@ -337,7 +337,7 @@ f = dot_x + abs(x);
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例1.gif" width = 260 />
+  <img  src="./images/fieldplay/举例1.gif" width = 260 />
 </figure>
 
 ---
@@ -349,7 +349,7 @@ f = x + sign(dot_x);
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例2.gif" width = 260 />
+  <img  src="./images/fieldplay/举例2.gif" width = 260 />
 </figure>
 
 在$$ \dot{x} \ge 0 $$时，有$$ \ddot{x} + x + 1 = 0 $$；在$$ \dot{x} < 0 $$时，有$$ \ddot{x} + x - 1 = 0 $$。
@@ -367,7 +367,7 @@ f = sin(x);
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例3.gif" width = 260 />
+  <img  src="./images/fieldplay/举例3.gif" width = 260 />
 </figure>
 
 ---
@@ -379,7 +379,7 @@ f = 3.0*(dot_x - 0.5)*dot_x + x + x*x;
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例4.gif" width = 260 />
+  <img  src="./images/fieldplay/举例4.gif" width = 260 />
 </figure>
 
 ---
@@ -391,7 +391,7 @@ f = x*dot_x + x ;
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例5.gif" width = 260 />
+  <img  src="./images/fieldplay/举例5.gif" width = 260 />
 </figure>
 
 ---
@@ -403,7 +403,7 @@ f = dot_x*dot_x + x ;
 ```
 
 <figure>
-  <img  src="../images/fieldplay/举例6.gif" width = 260 />
+  <img  src="./images/fieldplay/举例6.gif" width = 260 />
 </figure>
 
 ---
@@ -436,19 +436,19 @@ sign()
 还有一类，有典型非线性环节的系统。
 
 <figure>
-  <img  src="../images/fieldplay/饱和非线性.jpg" width = 350 />
+  <img  src="./images/fieldplay/饱和非线性.jpg" width = 350 />
 </figure>
 
 胡寿松第六版377页，系统带有饱和特性。根据信号流向把系统用微分方程写出来，分区画相轨迹，代码实现则是用逻辑语句实现判断
 
 <figure>
-  <img  src="../images/fieldplay/非线性相轨迹2.gif" width = 260 />
+  <img  src="./images/fieldplay/非线性相轨迹2.gif" width = 260 />
 </figure>
 
 可以对照书上的等倾线法的作图结果
 
 <figure>
-  <img  src="../images/fieldplay/饱和非线性相图.jpg" width = 400 />
+  <img  src="./images/fieldplay/饱和非线性相图.jpg" width = 400 />
 </figure>
 
 代码实现
@@ -486,13 +486,13 @@ vec2 get_velocity(vec2 p) {
 再来看一个有滞环环节的非线性系统
 
 <figure>
-  <img  src="../images/fieldplay/滞环非线性.jpg" width = 550 />
+  <img  src="./images/fieldplay/滞环非线性.jpg" width = 550 />
 </figure>
 
 这个不是很好画，手工画的话书上给的是用等倾线法作图。处理出分区表达式以后就可以使用代码实现了：
 
 <figure>
-  <img  src="../images/fieldplay/举例7.gif" width = 260 />
+  <img  src="./images/fieldplay/举例7.gif" width = 260 />
 </figure>
 
 可以很明显的看到有个极限环，这个系统自由响应的最终结果是自振，这个极限环是稳定的极限环，对于机械系统来说，是可以观察到这种运动的。
@@ -500,7 +500,7 @@ vec2 get_velocity(vec2 p) {
 对比书上的作图结果
 
 <figure>
-  <img  src="../images/fieldplay/滞环非线性相图.jpg" width = 300 />
+  <img  src="./images/fieldplay/滞环非线性相图.jpg" width = 300 />
 </figure>
 
 
