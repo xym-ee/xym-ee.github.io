@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenMV on xym-ee</title>
+    <link>https://xym.work/tags/openmv/</link>
+    <description>Recent content in OpenMV on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 29 Aug 2024 23:30:30 +0800</lastBuildDate>
+    <atom:link href="https://xym.work/tags/openmv/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[project] 2023 年电子设计竞赛：运动控制与目标追踪系统的设计</title>
+      <link>https://xym.work/blog/laser-track.html</link>
+      <pubDate>Thu, 29 Aug 2024 23:30:30 +0800</pubDate>
+      <guid>https://xym.work/blog/laser-track.html</guid>
+      <description>源码仓库 效果演示&#xA;0.简介 来源于 2023 年大学生电子设计竞赛的题目。我的导师正好是电赛的指导老师，我参加过2019年电赛，然后就帮忙一起指导一下。我主要出设计方案，完成控制算法可行性验证，主要是 webots 仿真和实际调试。&#xA;2023 的赛题：设计制作一个运动目标控制与自动追踪系统。&#xA;需要做两套系统，两套系统之间无通信&#xA;位置控制系统，红色激光模拟目标运动，激光点画出指定的矩形 自动追踪系统，绿色激光用来指示，绿色激光点跟踪红色激光运动 红色激光笔发射的光斑用来模拟运动目标，光斑落在正前方距离 $ 1 \text{m} $ 处的白色屏幕上，光斑直径 $ \le 1 \text{cm} $。红色光斑位置控制系统控制光斑能在屏幕范围内任意移动。绿色激光笔发射的光斑由绿色光斑位置系统控制，用于自动追踪屏幕上的红色光斑，指示目标的自动追踪效果。$ \le 1 \text{cm} $。&#xA;绿色激光笔放置线段如图 $ 1(b) $ 所示，该线段与屏幕平行，位于红色激光笔两侧，距红色激光笔距离大于 $ 0.4 \text{m} $ 、小于 $ 1 \text{m} $。绿色激光笔在两个放置线段上任意放置。&#xA;屏幕为白色，有效面积大于 $ 0.6 \times 0.6 \text{m}^2 $。用铅笔在屏幕中心画出一个边长 $ 0.5 \text{m} $ 的正方形，标识屏幕的边线；所画的正方形的中心为原点，用铅笔画出原点位置，所用铅笔痕迹宽 $ \le 1 \text{cm} $。&#xA;自动追踪系统只在完成提高题时需要。&#xA;1.赛题分析与方案设计 根据题目，有这几个比较重要的需要实现的功能&#xA;1.红色激光点能做一个固定大小的矩形运动 2.黑色胶带贴一个矩形框，红色激光点可以沿着黑框运行 3.绿色激光点追踪红色激光点运行 第 1 点，基础题的要求，激光点可以跟着铅笔线画一个方框。可以肯定的是铅笔线肯定不是用来做图像识别的，而且位置控制系统和屏幕的摆放都有严格的距离要求，那么在红激光点的位置上不需要做闭环控制，根据几何参数做计算，找到屏幕坐标系中点的位置和云台两个电机转角的关系，直接开环运动即可。需要在硬件上下点功夫，精度严重依赖几何参数，可以直接做一个架子，云台和屏幕都固定死了，😂，这种应试的项目不要不违反要求都是能做的。此功能要实现的代码的功能&#xA;实现指定两点之间的直线运动 第 2 点，黑胶带显然是要做视觉识别的，矩形运动比较关键的位置是 4 个顶点。有了 4 个点其实就可以计算出矩形边上所有的点了。这个目标的思路，一个也是纯开环控制，和功能 1 一样 ，有了四个点以后，有没有黑框就不重要了。</description>
+    </item>
+  </channel>
+</rss>

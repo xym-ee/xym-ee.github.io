@@ -106,7 +106,7 @@
         <div class="prose prose-invert max-w-full">
           <h2 id="1二维向量场">1.二维向量场</h2>
 <p>这篇文章介绍了一个平面向量场可视化的网页工具：<a href="https://anvaka.github.io/fieldplay/">fieldpaly</a></p>
-<p>这里只是介绍了系统相平面可视化实现的代码，给出了我定义的系统<strong>代码标准型</strong>，如果对相平面、非线性系统、状态空间、微分方程解的性质等控制的理论内容感兴趣，可以参考我的笔记：<a href="https://xym.work/math/part2/chapter3/1%E7%9B%B8%E5%B9%B3%E9%9D%A2.html">相平面法-工程中的数学</a></p>
+<p>这里只是介绍了系统相平面可视化实现的代码，给出了我定义的系统<strong>代码标准型</strong>，如果对相平面、非线性系统、状态空间、微分方程解的性质等控制的理论内容感兴趣，可以参考我的笔记：<a href="https://control.xym.work/2_control">相平面法-工程中的数学</a></p>
 <p>从纯数学的角度来讲，这是一个画二维向量场的网站。二维向量场的数学表达：</p>
 <p>$$ \boldsymbol{A} = (P,Q) = P(x,y) \cdot \boldsymbol{i} + Q(x,y) \cdot \boldsymbol{j} $$</p>
 <p>平面向量场$$ \boldsymbol{A} $$与位置相关，一般纸面上的表达方式是平面上每个点都有一个带箭头的向量。</p>
@@ -136,7 +136,7 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>电场的可视化效果</p>
 <figure>
-  <img  src="../images/fieldplay/点电荷电场.gif" width = 200 />
+  <img  src="./images/fieldplay/点电荷电场.gif" width = 200 />
 </figure>
 <p>注意这些粒子并不是试探电荷真实的运动，这里的速度是个抽象速度，“速度”反映了场的强度。截屏录制动画的时候不太清晰，实际上还可以通过颜色判断场的强度的。可以看出越靠近中心，强度越高。</p>
 <p>这一小段代码使用了函数<code>length()</code>得到向量的模长，此外还有各种数学函数可以使用，以实现各种各样的本质非线性二维场，这为画<strong>相平面图</strong>提供了很大的帮助，不需要使用<code>if</code>去嵌套实现了。</p>
@@ -178,7 +178,7 @@ $$</p>
 <p>$$ \mid sI-A \mid = (s+1)(s-1) = 0 $$</p>
 <p>根据经典控制理论，有一个在右半平面的极点，因此不稳定，然后看看相轨迹图：</p>
 <figure>
-  <img  src="../images/fieldplay/状态空间画相轨迹.gif" width = 200 />
+  <img  src="./images/fieldplay/状态空间画相轨迹.gif" width = 200 />
 </figure>
 <p>可以看出，是个不稳定的鞍点。代码实现如下，很简单的线性方程组的对应关系，这里参数名用的就是位置和速度，用抽象速度去理解相轨迹也是个很有意思的思路。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> get_velocity(<span style="color:#66d9ef">vec2</span> p) {
@@ -293,7 +293,7 @@ $$</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> v;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/非线性相轨迹1.gif" width=260 />
+  <img  src="./images/fieldplay/非线性相轨迹1.gif" width=260 />
 </figure>
 <p>这是胡寿松第六版自动控制原理375页的例题。系统的两个奇点$$ (0,0) $$和$$ (-2,0) $$。</p>
 <p>通过稳定点附近线性化可以判断一个是鞍点，一个是稳定焦点。上面的图是精确的相轨迹图。</p>
@@ -337,13 +337,13 @@ $$</p>
 <p>$$ \ddot{x} + \dot{x} + \mid x \mid = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> dot_x <span style="color:#f92672">+</span> abs(x);
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例1.gif" width = 260 />
+  <img  src="./images/fieldplay/举例1.gif" width = 260 />
 </figure>
 <hr>
 <p>$$ \ddot{x} + x + \mathrm{sign} \dot x = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> sign(dot_x);
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例2.gif" width = 260 />
+  <img  src="./images/fieldplay/举例2.gif" width = 260 />
 </figure>
 <p>在$$ \dot{x} \ge 0 $$时，有$$ \ddot{x} + x + 1 = 0 $$；在$$ \dot{x} &lt; 0 $$时，有$$ \ddot{x} + x - 1 = 0 $$。</p>
 <p>上下平面都是两个椭圆，奇点$$ x_{e1} = -1, x_{e2} = 1 $$。</p>
@@ -352,25 +352,25 @@ $$</p>
 <p>$$ \ddot{x} + \sin x = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> sin(x);
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例3.gif" width = 260 />
+  <img  src="./images/fieldplay/举例3.gif" width = 260 />
 </figure>
 <hr>
 <p>$$ \ddot{x} + 3(\dot x -0.5)\dot x + x + x^2 = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0</span><span style="color:#f92672">*</span>(dot_x <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>)<span style="color:#f92672">*</span>dot_x <span style="color:#f92672">+</span> x <span style="color:#f92672">+</span> x<span style="color:#f92672">*</span>x;
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例4.gif" width = 260 />
+  <img  src="./images/fieldplay/举例4.gif" width = 260 />
 </figure>
 <hr>
 <p>$$ \ddot{x} + x\dot x  + x = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span>dot_x <span style="color:#f92672">+</span> x ; 
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例5.gif" width = 260 />
+  <img  src="./images/fieldplay/举例5.gif" width = 260 />
 </figure>
 <hr>
 <p>$$ \ddot{x} + \dot x^2  + x = 0 $$</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span>f <span style="color:#f92672">=</span> dot_x<span style="color:#f92672">*</span>dot_x <span style="color:#f92672">+</span> x ;
 </span></span></code></pre></div><figure>
-  <img  src="../images/fieldplay/举例6.gif" width = 260 />
+  <img  src="./images/fieldplay/举例6.gif" width = 260 />
 </figure>
 <hr>
 <p>由上面的举例也可以看出来，有各种各样的数学函数可以使用，更加方便非线性系统的实现，这里列举一些常用的数学函数。</p>
@@ -387,15 +387,15 @@ $$</p>
 <p>上面最后提了一下稳定点线性化的事情。这类系统叫非本质非线性系统。线性化以后可以用典型二阶系统看个大概。</p>
 <p>还有一类，有典型非线性环节的系统。</p>
 <figure>
-  <img  src="../images/fieldplay/饱和非线性.jpg" width = 350 />
+  <img  src="./images/fieldplay/饱和非线性.jpg" width = 350 />
 </figure>
 <p>胡寿松第六版377页，系统带有饱和特性。根据信号流向把系统用微分方程写出来，分区画相轨迹，代码实现则是用逻辑语句实现判断</p>
 <figure>
-  <img  src="../images/fieldplay/非线性相轨迹2.gif" width = 260 />
+  <img  src="./images/fieldplay/非线性相轨迹2.gif" width = 260 />
 </figure>
 <p>可以对照书上的等倾线法的作图结果</p>
 <figure>
-  <img  src="../images/fieldplay/饱和非线性相图.jpg" width = 400 />
+  <img  src="./images/fieldplay/饱和非线性相图.jpg" width = 400 />
 </figure>
 <p>代码实现</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> get_velocity(<span style="color:#66d9ef">vec2</span> p) {
@@ -425,16 +425,16 @@ $$</p>
 </span></span></code></pre></div><hr>
 <p>再来看一个有滞环环节的非线性系统</p>
 <figure>
-  <img  src="../images/fieldplay/滞环非线性.jpg" width = 550 />
+  <img  src="./images/fieldplay/滞环非线性.jpg" width = 550 />
 </figure>
 <p>这个不是很好画，手工画的话书上给的是用等倾线法作图。处理出分区表达式以后就可以使用代码实现了：</p>
 <figure>
-  <img  src="../images/fieldplay/举例7.gif" width = 260 />
+  <img  src="./images/fieldplay/举例7.gif" width = 260 />
 </figure>
 <p>可以很明显的看到有个极限环，这个系统自由响应的最终结果是自振，这个极限环是稳定的极限环，对于机械系统来说，是可以观察到这种运动的。</p>
 <p>对比书上的作图结果</p>
 <figure>
-  <img  src="../images/fieldplay/滞环非线性相图.jpg" width = 300 />
+  <img  src="./images/fieldplay/滞环非线性相图.jpg" width = 300 />
 </figure>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-GLSL" data-lang="GLSL"><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> get_velocity(<span style="color:#66d9ef">vec2</span> p) {
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">vec2</span> v <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#ae81ff">0.</span>, <span style="color:#ae81ff">0.</span>);

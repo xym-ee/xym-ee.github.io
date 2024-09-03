@@ -11,7 +11,7 @@
 <meta name="geo.position" content="19.0760;72.8777">
 <meta name="geo.region" content="IN-MH">
 <meta name="geo.placename" content="Mumbai">
-<title>[project] ROS 机器人差速底盘开发 | xym-ee</title>
+<title>[project] ROS 机器人底盘开发，差速底盘和阿克曼底盘 | xym-ee</title>
 
 
         <link rel="stylesheet" href="/css/tailwind.min.ce97201a436e89554f6444624e62d4b32a48d70d124d557a1852401701ab43bc.css" type="text/css" integrity="sha256-zpcgGkNuiVVPZERiTmLUsypI1w0STVV6GFJAFwGrQ7w=" crossorigin="anonymous">
@@ -82,14 +82,14 @@
   <div class="flex flex-col pt-8 gap-10">
     
     <div class="flex flex-col w-full gap-4">
-      <h2 class="text-3xl max-sm:text-2xl font-bold">[project] ROS 机器人差速底盘开发</h2>
+      <h2 class="text-3xl max-sm:text-2xl font-bold">[project] ROS 机器人底盘开发，差速底盘和阿克曼底盘</h2>
       
       <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
         <p>📅 2024-08-30</p>
         
           <p>🔄 2024-08-30</p>
         
-        <p>⌚ Reading time: 0 min</p>
+        <p>⌚ Reading time: 1 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -110,7 +110,45 @@
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          
+          <p>模拟联合收割机器人</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/ros-chassis-1.mp4" type="video/mp4">
+</video>
+<p>模拟自动驾驶</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/ackerman-1.mp4" type="video/mp4">
+</video>
+<h2 id="0介绍">0.介绍</h2>
+<p>自主移动机器人，导航，为了导航需要地图，还需要定位。</p>
+<p>最后是运动，我主要做机器人的底盘开发和运动控制这块的内容。</p>
+<h2 id="1ros-差速底盘开发">1.ROS 差速底盘开发</h2>
+<p>这里主要介绍一下差速底盘的里程计计算</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_mutex_take</span>(status_mutex, RT_WAITING_FOREVER);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        status.chassis.motor_lf.v_feedback <span style="color:#f92672">=</span> v_lf;
+</span></span><span style="display:flex;"><span>        status.chassis.motor_lb.v_feedback <span style="color:#f92672">=</span> v_lb;
+</span></span><span style="display:flex;"><span>        status.chassis.motor_rf.v_feedback <span style="color:#f92672">=</span> v_rf;
+</span></span><span style="display:flex;"><span>        status.chassis.motor_rb.v_feedback <span style="color:#f92672">=</span> v_rb;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 里程计数据解算 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#define     L   0.23f    </span><span style="color:#75715e">/* 左右轮间距 */</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        v_l <span style="color:#f92672">=</span> (v_lf <span style="color:#f92672">+</span> v_lb)<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>        v_r <span style="color:#f92672">=</span> (v_rf <span style="color:#f92672">+</span> v_rb)<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0f</span>; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        status.info_send.speed_x <span style="color:#f92672">=</span> (v_l <span style="color:#f92672">+</span> v_r) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>        status.info_send.speed_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>        status.info_send.speed_angular <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(v_l <span style="color:#f92672">-</span> v_r) <span style="color:#f92672">/</span> L <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        status.info_send.pose_angula <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.93f</span> <span style="color:#f92672">*</span> status.info_send.speed_angular<span style="color:#f92672">*</span>DELAY_TIME;
+</span></span><span style="display:flex;"><span>        status.info_send.pose_angula <span style="color:#f92672">=</span> <span style="color:#a6e22e">angle_to_limit</span>(status.info_send.pose_angula);
+</span></span><span style="display:flex;"><span>        status.info_send.position_x  <span style="color:#f92672">+=</span> status.info_send.speed_x<span style="color:#f92672">*</span><span style="color:#a6e22e">cosf</span>(status.info_send.pose_angula)<span style="color:#f92672">*</span>DELAY_TIME;
+</span></span><span style="display:flex;"><span>        status.info_send.position_y  <span style="color:#f92672">+=</span> status.info_send.speed_x<span style="color:#f92672">*</span><span style="color:#a6e22e">sinf</span>(status.info_send.pose_angula)<span style="color:#f92672">*</span>DELAY_TIME;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_mutex_release</span>(status_mutex);
+</span></span></code></pre></div><h2 id="2阿克曼底盘">2.阿克曼底盘</h2>
+<p>主要也是里程计计算以及运动控制方面。</p>
+
           <hr />
         </div>
         <div>

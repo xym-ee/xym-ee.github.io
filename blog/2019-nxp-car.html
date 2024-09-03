@@ -89,7 +89,7 @@
         
           <p>🔄 2024-08-30</p>
         
-        <p>⌚ Reading time: 2 min</p>
+        <p>⌚ Reading time: 4 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -110,7 +110,12 @@
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          <p>效果视频</p>
+          <p>比赛视频</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/2019-nxp-car.mp4" type="video/mp4">
+</video>
+<p>比赛用车</p>
+<img src="./images/2019-nxp-car/智能车.jpg" width="400">
 <h2 id="0介绍">0.介绍</h2>
 <p>2019 年 7 月分我参加了当年的恩智浦杯智能汽车竞赛，以前叫飞思卡尔杯，对于自动化专业来说，这个比赛还是挺重要的。当时我大三，这个比赛(项目)算是我的第一个完成度比较高的作品。我负责的内容，硬件开发，驱动开发，整个软件框架的开发。</p>
 <p>这辆车也一直放在我身边，当时可能只是感兴趣觉得好玩，现在看起来这应该是我整个嵌入式开发生涯的起点。现在的我能给出更好地方案，更完整的设计，甚至更高效的代码结构。但是让我去评价当年的写这些代码的自己，我觉得做的已经不错了，这是一个项目总结，同时也是一个关于如何写出好代码的一些想法。</p>
@@ -135,8 +140,9 @@
 <p>硬件上，要考虑电机、舵机驱动，电磁传感器模拟信号的处理，整车供电。</p>
 <p>车辆控制上，需要考虑通过图像获得智能车相对于赛道的偏差，这部分内容由我的队友负责，通过偏差计算出舵机的控制量，这部分也由我的队友负责。相当于我搭建一个比较可靠的运动平台，并提供控制算法需要的原始数据，然后将控制算法的输出落实到执行机构如电机、舵机。</p>
 <h2 id="2硬件方案设计">2.硬件方案设计</h2>
-<p>我已经有几年不做硬件不画板了，但是这个项目是我比较完整的软硬件都做的项目，这里一定要拿出来介绍一下。</p>
-<p>使用 Altium Designer 来开发。考虑整车的电源设计，驱动板设计，电磁传感器设计，MCU 控制板的设计。</p>
+<p>我已经有几年不做硬件不画板了，但是这个项目是我比较完整的软硬件都做的项目，这里一定要拿出来介绍一下。使用 Altium Designer 来开发。考虑整车的电源设计，驱动板设计，电磁传感器设计，MCU 控制板的设计。</p>
+<img src="./images/2019-nxp-car/电路板.jpg" width="300">
+<p>这个车的硬件还是比较简单的，MCU 用的 BGA 封装芯片使用了核心板，底板引出传感器和控制接口，做好供电设计。此外电机驱动与集成的半桥驱动芯片，两个芯片组成一个 H 桥直流电机驱动电路。再就是电池传感器，赛道上的交流电频率是 20KHz，根据磁场频率选择合适的电感和电容组成一个 LC 电路，在磁场中电感两端就会有电压信号，然后做放大检波等处理输入到 ADC 接口即可。</p>
 <h2 id="3软件总体方案设计">3.软件总体方案设计</h2>
 <p>这里由于软件设计上的不完善，只能通过 main 函数主循环的实现来猜测当时的设计想法了</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
@@ -237,15 +243,91 @@
 </span></span><span style="display:flex;"><span>        .init <span style="color:#f92672">=</span> led_pin_init,
 </span></span><span style="display:flex;"><span>        .ops <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>led_ops
 </span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>具体的实现直接使用 nxp 的库。完整的源码</p>
-<p>当时只做了形式上的模仿，但是也确实通过这个了解到了一些程序设计上的东西。</p>
-<p>这也是我第一次接触这类语法，这对我后面学习 rt-thread 甚至 linux 都很有帮助。linux 内核中这类的表达也很多。</p>
-<h2 id="5关于程序的方法实现">5.关于程序的方法实现</h2>
-<p>目标是运动控制。那么有方法上的东西。</p>
-<p>用编程去实现理论的东西，应用控制算法。</p>
+</span></span></code></pre></div><p>具体的实现直接使用 nxp 的库。这也是我第一次学习使用这类语法，这对我后面学习 rt-thread 甚至 linux 都很有帮助。linux 内核中这类的表达也很多。</p>
+<h2 id="5关于算法上的实现">5.关于算法上的实现</h2>
+<p>目标是运动控制。那么有方法上的东西。用编程去实现理论的东西，应用控制算法。</p>
+<p>智能车最主要的是靠摄像头的图像来运行。通过图像计算出车辆在赛道的偏差然后控制舵机转向。一些当时调试的照片</p>
+<p>高斯滤波</p>
+<img src="./images/2019-nxp-car/滤波前.jpg" width=240 />
+<img src="./images/2019-nxp-car/滤波后.jpg" width=240 />
+<p>赛道图像滤波、二值化，找中线</p>
+<img src="./images/2019-nxp-car/图像处理.jpg" width=480 />
 <p>现在我觉得是我拖了队友的后腿。😂，因为方法都是用 matlab 仿真过的，现在的我看这些控制方法找不出一点毛病，但是看软件实现漏洞百出。事实上，从视频也可以看出来方法在当时就已经有了不错的控制效果。</p>
-<p>通过图像找偏差的具体思路：</p>
+<p>到这一步以后，其实就可以做比较简单的方向控制了。为了对车做更精确的控制，也可以再进一步，相机视角是固定的，可以做一个逆透视。</p>
+<p>采集照片和数学计算</p>
+<img src="./images/2019-nxp-car/采集图片.jpg" width=240 />
+<img src="./images/2019-nxp-car/数学计算.jpg" width=240 />
+<p>实际采集到的照片和透视效果：</p>
+<img src="./images/2019-nxp-car/逆透视场景.jpg" width=240 />
+<img src="./images/2019-nxp-car/逆透视.jpg" width=240 />
+<p>在 matlab 上验证过方法没问题后，将其在车上实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 逆透视变换矩阵 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> N1[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> { <span style="color:#f92672">-</span><span style="color:#ae81ff">0.0649852534450704</span>,<span style="color:#ae81ff">2.53734549914701</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">240.905004855923</span>,<span style="color:#ae81ff">1.72242380270896</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.115684719493100</span>,<span style="color:#ae81ff">423.076434304688</span>,<span style="color:#ae81ff">0.130208451031495</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00342074612370382</span> };
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> N2[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> { <span style="color:#f92672">-</span><span style="color:#ae81ff">0.0108680223123130</span>,<span style="color:#ae81ff">1.74103387838086</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">172.804762452853</span>,<span style="color:#ae81ff">1.48135911232730</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.324225542774878</span>,<span style="color:#ae81ff">294.738452846723</span>,<span style="color:#ae81ff">0.0903126321121198</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00636880777526755</span> };
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> N3[<span style="color:#ae81ff">8</span>] <span style="color:#f92672">=</span> { <span style="color:#f92672">-</span><span style="color:#ae81ff">0.0649852534450704</span>,<span style="color:#ae81ff">2.53734549914701</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">240.905004855923</span>,<span style="color:#ae81ff">1.72242380270896</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.115684719493100</span>,<span style="color:#ae81ff">423.076434304688</span>,<span style="color:#ae81ff">0.130208451031495</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.00342074612370382</span> };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 坐标变换函数：像素坐标-&gt;实际坐标 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">point_t</span> <span style="color:#a6e22e">img_locaion_transform</span>(<span style="color:#66d9ef">uint16_t</span> pix_i, <span style="color:#66d9ef">uint16_t</span> pix_j) <span style="color:#75715e">//坐标变换函数，输入行&amp;列，返回结构体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">point_t</span> real_coordinate;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (pix_i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		real_coordinate.x <span style="color:#f92672">=</span> (N3[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> (N3[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.9</span>;
+</span></span><span style="display:flex;"><span>		real_coordinate.y <span style="color:#f92672">=</span> (N3[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">5</span>]) <span style="color:#f92672">/</span> (N3[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N3[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (pix_i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">70</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		real_coordinate.x <span style="color:#f92672">=</span> (N1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> (N1[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.9</span>;
+</span></span><span style="display:flex;"><span>		real_coordinate.y <span style="color:#f92672">=</span> (N1[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">5</span>]) <span style="color:#f92672">/</span> (N1[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N1[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		real_coordinate.x <span style="color:#f92672">=</span> (N2[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">/</span> (N2[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.9</span>;
+</span></span><span style="display:flex;"><span>		real_coordinate.y <span style="color:#f92672">=</span> (N2[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">4</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">5</span>]) <span style="color:#f92672">/</span> (N2[<span style="color:#ae81ff">6</span>] <span style="color:#f92672">*</span> pix_i <span style="color:#f92672">+</span> N2[<span style="color:#ae81ff">7</span>] <span style="color:#f92672">*</span> pix_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> real_coordinate;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 三点（实际坐标）算曲率 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">_img_curvature</span>(<span style="color:#66d9ef">point_t</span> A, <span style="color:#66d9ef">point_t</span> B, <span style="color:#66d9ef">point_t</span> C)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 三边长和三角形面积 */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">double</span> AB, BC, AC, S;
+</span></span><span style="display:flex;"><span>	AB <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>(A, B);
+</span></span><span style="display:flex;"><span>	AC <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>(A, C);
+</span></span><span style="display:flex;"><span>	BC <span style="color:#f92672">=</span> <span style="color:#a6e22e">distance</span>(B, C);
+</span></span><span style="display:flex;"><span>	S <span style="color:#f92672">=</span> <span style="color:#a6e22e">fabs</span>((B.x <span style="color:#f92672">-</span> A.x)<span style="color:#f92672">*</span>(C.y <span style="color:#f92672">-</span> A.y) <span style="color:#f92672">-</span> (C.x <span style="color:#f92672">-</span> A.x)<span style="color:#f92672">*</span>(B.y <span style="color:#f92672">-</span> A.y)) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">//三点构成的三角形面积
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> S <span style="color:#f92672">/</span> (AB<span style="color:#f92672">*</span>BC<span style="color:#f92672">*</span>AC));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 赛道半径计算函数，返回单位cm */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">_img_calculate_r</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 三点算曲率 */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">point_t</span> A, B, C;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 边线数组指针 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int16_t</span> <span style="color:#f92672">*</span>p_line;    
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 左弯曲率用右边算 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (status.img_roadtype <span style="color:#f92672">==</span> RoadLeft)
+</span></span><span style="display:flex;"><span>    p_line <span style="color:#f92672">=</span> rightline;
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 右弯曲率用左边算 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (status.img_roadtype <span style="color:#f92672">==</span> RoadRight)
+</span></span><span style="display:flex;"><span>    p_line <span style="color:#f92672">=</span> leftline;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>  <span style="color:#75715e">/* 程序出错。直路不进入此函数 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">/* 像素位置逆透视为实际位置，这三行位置可以改变 */</span>
+</span></span><span style="display:flex;"><span>	A <span style="color:#f92672">=</span> <span style="color:#a6e22e">img_locaion_transform</span>(<span style="color:#ae81ff">70</span>, p_line[<span style="color:#ae81ff">70</span>]);
+</span></span><span style="display:flex;"><span>	B <span style="color:#f92672">=</span> <span style="color:#a6e22e">img_locaion_transform</span>(<span style="color:#ae81ff">60</span>, p_line[<span style="color:#ae81ff">60</span>]);
+</span></span><span style="display:flex;"><span>	C <span style="color:#f92672">=</span> <span style="color:#a6e22e">img_locaion_transform</span>(<span style="color:#ae81ff">50</span>, p_line[<span style="color:#ae81ff">50</span>]);  
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">/* 半径 = 1/曲率 */</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#a6e22e">_img_curvature</span>(A, B, C));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>即通过图像直接计算弯道的半径，然后根据转弯半径可以做更精确的控制，甚至可以做实验直接找到需要的舵机转角值。</p>
 <h2 id="6总结">6.总结</h2>
+<p>分析这个比赛，从视频效果来看其实很不错，不足点还是出现在了软件架构的设计上。对于赛题的要求，实际上还有一个红色障碍物，还需要进圆环，还需要在跑完一整圈以后自动停车。这些都是业务上的逻辑，按道理是我应该负责的，当时的代码只完成了最基本的沿着赛道跑的逻辑，然后在检测不到赛道以后切换电磁控制逻辑。电磁导航的算法也是我做的。问题在于当时还没能有一套好的软件框架，如使用 RTOS 多线程开发，或是使用状态完成运行逻辑。整个业务逻辑属于是扶着脑袋硬想出来的，前后台的软件结构硬靠好多全局标志变量完成了这个事情。所以其实拿到华东二等奖也是一个合理的结果。</p>
+<p>nxp 官方库的源码有很多封装、集成的面向对象的设计实现，形式上的模仿也让我收获了不少，后面再去学习 rt-thread 源码、甚至是 linux 一些驱动源码时，都能找到一些官方库的影子。</p>
 
           <hr />
         </div>

@@ -105,15 +105,21 @@
     <a href='/tags/stm32'
     class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">stm32</a>
   
+    <a href='/tags/%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">电子设计竞赛</a>
+  
 </div>
       </div>
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          <h1 id="0简介">0.简介</h1>
-<p>我参加了 2019 年全国大学生电子设计竞赛，当时我大三。选的题目是模拟电池曲射炮设计。</p>
-<p>赛题要求是设计制作一个电磁炮模型，通过视觉识别指定元素，自动发射射击。</p>
-<img src="./images/curved-fire-gun-1.png" width="600" style="display: block; margin: auto;">
+          <ul>
+<li><a href="https://github.com/xym-ee/electromagnetic-railgun">源码仓库</a></li>
+</ul>
+<h1 id="0简介">0.简介</h1>
+<p>我参加了 2019 年全国大学生电子设计竞赛，当时我大三。选的题目是模拟电池曲射炮设计。赛题要求是设计制作一个电磁炮模型，通过视觉识别指定元素，自动发射射击。</p>
+<p>电磁炮与环形靶的位置示意如图所示。电磁炮放置在定标点处，炮管初始水平方向与中轴线夹角为 $ 0 \degree $ 、垂直方向仰角为 $ 0 \degree $ 。环形靶水平放置在地面，靶心位置在与定标点距离 $ 200 \text{cm} \le  d \le 300 \text{cm} $ ，与中心轴线夹角 $ \alpha \le \pm 30 \degree $ 的范围内。</p>
+<img src="./images/curved-fire-gun-1.png" width="500" style="display: block; margin: auto;">
 <p>需要实现的功能</p>
 <ul>
 <li>炮弹的发射和命中功能
@@ -126,30 +132,36 @@
 <li>炮管左右运动的功能</li>
 </ul>
 <p>这个东西应该是硬件设计的内容占了60%，需要设计出合适的发射装置，使得可以通过  MCU 控制发射距离。视觉检测目标然后和转动到目标角度都要在能成功发射并命中的前提下才有意义。</p>
-<p>先看当时实现的效果</p>
+<p>先看当时实现的参赛作品</p>
+<img src="./images/curved-fire-gun-6.png" width="300" style="display: block; margin: auto;">
+<p>精度控制效果</p>
+<img src="./images/curved-fire-gun-1.gif" width="300" style="display: block; margin: auto;">
 <p>精度还是不错的，拿了江苏省一等奖，实际上我们已经进入全国总测评了，如果总测评过了就是全国一等奖，没过是国二。但是呢，作品可能在路上出问题了，然后就退回省一了😂。还是比较可惜的，好在学校的比赛出问题都是小问题，如果这是工作上的失误那可能要出大问题。</p>
-<p>23 年，有人觉得这个东西挺好玩的，是一个不错的教学用具，然后我在比赛的基础上，重新基于 RTOS 写了代码，并且做的更细致了一些</p>
+<p>23 年，有人觉得这个东西挺好玩的，是一个不错的教学用具，然后我在比赛的基础上，重新基于 RTOS 写了代码，并且做的更细致了一些。</p>
 <h2 id="12019电赛版电磁炮的设计思路">1.2019电赛版电磁炮的设计思路</h2>
-<p>实现赛题要求需要 3 部分，充能与发射装置、云台、视觉检测，当时主控芯片选的是 NXP imx rt1052，此外还有显示屏、按键等完成交互操作。</p>
-<p>和电机控制类似，这也是个典型的低压控制高压的电子系统。先考虑充能和发射装置。</p>
-<p>发射的基本原理，电感线圈流过电流时产生一个磁场，用磁场对磁性炮弹有一个作用力，完成对炮弹的发射。</p>
-<p>这个感生磁场还不能一直存在，否则前段加速炮弹，后段会阻碍炮弹。也就是说线圈要通过瞬间的大电流，因此就需要大容量的电容来对线圈放电，刚好能实现比较好的发射效果。</p>
-<p>此外还需要配套的充电装置和放电开关，还需要实时检测电容充电电压以控制电容中的储能量，这是对炮弹发射距离控制的关键。</p>
-<p>由于比赛时使用的是锂电池供电，因此为了能给电容充电到一个比较高的电压，需要逆变器和整流器，对于充电通断的控制可以使用继电器来实现。</p>
-<p>电容电压检测则需要使用分压电阻分压然后做隔离送入 MCU 的 ADC 端口</p>
-<p>电容对发射线圈的放电开关需要使用晶闸管，使用继电器的话触点常容易损坏。</p>
-<p>因此把发射模块看做一个整体，有这些输入输出引脚输出接口</p>
+<p>实现赛题要求需要 3 部分，充能与发射装置、云台、视觉检测，当时主控芯片选的是 NXP imx rt1052，此外还有显示屏、按键等完成交互操作。和电机控制类似，这也是个典型的低压控制高压的电子系统。整体上的设计如图所示</p>
+<img src="./images/curved-fire-gun-4.png" width="300" style="display: block; margin: auto;">
+<p>先考虑充能和发射装置，发射的基本原理：电感线圈流过电流时产生一个磁场，用磁场对磁性炮弹有一个作用力，完成对炮弹的发射。</p>
+<p>这个感生磁场还不能一直存在，否则前段加速炮弹，后段会阻碍炮弹。也就是说线圈要通过瞬间的大电流，因此就需要大容量的电容来对线圈放电，刚好能实现比较好的发射效果。此外还需要配套的充电装置和放电开关，还需要实时检测电容充电电压以控制电容中的储能量，这是对炮弹发射距离控制的关键。</p>
+<p>由于比赛时使用的是锂电池供电，因此为了能给电容充电到一个比较高的电压，需要逆变器和整流器，对于充电通断的控制可以使用继电器来实现。电容电压检测则需要使用分压电阻分压然后做隔离送入 MCU 的 ADC 端口。电容对发射线圈的放电开关需要使用晶闸管，使用继电器的话触点常容易损坏。</p>
+<p>因此高压部分的原理上为下面这个图</p>
+<img src="./images/curved-fire-gun-5.png" width="500" style="display: block; margin: auto;">
+<p>细节上的实现</p>
+<img src="./images/curved-fire-gun-2.png" width="600" style="display: block; margin: auto;">
+<p>把发射模块看做一个整体，有这些输入输出引脚输出接口</p>
 <ul>
 <li>GPIO_IN, 充电控制</li>
 <li>GPIO_IN, 发射控制</li>
 <li>AD_OUT, 充电电压反馈</li>
 </ul>
-<img src="./images/curved-fire-gun-2.png" width="600" style="display: block; margin: auto;">
-<p>云台使用舵机云台就可以，这个让任务里，openmv 就可以胜任识别的工作，openmv 和 控制板 使用串口通信，openmv 只需要发送回目标的横坐标即可。</p>
+<p>云台使用舵机云台就可以，这个任务里 openmv 就可以胜任识别的工作，openmv 和控制板使用串口通信，openmv 只需要发送回目标的横坐标即可。</p>
 <p>当时的代码是裸机开发实现的，代码也没做备份现在也找不到了😂。</p>
 <h2 id="2教具版电磁炮的设计思路">2.教具版电磁炮的设计思路</h2>
 <p>发射部分、视觉识别部分、云台部分还是和以前一样，但是主控换成了 STM32，并且使用 rt-thread 来完成所有功能的开发，在交互功能上做了新的改进。</p>
 <p>先来看效果</p>
+<video controls width="480">
+  <source src="./videos/curved-fire-gun-1.mp4" type="video/mp4">
+</video>
 <p>考虑到这是教学用具，设计这些功能</p>
 <ul>
 <li>有两种模式：手动控制模式和自动追踪目标模式</li>
@@ -176,7 +188,7 @@
 </span></span></code></pre></div><p>然后在初始化时，绑定按键和事件触发的回调函数。</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">Button_Create</span>(<span style="color:#e6db74">&#34;btn_servo_l&#34;</span>, <span style="color:#f92672">&amp;</span>btn_servo_l, read_btn_servo_l, PIN_LOW);
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">Button_Attach</span>(<span style="color:#f92672">&amp;</span>btn_servo_l, BUTTON_DOWM, btn_servo_l_down_cb);
-</span></span></code></pre></div><p>然后开一个线程调用库作者提供的按键处理函数即可。用户只需要思考按键按下以后，有什么事情要发生即可。</p>
+</span></span></code></pre></div><p>然后开一个线程调用按键库作者提供的按键处理函数即可。用户只需要思考按键按下以后，有什么事情要发生即可。</p>
 <h2 id="3总结">3.总结</h2>
 <p>这已经是我时隔多年总结以前的项目，这个项目是我刚使用 rt-thread 比较熟练的时候做的，但是现在会看以前的代码，其实还是有很多问题。</p>
 <p>比如按键逻辑的那一块，即使使用了按键库，我还是定义了一个 <code>int key=0</code> ，在按键回调函数中修改了这个值，现在已经看不懂为什么要改值了，拿我现在对自己的标准来说，这个代码没有做到不言自明，用数字代表状态本来就增加了阅读代码的障碍，这使得用了按键库也并没有比没用让代码更好读。</p>

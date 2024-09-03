@@ -89,7 +89,7 @@
         
           <p>🔄 2024-08-29</p>
         
-        <p>⌚ Reading time: 7 min</p>
+        <p>⌚ Reading time: 8 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -114,21 +114,36 @@
     <a href='/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86'
     class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">图像处理</a>
   
+    <a href='/tags/webots'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">webots</a>
+  
+    <a href='/tags/openmv'
+    class="border border-sky-400 p-1 hover:bg-sky-400 focus:bg-sky-400 text-center">OpenMV</a>
+  
 </div>
       </div>
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          <h2 id="0简介">0.简介</h2>
-<p>来源于 2023 年大学生电子设计竞赛的题目。导师正好是电赛的指导老师，我参加过2019年电赛，然后就帮忙一起指导一下。</p>
-<p>出方案，方法验证，分工。</p>
-<p>设计制作一个运动目标控制与自动追踪系统。</p>
+          <ul>
+<li><a href="https://github.com/xym-ee/tracking_laser_pointer">源码仓库</a></li>
+</ul>
+<p>效果演示</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/laser-track-4.mp4" type="video/mp4">
+</video>
+<h2 id="0简介">0.简介</h2>
+<p>来源于 2023 年大学生电子设计竞赛的题目。我的导师正好是电赛的指导老师，我参加过2019年电赛，然后就帮忙一起指导一下。我主要出设计方案，完成控制算法可行性验证，主要是 webots 仿真和实际调试。</p>
+<p>2023 的赛题：设计制作一个运动目标控制与自动追踪系统。</p>
 <img src="./images/laser-track-1.png" width="500" style="display: block; margin: auto;">
 <p>需要做两套系统，两套系统之间无通信</p>
 <ul>
 <li>位置控制系统，红色激光模拟目标运动，激光点画出指定的矩形</li>
 <li>自动追踪系统，绿色激光用来指示，绿色激光点跟踪红色激光运动</li>
 </ul>
+<p>红色激光笔发射的光斑用来模拟运动目标，光斑落在正前方距离 $ 1 \text{m} $ 处的白色屏幕上，光斑直径 $ \le 1 \text{cm} $。红色光斑位置控制系统控制光斑能在屏幕范围内任意移动。绿色激光笔发射的光斑由绿色光斑位置系统控制，用于自动追踪屏幕上的红色光斑，指示目标的自动追踪效果。$ \le 1 \text{cm} $。</p>
+<p>绿色激光笔放置线段如图 $ 1(b) $ 所示，该线段与屏幕平行，位于红色激光笔两侧，距红色激光笔距离大于 $ 0.4 \text{m} $ 、小于 $ 1 \text{m} $。绿色激光笔在两个放置线段上任意放置。</p>
+<p>屏幕为白色，有效面积大于 $ 0.6 \times 0.6 \text{m}^2 $。用铅笔在屏幕中心画出一个边长 $ 0.5 \text{m} $ 的正方形，标识屏幕的边线；所画的正方形的中心为原点，用铅笔画出原点位置，所用铅笔痕迹宽 $ \le 1 \text{cm} $。</p>
 <p>自动追踪系统只在完成提高题时需要。</p>
 <h2 id="1赛题分析与方案设计">1.赛题分析与方案设计</h2>
 <p>根据题目，有这几个比较重要的需要实现的功能</p>
@@ -187,7 +202,12 @@ $$</p>
 <p>这样屏幕上的每个点就都能到了，两点确定一条直线，画一条线只需要首两个点就行，在两个点之间插入足够多的点，按顺序发送每个点的转角指令看起来就实现直线运行效果了。</p>
 <p>接下来就是找出这个函数 $ f $。</p>
 <img src="./images/laser-track-2.png" width="500" style="display: block; margin: auto;">
-<p>首先用一个数学问题的方式来描述，云台和屏幕的几何位置关系如图。$ {T} $ 为屏幕坐标系，$ {B} $ 为云台坐标系。</p>
+<p>首先用一个数学问题的方式来描述，云台和屏幕的几何位置关系如图。</p>
+<ul>
+<li>相机坐标系 $ { C } $</li>
+<li>屏幕坐标系 $ { T } $</li>
+<li>云台坐标系 $ { B } $</li>
+</ul>
 <p>一个点的像素坐标为 $ (u,v) $，通过相机和合理安装，用比较简单的方式可以得到像素坐标上的点在屏幕坐标的位置</p>
 <p>$$ ^T P = T_1 \cdot [u, v]^T $$</p>
 <p>有了屏幕坐标系上点的坐标 去计算云台坐标系里的坐标</p>

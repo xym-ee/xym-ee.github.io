@@ -89,7 +89,7 @@
         
           <p>🔄 2024-08-30</p>
         
-        <p>⌚ Reading time: 0 min</p>
+        <p>⌚ Reading time: 1 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -110,7 +110,46 @@
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          
+          <h2 id="0介绍">0.介绍</h2>
+<p>一种全向底盘的类型是麦克纳姆轮底盘，还有一种类似行李箱轮的结构，轮子本身可以 $ 360 \degree $ 受控的旋转，即舵轮。</p>
+<p>项目来源</p>
+<h2 id="1舵轮底盘控制原理">1.舵轮底盘控制原理</h2>
+<p>几种模式</p>
+<p>$$
+\left {
+\begin{array}{l}
+r_2 \cos \theta_2 - r_1 \cos \theta_1 = 2a \
+r_1 - r_1 \cos \theta_1 + a = r \
+r_2 \cos \theta_2 = r + a \
+r_1 \sin \theta_1 = a \
+r_2 \sin \theta_2 = a \
+\end{array}
+\right .
+$$</p>
+<p>先搞走三角函数，计算内外圆的半径</p>
+<p>由后面四个式子</p>
+<p>$$
+\cos \theta_1 = \frac{r_1 + a - r}{r_1}
+$$</p>
+<p>$$
+\cos \theta_2 = \frac{r + a }{r_2}
+$$</p>
+<p>带入第一个式子里有</p>
+<p>$$
+r + a - (r_1 + a -r) = 2a
+$$</p>
+<p>$$
+r_1 = 2(r-a)
+$$</p>
+<p>$$
+\sin \theta_1 = \frac{a}{r_1}
+$$</p>
+<p>$$
+\sin \theta_1 = \frac{a}{r_2}
+$$</p>
+<h2 id="2webots-运动控制仿真">2.webots 运动控制仿真</h2>
+<h2 id="heading"></h2>
+
           <hr />
         </div>
         <div>

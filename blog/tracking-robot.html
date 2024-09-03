@@ -11,7 +11,7 @@
 <meta name="geo.position" content="19.0760;72.8777">
 <meta name="geo.region" content="IN-MH">
 <meta name="geo.placename" content="Mumbai">
-<title>[project] 循迹类比赛总结：控制方法和逻辑开发代码结构 | xym-ee</title>
+<title>[project] 循迹类比赛总结：控制方法和代码结构 | xym-ee</title>
 
 
         <link rel="stylesheet" href="/css/tailwind.min.ce97201a436e89554f6444624e62d4b32a48d70d124d557a1852401701ab43bc.css" type="text/css" integrity="sha256-zpcgGkNuiVVPZERiTmLUsypI1w0STVV6GFJAFwGrQ7w=" crossorigin="anonymous">
@@ -82,14 +82,14 @@
   <div class="flex flex-col pt-8 gap-10">
     
     <div class="flex flex-col w-full gap-4">
-      <h2 class="text-3xl max-sm:text-2xl font-bold">[project] 循迹类比赛总结：控制方法和逻辑开发代码结构</h2>
+      <h2 class="text-3xl max-sm:text-2xl font-bold">[project] 循迹类比赛总结：控制方法和代码结构</h2>
       
       <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
         <p>📅 2024-08-30</p>
         
           <p>🔄 2024-08-30</p>
         
-        <p>⌚ Reading time: 0 min</p>
+        <p>⌚ Reading time: 2 min</p>
       </div>
       
       <div class="flex flex-row gap-2 flex-nowrap">
@@ -110,7 +110,123 @@
       <hr />
       <div class="flex flex-col gap-10">
         <div class="prose prose-invert max-w-full">
-          
+          <h2 id="0介绍">0.介绍</h2>
+<p>实习期间项目，实习公司卖教育机器人的套件，并且是比赛主办方，需要比赛配套的示例代码。实习之前我参加过一些比赛了，我做的第一个比赛就是循迹车，正好总结一下。</p>
+<p>循迹类机器人比赛，使用灰度传感器识别色差比较明显的线，完成规定任务的比赛。我的整个嵌入式生涯、STM32 的第一个完整作品就是一辆循迹小车，去参加学校的机器人比赛。比赛要求是从指定的位置出发，然后沿着白线在规定的时间里去尽可能多的地方。</p>
+<img src="./images/tracking_robot/tracking-robot-1.png" width="400" style="display: block; margin: auto;">
+<p>当时自己买了配件，画了底板，在宿舍搭了第一个车</p>
+<img src="./images/tracking_robot/tracking-robot-2.png" width="400" style="display: block; margin: auto;">
+<p>就以这个比赛，分析一下如果想做好，控制上和代码上需要考虑的一些问题。</p>
+<p>按照机器人开发的思路，分为路径、控制、定位、代码结构几个部分。</p>
+<h2 id="路径">路径</h2>
+<p>考虑路径之前，先考虑怎么按照一个给定的路径走。</p>
+<p>先用一个简化的图举例，给每个点都标上号，给出一个路径点序列，这就是一条要走的路。</p>
+<p>对于这个比赛，需要知道车在哪里，下一点要去哪里。可以用状态来思考，一条路径的每个点都是一个状态，一个状态的下一个状态是确定的，然后根据当前状态，一步一步转移，最终到终点</p>
+<img src="./images/tracking_robot/tracking-robot-3.gif" width="400" style="display: block; margin: auto;">
+<p>先看一个按照这个思路设计的演示视频</p>
+<video controls style="margin: 0 auto;" width="480">
+  <source src="./videos/tracking-robot-1.mp4" type="video/mp4">
+</video>
+<p>程序上的一个大概得思路</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">auto_run</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> location, <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span> destination)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (destination <span style="color:#f92672">&gt;</span> location)   <span style="color:#75715e">/* 正向运行 */</span>
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> location <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> destination; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">auto_drive_fun_lst</span>(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (destination <span style="color:#f92672">&lt;</span> location)   <span style="color:#75715e">/* 反向运行 */</span>
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> location <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> destination; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">auto_reverse_fun_lst</span>(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这里隐含了一些状态机的想法，其实如果直接用状态机的框架可能会更好一点。这里的逻辑还是有一点绕。</p>
+<p>对于这个比赛的地图，使用了下面的标点</p>
+<img src="./images/tracking_robot/tracking-robot-4.png" width="200" style="display: block; margin: auto;">
+<p>有 3 条路线</p>
+<p>$$
+A =<br>
+\left [
+\begin{array}{}
+0 &amp; 1 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 &amp; 11 &amp; 10 &amp; 0 \\
+\end{array}
+\right ] \tag{1}
+$$</p>
+<p>$$
+A =<br>
+\left [
+\begin{array}{}
+0 &amp; 1 &amp; 2 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 &amp; 11 &amp; 10 &amp; 0 \\
+\end{array}
+\right ] \tag{2}
+$$</p>
+<p>$$
+A =<br>
+\left [
+\begin{array}{}
+0 &amp; 1 &amp; 2 &amp; 3 &amp; 6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 &amp; 11 &amp; 10 &amp; 0 \\
+\end{array}
+\right ] \tag{3}
+$$</p>
+<p>在程序中可以直接用硬编码路径，然后指定使用哪一个数组。</p>
+<p>到这一步其实并没有涉及到真正意义上的机器人导航中路径规划的问题。为了让机器人更智能，可以硬编码地图，只给出发点和目标点，然后机器人自己去计算一条可行路径存放一个数组里。还是上面那个简单的地图，首先考虑如何表示这个地图，一个简单的想法：用一个矩阵来表示点的连通性，无向的话是一个对称矩阵</p>
+<img src="./images/tracking_robot/tracking-robot-5.png" width="400" style="display: block; margin: auto;">
+<p>前面是硬编码了地图，再往前一步，如果说还想让这个机器人更智能，比如说能自己边跑边建立一个地图，然后吧地图保存下来。那么距离真正的智能又更近了一步。对于使用灰度传感器来说，建立地图也不是一件遥不可及的事情，但是所有的这些东西都依赖于巡线控制的效果，因为这类机器人想实现实时定位需要另外加传感器，如果紧靠灰度传感器，那么就会一步错、步步错。</p>
+<h2 id="控制">控制</h2>
+<p>看一个麦克纳姆轮底盘灰度巡线的控制效果</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/tracking-robot-2.mp4" type="video/mp4">
+</video>
+<p>从原理上来分析一下</p>
+<img src="./images/tracking_robot/tracking-robot-6.gif" width="400" style="display: block; margin: auto;">
+<p>当白线处于左侧灰度传感器外或右侧灰度传感器外时，相当于已经失控了，所以实际的传感器的函数表示为</p>
+<img src="./images/tracking_robot/tracking-robot-7.png" width="200" style="display: block; margin: auto;">
+<p>这是一个典型的非线性系统，在自动控制原理书上可以找得到原题的那种。车的左右控制也是可以建模出来的，但是懒得推公式了，(通过实验现象反推)这个高阶系统可以用一个二阶系统来近似，那么这样的话，方向控制就是一个非线性章节的例题：</p>
+<img src="./images/tracking_robot/tracking-robot-8.png" width="500" style="display: block; margin: auto;">
+<p>一眼看出方向控制系统是会有振荡的，自振周期以及幅值与控制系数 $ K $ 有关。</p>
+<p>我特意调了两个不同的 K，这个系统也是程序里真实的值</p>
+<p>代码的实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 循迹测试函数 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">track_drive_test</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 20ms执行一次控制 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">delay_ms</span>(<span style="color:#ae81ff">20</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 车前进速度和差速值控制，error前的系数 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    motor_move(300, 1000 * gray_front_error());
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">motor_move</span>(<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">260</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">gray_front_error</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 遇到十字路口，停车，跳出控制循环 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">gray_is_cross</span>())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">motor_move</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>);   <span style="color:#75715e">/* 测试程序停在此处 */</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>$ K=1000 $ 的运行效果</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/tracking-robot-3.mp4" type="video/mp4">
+</video>
+<p>$ K=260 $ 的运行效果</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/tracking-robot-4.mp4" type="video/mp4">
+</video>
+<p>可以看到和理论就对上了，$ K=260 $ 也是有震荡的，但是没有那么明显。</p>
+<h2 id="代码结构">代码结构</h2>
+<p>这个循迹的项目为裸机开发，我的整个工程的代码结构</p>
+<img src="./images/tracking_robot/tracking-robot-9.png" width="500" style="display: block; margin: auto;">
+
           <hr />
         </div>
         <div>
