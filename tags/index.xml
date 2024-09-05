@@ -6,13 +6,48 @@
     <description>Recent content in Tags on xym-ee</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Aug 2024 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2024 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://xym.work/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gcc</title>
+      <link>https://xym.work/tags/gcc/</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/gcc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gdb</title>
+      <link>https://xym.work/tags/gdb/</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/gdb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Link</title>
+      <link>https://xym.work/tags/link/</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/link/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Makefile</title>
+      <link>https://xym.work/tags/makefile/</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/makefile/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Post</title>
       <link>https://xym.work/tags/post/</link>
-      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
       <guid>https://xym.work/tags/post/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stm32</title>
+      <link>https://xym.work/tags/stm32/</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/tags/stm32/</guid>
       <description></description>
     </item>
     <item>
@@ -41,13 +76,6 @@
       <link>https://xym.work/tags/socket/</link>
       <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
       <guid>https://xym.work/tags/socket/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Stm32</title>
-      <link>https://xym.work/tags/stm32/</link>
-      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
-      <guid>https://xym.work/tags/stm32/</guid>
       <description></description>
     </item>
     <item>

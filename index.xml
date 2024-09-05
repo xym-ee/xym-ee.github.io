@@ -6,14 +6,14 @@
     <description>Recent content in Home on xym-ee</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Aug 2024 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2024 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://xym.work/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[post] 使用 gcc 开发 STM32</title>
       <link>https://xym.work/blog/baremetal.html</link>
-      <pubDate>Fri, 30 Aug 2024 10:00:00 +0800</pubDate>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
       <guid>https://xym.work/blog/baremetal.html</guid>
-      <description></description>
+      <description>使用 gcc 开发 STM32 有 keil IAR 等 IDE，还要在 ubuntu 环境下使用 gcc 来开发 stm32 看起来似乎吃力不讨好。但是掌握这个技能的真正含义是：&#xA;拿到任意一块使用 arm cortex-m 内核的全新设计的芯片，只有芯片手册甚至还没有 IDE 可以使用的时候，使用 C 语言和一些 arm 汇编，以及交叉编译工具，是可以把这个芯片使用起来的。&#xA;更实际的情况是，一些大的裸机项目比如 u-boot，甚至 linux kernel 都是没有 IDE 用的，开发、调试这些项目的工具正是裸机开发 stm32 的这套工具。从一个简单的芯片开始去学习这一流程、练习相应工具的使用。&#xA;我的环境&#xA;ubuntu 22.04 STM32F103C8T6 64K flash 20K ram st-link v2 13.3.rel1-x86_64-arm-none-eabi 最简单的程序 int main() { return 0; } `` 为了让这个函数能在 CPU 上执行，还需要做到芯片通电后跳转到 main 入口。 ```c __attribute__((naked, noreturn)) void _reset(void) { extern long _sbss, _ebss, _sdata, _edata, _sidata; for (long *dst = &amp;amp;_sbss; dst &amp;lt; &amp;amp;_ebss; dst++) *dst = 0; for (long *dst = &amp;amp;_sdata, *src = &amp;amp;_sidata; dst &amp;lt; &amp;amp;_edata;) *dst++ = *src++; main(); // Call main() for (;;) (void) 0; // Infinite loop in the case if main() returns } 想让这个函数通电就执行，需要准备好 C 语言的运行环境，以及指定这个函数的地址，即程序员和硬件的约定，查看 m3 权威指南</description>
     </item>
     <item>
       <title>[project] 2019 年恩智浦杯大学生智能汽车竞赛，代码 review</title>
