@@ -22,13 +22,13 @@ tags:       ["project","rt-thread","stm32"]
 几种模式
 
 $$
-\left \{
+\left \\{
     \begin{array}{l}
-        r_2 \cos \theta_2 - r_1 \cos \theta_1 = 2a \\
-        r_1 - r_1 \cos \theta_1 + a = r \\
-        r_2 \cos \theta_2 = r + a \\
-        r_1 \sin \theta_1 = a \\
-        r_2 \sin \theta_2 = a \\
+        r_2 \cos \theta_2 - r_1 \cos \theta_1 = 2a \\\\
+        r_1 - r_1 \cos \theta_1 + a = r \\\\
+        r_2 \cos \theta_2 = r + a \\\\
+        r_1 \sin \theta_1 = a \\\\
+        r_2 \sin \theta_2 = a \\\\
     \end{array}
 \right .
 $$
