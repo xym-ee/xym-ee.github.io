@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>笔记 on xym-ee</title>
+    <link>https://xym.work/categories/%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 笔记 on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 May 2026 13:00:00 +0800</lastBuildDate>
+    <atom:link href="https://xym.work/categories/%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[post] vibe coding 与编程 Agent</title>
+      <link>https://xym.work/blog/vibe-coding.html</link>
+      <pubDate>Mon, 25 May 2026 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/vibe-coding.html</guid>
+      <description>（待完善）&#xA;Agent = Model + Harness&#xA;Agent 本身的原理，以及如何更好的使用如 claude code，codex，open claw&#xA;自然语言会是新的 Shell 吗？&#xA;0 背景 0.1 与 ChatGPT 聊天 ChatGPT 像一个“专家问答窗口”，用户输入自然语言，模型返回自然语言。&#xA;生成式预训练大模型 GPT，NLP 的技术路线从为每个任务单独训练转向预训练大模型 + 微调/提示。&#xA;https://openai.com/zh-Hans-CN/index/chatgpt/&#xA;2022 年 11 月 30 日，隆重推出 ChatGPT，3.5。能对话，写文章，回答追问，这个时候的模型已经比较厉害了，但是还是能看出来车轱辘话来回讲。&#xA;2023 年 3 月，GPT-4 出来，AI 真的能做些事情了。&#xA;2024 年 5 月 GPT-4o，免费用户能体验到的最先进的模型。&#xA;0.2 通过 api 与 llm 对话 关于 LLM API，2020 年 6 月，GPT3-API 开放给开发者&#xA;https://openai.com/zh-Hans-CN/index/openai-api/&#xA;api 比网页对话问答更接近模型，早期的 GPT3 模型就已经有 API 的调用接口了，将大模型集成进软件工作流的尝试也开始了。&#xA;大模型，大语言模型，字符串进字符串出（文本进文本出，严格来说 token 进，token 出，字符串被 Tokenizer 处理为 token，https://platform.</description>
+    </item>
+    <item>
+      <title>[post] 开发板装系统</title>
+      <link>https://xym.work/blog/dev-board-os.html</link>
+      <pubDate>Mon, 26 Jan 2026 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/dev-board-os.html</guid>
+      <description>开发板装系统 orangepi 5 plus ，RK3588&#xA;orangepi 3 LTS，全志H6&#xA;安装 ubuntu server 22.04 jammy&#xA;改单个字符密码 改一个字符的密码。Ubuntu Server 默认启用了 PAM 密码强度策略&#xA;# 编辑 PAM 配置 sudo vi /etc/pam.d/common-password 其中一行修改为&#xA;# here are the per-package modules (the &amp;#34;Primary&amp;#34; block) password [success=1 default=ignore] pam_unix.so yescrypt minlen=1 使用 passwd 修改密码&#xA;apt 源的问题 新板可能会有时间问题，导致 apt update 失败，可以先设置时间。&#xA;22.04 aarch64 的软件源 /etc/apt/sources.list&#xA;deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy main restricted universe multiverse # deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy main restricted universe multiverse deb http://mirrors.</description>
+    </item>
+    <item>
+      <title>[post] 从一次博客部署，到一套可复用的服务器初始化方案</title>
+      <link>https://xym.work/blog/deploy-to-server.html</link>
+      <pubDate>Sat, 10 Jan 2026 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/deploy-to-server.html</guid>
+      <description>0. 引言：系统整体工作流程（全景视角） 在这套博客系统中，刻意把写作、构建和部署拆分成了几个彼此解耦的阶段。日常内容的开发只发生在 GitHub 的 hugodev 分支，这个分支只包含 Hugo 源码，用来承载写作本身，而不关心任何部署形态。每当 hugodev 有新的提交，GitHub Actions 会自动触发构建流程，将源码生成纯静态文件，并把结果推送到 pub 分支。pub 分支的定位非常明确，它不是给人编辑的，而是作为一个稳定、可被机器直接使用的部署接口存在。&#xA;为了让整个流程在国内网络环境下更加稳定，服务器并不直接从 GitHub 获取构建产物，而是通过 Gitee 对 pub 分支进行镜像同步。服务器端不参与任何构建过程，也不需要安装 Hugo 或 CI 工具，它只以固定节奏从 Gitee 拉取 pub 分支的最新内容，并在内容发生变化后 reload nginx，使更新对外生效。整个服务器侧的行为被刻意压缩为三件事：定时同步、静态托管、对外服务。&#xA;下面这张图展示了这套流程的完整链路，以及各个阶段之间的边界关系：&#xA;┌────────────────────┐ │ Local Writing │ │ (Markdown / Hugo) │ └─────────┬──────────┘ │ │ git push ▼ ┌────────────────────┐ │ GitHub Repo │ │ hugodev branch │ │ (source only) │ └─────────┬──────────┘ │ │ GitHub Actions │ (build) ▼ ┌────────────────────┐ │ GitHub Repo │ │ pub branch │ │ (static artifacts) │ └─────────┬──────────┘ │ │ mirror sync ▼ ┌────────────────────┐ │ Gitee │ │ pub branch │ │ (domestic mirror) │ └─────────┬──────────┘ │ │ cron (pull) ▼ ┌────────────────────────────────┐ │ Server │ │ │ │ cron → git pull (pub) │ │ → nginx reload │ │ │ │ (no build tools, no CI) │ └────────────────────────────────┘ 这种拆分方式带来的直接结果是，构建环境与运行环境完全分离。博客的生成逻辑被固定在 CI 中，而服务器只面对已经生成好的静态文件。即使将来不再使用 Hugo，或更换为其他静态站点生成器，这套流程中真正需要调整的，也只是构建阶段；服务器侧的逻辑可以保持不变。同样地，当服务器需要迁移或重装时，也不需要关心构建工具链，只要能够从仓库获取 pub 分支并提供静态服务即可。</description>
+    </item>
+    <item>
+      <title>[post] 从 S32DS 到 VS Code：嵌入式 IDE 中被隐藏的编译过程</title>
+      <link>https://xym.work/blog/s32ds_vscdoe.html</link>
+      <pubDate>Sat, 30 Aug 2025 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/s32ds_vscdoe.html</guid>
+      <description>1.引言 进入汽车电子行业之后，我开始接触车规级 MCU，比如 NXP S32K144、S32K312。NXP 官方提供的开发环境是 S32 Design Studio (S32DS)，它实际上是一个基于 Eclipse 定制的 IDE。这类 IDE 在嵌入式开发里很常见，像 RT-Thread Studio 也是基于 Eclipse 定制的，都是类似的思路：&#xA;集成 GCC 工具链 提供 MCU 配置和外设初始化界面 自动生成 makefile 一键编译、下载、调试 和 S32DS 相比，嵌入式开发更常用的是 Keil (MDK-ARM) 或 IAR Embedded Workbench。在 Keil/IAR 中，几乎所有编译选项都藏在 GUI 配置对话框里（工程 → Options for Target…），开发者点几下就能完成编译设置。工程文件（Keil 的 .uvprojx / IAR 的 .ewp）就是这些配置的保存载体，用户很少需要直接接触编译器命令行。&#xA;编译时 IDE 开发者几乎看不到底层命令和流程。相比之下，S32DS (Eclipse) 的方式要“开放”得多，工程目录里直接存在 makefile，编译过程透明可见，甚至可以完全脱离 Eclipse IDE，直接在命令行里运行 make -C Debug_FLASH 完成编译。&#xA;在实际项目里，一些经验丰富的老工程师喜欢 Source Insight 作为轻量的代码浏览器，快速搜索、跳转；也有人尝试 VS Code，借助 C/C++ 插件获得更现代的编辑体验如补全、跳转、代码检查、Git 集成。而对于 S32DS 这样的 Eclipse 系 IDE，如果仅仅把它当成“工程生成器”和“编译工具链”，代码编辑的部分就完全可以交给 VS Code。</description>
+    </item>
+    <item>
+      <title>[post] 中大型嵌入式项目开发与管理：构建系统</title>
+      <link>https://xym.work/blog/system-dev.html</link>
+      <pubDate>Sat, 29 Mar 2025 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/system-dev.html</guid>
+      <description>大型嵌入式项目的开发与管理：构建系统 在嵌入式系统开发中，项目的规模和复杂性随着需求的增加而不断扩大。对于小型项目，开发者通常能够直接操作硬件，利用简洁的编译和开发环境进行开发。这类项目通常是裸机开发，例如使用 C51 或 STM32 等微控制器，通过集成开发环境（IDE）来进行开发。开发者通常专注于核心业务功能的实现，而不关心过多的底层细节，如编译过程、链接器配置或系统架构。这种方式的优点是快速实现和简单的开发流程，但在面对更复杂的需求时往往显得力不从心。&#xA;例如，使用 C51 的经典项目通常包括简单的应用，如控制一个 LED 的闪烁、读取传感器数据并输出，或者其他单一功能的嵌入式系统。这些项目通常不涉及操作系统或复杂的硬件抽象层，开发者只需要专注于代码的实现和调试。&#xA;同样，使用 STM32 的开发者通常通过 STM32CubeIDE 或 Keil MDK 等集成开发环境进行开发。这些工具提供了完整的硬件支持库和简化的项目设置，开发者能够快速构建和测试程序，只需关注核心业务逻辑，而不必过多处理与硬件平台和构建系统相关的细节。&#xA;然而，随着项目规模的扩大，特别是当项目需要支持多个硬件平台、复杂的功能模块以及持续集成等需求时，裸机开发的方式就暴露出其局限性。此时，构建系统就显得尤为重要。&#xA;什么是构建系统？&#xA;构建系统是自动化处理代码构建过程的工具，通常包括以下功能：&#xA;源代码编译：将源代码（如 .c、.cpp 文件）编译为目标文件（.o、.obj 文件）。 模块依赖管理：在大型项目中，代码模块之间通常有复杂的依赖关系。构建系统能够自动识别依赖，并按正确顺序进行编译和链接。 配置管理：根据项目需求或目标平台，配置哪些模块需要启用，哪些功能需要裁剪。 跨平台支持：支持不同的硬件平台、操作系统或编译器工具链，以便生成适配不同目标平台的可执行文件或固件。 在嵌入式开发中，编译通常并非在目标硬件平台上进行，而是通过交叉编译来生成目标平台的代码。交叉编译工具链（如 Keil、IAR 和 GCC）是构建系统的核心组成部分，负责将开发环境中的源代码编译成目标平台能够执行的二进制文件。在构建系统中，交叉编译工具链的选择和配置直接影响到项目的编译速度、生成代码的效率以及对目标平台的支持能力。构建系统需要能够灵活地集成不同的交叉编译工具链，并根据目标硬件架构和操作系统配置相应的编译参数。通过这一过程，开发者能够确保代码能够在不同的硬件平台上正确运行。&#xA;本篇文章以 RT-Thread 为代表，结合 Linux Kernel、U-Boot、PX4-Autopilot 等开源项目，系统性探讨大型嵌入式项目的开发管理思路、构建系统对比及实际工程中可复用的最佳实践。&#xA;1 中大型嵌入式项目开发特征，使用构建系统的必要性 1.1 特征一：多模块与组件化架构，依赖管理，功能可裁剪与配置能力 大型项目功能全面，但是项目中的嵌入式设备是高度定制化的，并不需要用到全部功能， 由此带来的，依赖管理。如传感器软件包依赖通信接口的驱动 功能裁剪与配置，功能本身的裁剪，功能的配置，如引脚等&#xA;中大型嵌入式项目往往采用多模块、组件化架构来组织系统。每个模块对应一类功能或外设，可单独开发、调试和裁剪，便于项目的可维护性和可扩展性。&#xA;以 RT-Thread 中的 OLED 显示模块为例：&#xA;OLED 模块是一个可裁剪模块，用户可以根据项目需求选择是否启用该功能。&#xA;OLED 显示屏的驱动接口可配置，支持使用 IIC 或 SPI 接口与主控通信。&#xA;若选择 IIC 接口，系统会依赖一个 IIC 驱动模块。此驱动本身也具有多种实现方式，比如：&#xA;使用硬件 IIC 控制器；&#xA;使用模拟 IIC（Soft IIC） 实现。软 IIC 驱动中，GPIO 引脚是可配置的，需根据硬件实际连接进行适配。</description>
+    </item>
+    <item>
+      <title>[post] 使用 gcc 开发 STM32</title>
+      <link>https://xym.work/blog/baremetal.html</link>
+      <pubDate>Wed, 04 Sep 2024 10:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/baremetal.html</guid>
+      <description>使用 gcc 开发 STM32 (2024.09.04 创建，2026.01.23 完善。)&#xA;在 STM32 开发领域，Keil、IAR 这样的 IDE 几乎是默认选择。&#xA;在 Ubuntu 环境下，直接使用 arm-none-eabi-gcc 来开发 STM32，看起来多少有点“吃力不讨好”。&#xA;但真正掌握这套流程的意义，远不止是“不用 IDE 写单片机程序”。&#xA;用 GCC 裸机开发这件事背后隐含着一个非常重要的能力：&#xA;拿到一颗全新的、基于 ARM Cortex-M 内核的芯片，只有芯片手册，甚至连官方 IDE 都还没准备好的时候，你依然能把它跑起来。只要掌握了&#xA;C 语言 一点点 ARM 汇编(只会看也行) 交叉编译工具链 链接脚本 那么芯片是否“被官方支持”并不重要。&#xA;更现实的一层意义，很多大型“裸机”项目比如 u-boot，甚至 linux kernel，各类 SoC BSP，这些项目开发、调试并不依赖图形化工具。而 STM32 裸机开发，恰好是理解这一整套工具链的最小项目。从一颗 Cortex-M3 芯片开始，去理解“代码是如何真正跑到 CPU 上的”。&#xA;我的环境&#xA;Host：ubuntu 22.04 MCU：STM32F103C8T6 64K flash 20K ram 调试器：st-link v2 工具链：13.3.rel1-x86_64-arm-none-eabi 从最简单的程序 int main() { return 0; } 这是一个合法的 C 程序，但它还不是一个能在 MCU 上运行的程序。CPU 上电以后，并不知道什么是 main()。</description>
+    </item>
+    <item>
+      <title>[post] 静态网站搭建中有关计算机网络相关的内容</title>
+      <link>https://xym.work/blog/hugowebsite.html</link>
+      <pubDate>Tue, 20 Aug 2024 13:00:00 +0800</pubDate>
+      <guid>https://xym.work/blog/hugowebsite.html</guid>
+      <description>0. 介绍 需求 1：我需要有个个人网站 hugo 、github pages 需求 2：我需要在局域网中开发和调试 端口转发，NAT 需求 3：我想要更快的访问速度 云服务器部署网页，nginx 需求 4：我想在外网访问内网的机器开发和调试 内网穿透，frp 需求 5: 我还想要更好的体验 软路由、定时任务。问问 chatgpt 1. hogo 生成静态页面 在 ubuntu 环境下开发，ubuntu 安装于虚拟机中，采用桥接网卡方式上网。IP 10.0.0.22&#xA;使用了 terminal-hugo-theme 主题，按照 README 中的说明，在本地生成静态页面并启动一个本地的网页服务器，&#xA;hugo server --buildDrafts --disableFastRender --gc --ignoreCache --noHTTPCache --forceSyncStatic --verbose -w 指令的参数&#xA;--buildDrafts: 生成静态页面时为草稿的内容 --disableFastRender: 禁用快速渲染(只会重新生成发生变化的部分)，确保在每次更改时全部重新生成 --gc: 垃圾回收，清理未使用的文件 --ignoreCache: 强制忽略缓存并重新构建所有文件，确保生成的时最新的 --noHTTPCache: 禁用 HTTP 缓存，强制浏览器从服务器加载站点，确保从浏览器看的到是最新的 --forceSyncStatic: 强制同步静态文件（例如图片、CSS、JS），即使 Hugo 认为它们没有更改。确保所有静态资源都是最新的 --verbose: 输出更多信息 -w: 是 --watch 的缩写，监视文件系统的更改，并在文件修改时自动重新构建站点 hugo 的本地网页服务器监听 1313 端口，生成后，在 ubuntu 的浏览器中访问 http://127.</description>
+    </item>
+  </channel>
+</rss>

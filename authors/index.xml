@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on xym-ee</title>
+    <link>https://xym.work/authors/</link>
+    <description>Recent content in Authors on xym-ee</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 28 Mar 2024 15:00:00 +0000</lastBuildDate>
+    <atom:link href="https://xym.work/authors/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nayan Seth</title>
+      <link>https://xym.work/authors/nayan-seth/</link>
+      <pubDate>Thu, 28 Mar 2024 15:00:00 +0000</pubDate>
+      <guid>https://xym.work/authors/nayan-seth/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Author 3</title>
+      <link>https://xym.work/authors/author-3/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Author 4</title>
+      <link>https://xym.work/authors/author-4/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-4/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Author 5</title>
+      <link>https://xym.work/authors/author-5/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/author-5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>John Doe</title>
+      <link>https://xym.work/authors/john-doe/</link>
+      <pubDate>Fri, 01 Jan 1999 19:01:48 +0530</pubDate>
+      <guid>https://xym.work/authors/john-doe/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

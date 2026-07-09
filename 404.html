@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>404 Page not found | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+<style>
+  .not-found-page {
+    --nf-bg: var(--color-bg, #ffffff);
+    --nf-bg-muted: var(--color-bg-muted, #f6f8fa);
+    --nf-border: var(--color-border, #d8dee4);
+    --nf-border-soft: var(--color-border-soft, #e5e7eb);
+    --nf-text: var(--color-text, #111827);
+    --nf-muted: var(--color-text-muted, #4b5563);
+    --nf-subtle: var(--color-text-subtle, #6b7280);
+    --nf-terminal: var(--color-terminal, #15803d);
+    --nf-terminal-soft: var(--color-terminal-soft, #dcfce7);
+    --nf-terminal-bg: var(--color-terminal-bg, #0b1220);
+    --nf-terminal-text: var(--color-terminal-text, #d1fae5);
+  }
+
+  .not-found-shell {
+    position: relative;
+    display: grid;
+    gap: 1.75rem;
+    background: var(--nf-bg-muted);
+    border: 1px solid var(--nf-border);
+    border-radius: 8px;
+    margin: 2rem 0 1.25rem;
+    padding: 2.5rem;
+    overflow: hidden;
+  }
+
+  .not-found-shell::before {
+    content: "$ locate page";
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    color: var(--nf-terminal);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8rem;
+    opacity: 0.55;
+  }
+
+  .not-found-code {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--nf-terminal);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.82rem;
+  }
+
+  .not-found-code::before {
+    content: "xym-ee$";
+    color: var(--nf-terminal);
+  }
+
+  .not-found-title {
+    color: var(--nf-text);
+    font-size: clamp(3.5rem, 14vw, 8rem);
+    font-weight: 800;
+    line-height: 0.92;
+    margin: 0;
+  }
+
+  .not-found-heading {
+    color: var(--nf-text);
+    font-size: clamp(1.35rem, 5vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .not-found-copy {
+    color: var(--nf-muted);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    margin: 0;
+    max-width: 42rem;
+  }
+
+  .not-found-terminal {
+    background: var(--nf-terminal-bg);
+    border: 1px solid rgba(21, 128, 61, 0.35);
+    border-radius: 8px;
+    color: var(--nf-terminal-text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.84rem;
+    line-height: 1.75;
+    padding: 1rem 1.1rem;
+    white-space: normal;
+  }
+
+  .not-found-terminal-line {
+    display: block;
+  }
+
+  .not-found-terminal-line.muted {
+    color: rgba(209, 250, 229, 0.7);
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .not-found-action {
+    align-items: center;
+    background: var(--nf-bg);
+    border: 1px solid var(--nf-border);
+    border-radius: 6px;
+    color: var(--nf-text);
+    display: inline-flex;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    min-height: 2.6rem;
+    padding: 0.7rem 0.95rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .not-found-action:hover,
+  .not-found-action:focus-visible {
+    background: var(--nf-terminal-soft);
+    border-color: var(--nf-terminal);
+    color: var(--nf-terminal);
+    transform: translateY(-1px);
+  }
+
+  .not-found-action:focus-visible {
+    outline: 2px solid var(--nf-terminal);
+    outline-offset: 3px;
+  }
+
+  .not-found-hint {
+    color: var(--nf-subtle);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+  }
+
+  .route-game {
+    background: var(--nf-bg);
+    border: 1px solid var(--nf-border-soft);
+    border-radius: 8px;
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .route-game:focus-visible {
+    outline: 2px solid var(--nf-terminal);
+    outline-offset: 3px;
+  }
+
+  .route-game-header {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .route-game-title {
+    color: var(--nf-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+  }
+
+  .route-game-copy,
+  .route-game-status {
+    color: var(--nf-muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .route-game-status {
+    color: var(--nf-terminal);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .route-game-button,
+  .route-control {
+    background: var(--nf-bg-muted);
+    border: 1px solid var(--nf-border);
+    border-radius: 6px;
+    color: var(--nf-text);
+    cursor: pointer;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    min-height: 2.25rem;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+
+  .route-game-button {
+    padding: 0 0.8rem;
+    white-space: nowrap;
+  }
+
+  .route-game-button:hover,
+  .route-game-button:focus-visible,
+  .route-control:hover,
+  .route-control:focus-visible {
+    background: var(--nf-terminal-soft);
+    border-color: var(--nf-terminal);
+    color: var(--nf-terminal);
+    transform: translateY(-1px);
+  }
+
+  .route-game-button:focus-visible,
+  .route-control:focus-visible {
+    outline: 2px solid var(--nf-terminal);
+    outline-offset: 2px;
+  }
+
+  .route-game-board {
+    aspect-ratio: 1;
+    display: grid;
+    gap: 0.35rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    max-width: 23rem;
+    width: 100%;
+  }
+
+  .route-cell {
+    align-items: center;
+    aspect-ratio: 1;
+    background: var(--nf-bg-muted);
+    border: 1px solid var(--nf-border-soft);
+    border-radius: 6px;
+    color: var(--nf-subtle);
+    display: flex;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: clamp(0.7rem, 3vw, 0.95rem);
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1;
+    min-width: 0;
+  }
+
+  .route-cell.is-wall {
+    background: var(--nf-terminal-bg);
+    border-color: var(--nf-terminal-bg);
+  }
+
+  .route-cell.is-fragment {
+    background: var(--nf-terminal-soft);
+    border-color: rgba(21, 128, 61, 0.45);
+    color: var(--nf-terminal);
+  }
+
+  .route-cell.is-exit {
+    border-color: var(--nf-terminal);
+    color: var(--nf-terminal);
+  }
+
+  .route-cell.is-player {
+    background: var(--nf-terminal);
+    border-color: var(--nf-terminal);
+    color: #ffffff;
+  }
+
+  .route-game.recovered .route-cell.is-exit,
+  .route-game.recovered .route-cell.is-player {
+    background: var(--nf-terminal);
+    border-color: var(--nf-terminal);
+    color: #ffffff;
+  }
+
+  .route-game-body {
+    align-items: start;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(12rem, 23rem) minmax(8rem, 1fr);
+  }
+
+  .route-controls {
+    display: grid;
+    gap: 0.45rem;
+    grid-template-columns: repeat(3, 2.7rem);
+    justify-content: start;
+  }
+
+  .route-control {
+    padding: 0;
+  }
+
+  .route-control-placeholder {
+    min-height: 2.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .not-found-shell {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .not-found-shell::before {
+      display: none;
+    }
+
+    .not-found-actions {
+      flex-direction: column;
+    }
+
+    .not-found-action {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .route-game-header,
+    .route-game-body {
+      grid-template-columns: 1fr;
+    }
+
+    .route-game-header {
+      display: grid;
+    }
+
+    .route-game-button {
+      justify-self: start;
+    }
+
+    .route-controls {
+      justify-content: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-action {
+      transition: none;
+    }
+
+    .route-game-button,
+    .route-control,
+    .not-found-action:hover,
+    .not-found-action:focus-visible,
+    .route-game-button:hover,
+    .route-game-button:focus-visible,
+    .route-control:hover,
+    .route-control:focus-visible {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
+
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <main class="not-found-page flex flex-col pt-4 w-full" aria-labelledby="not-found-title">
+    <section class="not-found-shell">
+      <div class="not-found-code">request /unknown</div>
+
+      <div>
+        <h1 id="not-found-title" class="not-found-title">404</h1>
+        <p class="not-found-heading">没有找到这个页面</p>
+      </div>
+
+      <p class="not-found-copy">
+        这个链接可能已经移动、删除，或者路径写错了。可以回到首页，也可以直接进入博客或笔记继续浏览。
+      </p>
+
+      <div class="not-found-terminal" aria-label="404 diagnostics">
+        <span class="not-found-terminal-line">$ status --page</span>
+        <span class="not-found-terminal-line">HTTP 404: route not found</span>
+        <span class="not-found-terminal-line muted">suggestion: choose a known entry point below</span>
+      </div>
+
+      <section class="route-game" aria-labelledby="route-game-title" tabindex="0">
+        <div class="route-game-header">
+          <div>
+            <h2 id="route-game-title" class="route-game-title">route recovery</h2>
+            <p class="route-game-copy">收集散落的路径碎片，拼出 /blog 后走到出口。</p>
+          </div>
+          <button class="route-game-button" type="button" data-route-reset>Start</button>
+        </div>
+
+        <div class="route-game-body">
+          <div class="route-game-board" data-route-board role="grid" aria-label="Route recovery grid">
+            <noscript>小游戏需要 JavaScript，下面的导航链接仍可正常使用。</noscript>
+          </div>
+
+          <div>
+            <p class="route-game-status" data-route-status aria-live="polite">
+              Press Start. Use WASD or arrow keys.
+            </p>
+            <div class="route-controls" aria-label="Route controls">
+              <span class="route-control-placeholder"></span>
+              <button class="route-control" type="button" data-route-move="up" aria-label="Move up">W</button>
+              <span class="route-control-placeholder"></span>
+              <button class="route-control" type="button" data-route-move="left" aria-label="Move left">A</button>
+              <button class="route-control" type="button" data-route-move="down" aria-label="Move down">S</button>
+              <button class="route-control" type="button" data-route-move="right" aria-label="Move right">D</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="not-found-hint">xym-ee / content / route-check</div>
+    </section>
+  </main>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  <script>
+  (function() {
+    const game = document.querySelector('.route-game');
+    const board = document.querySelector('[data-route-board]');
+    const status = document.querySelector('[data-route-status]');
+    const resetButton = document.querySelector('[data-route-reset]');
+    const controls = Array.from(document.querySelectorAll('[data-route-move]'));
+
+    if (!game || !board || !status || !resetButton) return;
+
+    const size = 7;
+    const start = { x: 0, y: 0 };
+    const exit = { x: 6, y: 6 };
+    const walls = new Set(['2,1', '4,1', '1,2', '2,2', '4,3', '5,3', '1,5', '2,5', '4,5']);
+    const fragments = [
+      { x: 3, y: 0, label: '/' },
+      { x: 6, y: 1, label: 'b' },
+      { x: 1, y: 4, label: 'l' },
+      { x: 3, y: 6, label: 'o' },
+      { x: 6, y: 5, label: 'g' }
+    ];
+    const directions = {
+      up: { x: 0, y: -1 },
+      down: { x: 0, y: 1 },
+      left: { x: -1, y: 0 },
+      right: { x: 1, y: 0 }
+    };
+    const keyMap = {
+      ArrowUp: 'up',
+      w: 'up',
+      W: 'up',
+      ArrowDown: 'down',
+      s: 'down',
+      S: 'down',
+      ArrowLeft: 'left',
+      a: 'left',
+      A: 'left',
+      ArrowRight: 'right',
+      d: 'right',
+      D: 'right'
+    };
+
+    let player;
+    let collected;
+    let moves;
+    let active;
+    let recovered;
+
+    function key(x, y) {
+      return x + ',' + y;
+    }
+
+    function fragmentAt(x, y) {
+      return fragments.find(function(fragment) {
+        return fragment.x === x && fragment.y === y && !collected.has(fragment.label);
+      });
+    }
+
+    function render() {
+      board.textContent = '';
+      game.classList.toggle('recovered', recovered);
+
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          const cell = document.createElement('span');
+          const foundFragment = fragmentAt(x, y);
+          const isPlayer = player.x === x && player.y === y;
+
+          cell.className = 'route-cell';
+          cell.setAttribute('role', 'gridcell');
+
+          if (walls.has(key(x, y))) {
+            cell.classList.add('is-wall');
+            cell.textContent = '#';
+          } else if (exit.x === x && exit.y === y) {
+            cell.classList.add('is-exit');
+            cell.textContent = '>';
+          } else if (foundFragment) {
+            cell.classList.add('is-fragment');
+            cell.textContent = foundFragment.label;
+          } else {
+            cell.textContent = '.';
+          }
+
+          if (isPlayer) {
+            cell.classList.add('is-player');
+            cell.textContent = '@';
+          }
+
+          board.appendChild(cell);
+        }
+      }
+    }
+
+    function updateStatus(message) {
+      const route = fragments.map(function(fragment) {
+        return collected.has(fragment.label) ? fragment.label : '_';
+      }).join('');
+
+      status.textContent = message || ('route: ' + route + ' | moves: ' + moves);
+    }
+
+    function resetGame() {
+      player = { x: start.x, y: start.y };
+      collected = new Set();
+      moves = 0;
+      active = true;
+      recovered = false;
+      resetButton.textContent = 'Restart';
+      controls.forEach(function(button) {
+        button.disabled = false;
+      });
+      render();
+      updateStatus('route: _____ | moves: 0');
+      game.focus();
+    }
+
+    function move(directionName) {
+      if (!active || recovered) return;
+
+      const direction = directions[directionName];
+      const next = {
+        x: player.x + direction.x,
+        y: player.y + direction.y
+      };
+
+      if (
+        next.x < 0 ||
+        next.x >= size ||
+        next.y < 0 ||
+        next.y >= size ||
+        walls.has(key(next.x, next.y))
+      ) {
+        updateStatus('blocked | route needs another path');
+        return;
+      }
+
+      player = next;
+      moves++;
+
+      const foundFragment = fragmentAt(player.x, player.y);
+      if (foundFragment) {
+        collected.add(foundFragment.label);
+      }
+
+      if (player.x === exit.x && player.y === exit.y && collected.size === fragments.length) {
+        recovered = true;
+        active = false;
+        render();
+        updateStatus('route recovered: /blog | moves: ' + moves);
+        return;
+      }
+
+      if (player.x === exit.x && player.y === exit.y) {
+        updateStatus('exit locked | collect the full route first');
+        render();
+        return;
+      }
+
+      render();
+      updateStatus();
+    }
+
+    resetButton.addEventListener('click', resetGame);
+    controls.forEach(function(button) {
+      button.disabled = true;
+      button.addEventListener('click', function() {
+        move(button.dataset.routeMove);
+        game.focus();
+      });
+    });
+
+    document.addEventListener('keydown', function(event) {
+      const direction = keyMap[event.key];
+      if (!direction || !active) return;
+
+      event.preventDefault();
+      move(direction);
+    });
+
+    player = { x: start.x, y: start.y };
+    collected = new Set();
+    moves = 0;
+    active = false;
+    recovered = false;
+    render();
+  })();
+  </script>
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

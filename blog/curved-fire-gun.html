@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[project] 2019 年电子设计竞赛：模拟电磁曲射炮设计 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[project] 2019 年电子设计竞赛：模拟电磁曲射炮设计</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2024-08-30</p>
+        
+          <p>🔄 2024-08-30</p>
+        
+        <p>⌚ Reading time: 1 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E9%A1%B9%E7%9B%AE'
+    class="site-chip border p-1 text-center transition-colors">> 项目</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <ul>
+<li><a href="https://github.com/xym-ee/electromagnetic-railgun">源码仓库</a></li>
+</ul>
+<h2 id="0简介">0.简介</h2>
+<p>我参加了 2019 年全国大学生电子设计竞赛，当时我大三。选的题目是模拟电池曲射炮设计。赛题要求是设计制作一个电磁炮模型，通过视觉识别指定元素，自动发射射击。</p>
+<p>电磁炮与环形靶的位置示意如图所示。电磁炮放置在定标点处，炮管初始水平方向与中轴线夹角为 $ 0 ^\circ $ 、垂直方向仰角为 $ 0 ^\circ $ 。环形靶水平放置在地面，靶心位置在与定标点距离 $ 200 \text{cm} \le  d \le 300 \text{cm} $ ，与中心轴线夹角 $ \alpha \le \pm 30 ^\circ $ 的范围内。</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-1.png" width="500" style="display: block; margin: auto;">
+<p>需要实现的功能</p>
+<ul>
+<li>炮弹的发射和命中功能
+<ul>
+<li>最基本的发射功能</li>
+<li>对发射距离的控制</li>
+</ul>
+</li>
+<li>有视觉检测功能</li>
+<li>炮管左右运动的功能</li>
+</ul>
+<p>这个东西应该是硬件设计的内容占了60%，需要设计出合适的发射装置，使得可以通过  MCU 控制发射距离。视觉检测目标然后和转动到目标角度都要在能成功发射并命中的前提下才有意义。</p>
+<p>先看当时实现的参赛作品</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-6.png" width="300" style="display: block; margin: auto;">
+<p>精度控制效果</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-1.gif" width="300" style="display: block; margin: auto;">
+<p>精度还是不错的，拿了江苏省一等奖，实际上我们已经进入全国总测评了，如果总测评过了就是全国一等奖，没过是国二。但是呢，作品可能在路上出问题了，然后就退回省一了😂。还是比较可惜的，好在学校的比赛出问题都是小问题，如果这是工作上的失误那可能要出大问题。</p>
+<p>23 年，有人觉得这个东西挺好玩的，是一个不错的教学用具，然后我在比赛的基础上，重新基于 RTOS 写了代码，并且做的更细致了一些。</p>
+<h3 id="12019电赛版电磁炮的设计思路">1.2019电赛版电磁炮的设计思路</h3>
+<p>实现赛题要求需要 3 部分，充能与发射装置、云台、视觉检测，当时主控芯片选的是 NXP imx rt1052，此外还有显示屏、按键等完成交互操作。和电机控制类似，这也是个典型的低压控制高压的电子系统。整体上的设计如图所示</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-4.png" width="400" style="display: block; margin: auto;">
+<p>先考虑充能和发射装置，发射的基本原理：电感线圈流过电流时产生一个磁场，用磁场对磁性炮弹有一个作用力，完成对炮弹的发射。</p>
+<p>这个感生磁场还不能一直存在，否则前段加速炮弹，后段会阻碍炮弹。也就是说线圈要通过瞬间的大电流，因此就需要大容量的电容来对线圈放电，刚好能实现比较好的发射效果。此外还需要配套的充电装置和放电开关，还需要实时检测电容充电电压以控制电容中的储能量，这是对炮弹发射距离控制的关键。</p>
+<p>由于比赛时使用的是锂电池供电，因此为了能给电容充电到一个比较高的电压，需要逆变器和整流器，对于充电通断的控制可以使用继电器来实现。电容电压检测则需要使用分压电阻分压然后做隔离送入 MCU 的 ADC 端口。电容对发射线圈的放电开关需要使用晶闸管，使用继电器的话触点常容易损坏。</p>
+<p>因此高压部分的原理上为下面这个图</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-5.png" width="600" style="display: block; margin: auto;">
+<p>细节上的实现</p>
+<img src="./images/1-curved-fire-gun/curved-fire-gun-2.png" width="600" style="display: block; margin: auto;">
+<p>把发射模块看做一个整体，有这些输入输出引脚输出接口</p>
+<ul>
+<li>GPIO_IN, 充电控制</li>
+<li>GPIO_IN, 发射控制</li>
+<li>AD_OUT, 充电电压反馈</li>
+</ul>
+<p>云台使用舵机云台就可以，这个任务里 openmv 就可以胜任识别的工作，openmv 和控制板使用串口通信，openmv 只需要发送回目标的横坐标即可。</p>
+<p>当时的代码是裸机开发实现的，代码也没做备份现在也找不到了😂。</p>
+<h3 id="2教具版电磁炮的设计思路">2.教具版电磁炮的设计思路</h3>
+<p>发射部分、视觉识别部分、云台部分还是和以前一样，但是主控换成了 STM32，并且使用 rt-thread 来完成所有功能的开发，在交互功能上做了新的改进。</p>
+<p>先来看效果</p>
+<video controls width="480">
+  <source src="./videos/curved-fire-gun-1.mp4" type="video/mp4">
+</video>
+<p>考虑到这是教学用具，设计这些功能</p>
+<ul>
+<li>有两种模式：手动控制模式和自动追踪目标模式</li>
+<li>手动控制模式使用按键调整炮管的指向</li>
+<li>自动追踪模式下炮管自动指向目标</li>
+<li>出于安全考虑不论是手动模式还是自动模式，都需要手动控制电容充电和发射</li>
+<li>需要设计充满电自动停止充电的功能，并且需要使用蜂鸣器提示电容有点</li>
+</ul>
+<p>因此这一版电磁炮使用了更多的控制按键，这就需要考虑按键的读取逻辑和按键处理事件这两个事情。比较复杂的系统，按键的读取与事件处理可以分离开来考虑，以提高代码的可维护性和扩展性。</p>
+<p>rtt 提供了许多按键相关的软件包。使用事件驱动型按键驱动模块，将按键处理函数和按键及按键状态分开，去掉了按键处理的硬编码，使得业务逻辑更清晰。</p>
+<p>比如控制云台转动的其中一个按键，定义按键，实现按键值读取函数和按键发生时要做的事情。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>Button_t btn_servo_l;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint8_t</span> <span style="color:#a6e22e">read_btn_servo_l</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">rt_pin_read</span>(SERVO_L_PIN);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">btn_servo_l_down_cb</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>btn)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    status.pts_control <span style="color:#f92672">=</span> LEFT;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rt_kprintf</span>(<span style="color:#e6db74">&#34;SERVO_L_PIN once press</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>然后在初始化时，绑定按键和事件触发的回调函数。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">Button_Create</span>(<span style="color:#e6db74">&#34;btn_servo_l&#34;</span>, <span style="color:#f92672">&amp;</span>btn_servo_l, read_btn_servo_l, PIN_LOW);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Button_Attach</span>(<span style="color:#f92672">&amp;</span>btn_servo_l, BUTTON_DOWM, btn_servo_l_down_cb);
+</span></span></code></pre></div><p>然后开一个线程调用按键库作者提供的按键处理函数即可。用户只需要思考按键按下以后，有什么事情要发生即可。</p>
+<h3 id="3总结">3.总结</h3>
+<p>这已经是我时隔多年总结以前的项目，这个项目是我刚使用 rt-thread 比较熟练的时候做的，但是现在会看以前的代码，其实还是有很多问题。</p>
+<p>比如按键逻辑的那一块，即使使用了按键库，我还是定义了一个 <code>int key=0</code> ，在按键回调函数中修改了这个值，现在已经看不懂为什么要改值了，拿我现在对自己的标准来说，这个代码没有做到不言自明，用数字代表状态本来就增加了阅读代码的障碍，这使得用了按键库也并没有比没用让代码更好读。</p>
+<p>如果现在让我实现这个代码的话，我大概率会直接在按键回调函数中去修改云台对应方向的转角值。因为操作的逻辑就是按下左键，云台左移，那么回调函数里就直接做左移的动作。这样的代码应该才是<strong>不言自明</strong>的。完全把操作逻辑和代码逻辑就对应起来了。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/curved-fire-gun.html";
+    this.page.identifier = "\/blog\/curved-fire-gun.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

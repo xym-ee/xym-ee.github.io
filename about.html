@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="About - {{ .Site.Title }}">
+<title>About Me | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+<style>
+  :root {
+    --about-bg: var(--color-bg, #ffffff);
+    --about-bg-muted: var(--color-bg-muted, #f6f8fa);
+    --about-border: var(--color-border, #d8dee4);
+    --about-border-soft: var(--color-border-soft, #e5e7eb);
+    --about-text: var(--color-text, #111827);
+    --about-muted: var(--color-text-muted, #4b5563);
+    --about-subtle: var(--color-text-subtle, #6b7280);
+    --about-terminal: var(--color-terminal, #15803d);
+    --about-terminal-soft: var(--color-terminal-soft, #dcfce7);
+    --about-blue: var(--color-engineering-blue, #2563eb);
+  }
+
+  #about-hero {
+    position: relative;
+    background: var(--about-bg-muted);
+    border: 1px solid var(--about-border);
+    border-radius: 8px;
+    padding: 2.5rem 2.5rem 2rem;
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+  #about-hero::before {
+    content: "$ whoami";
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    color: var(--about-terminal);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.8rem;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    color: var(--about-terminal);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .hero-role {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--about-text);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  .hero-tagline {
+    color: var(--about-muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .about-card {
+    background: var(--about-bg);
+    border: 1px solid var(--about-border-soft);
+    border-radius: 8px;
+    padding: 1.75rem 2rem;
+    margin: 1.25rem 0;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out,
+                border-color 0.3s, box-shadow 0.3s;
+  }
+  .about-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .about-card:hover {
+    border-color: var(--about-border);
+    box-shadow: 0 12px 30px rgba(17, 24, 39, 0.06);
+  }
+
+  .about-card > h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--about-text);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    position: relative;
+    display: inline-block;
+  }
+  .about-card > h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--about-terminal), transparent);
+    border-radius: 2px;
+  }
+
+  .about-card .card-body p {
+    color: var(--about-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+  }
+  .about-card .card-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .about-card .card-body ul li {
+    color: var(--about-muted);
+    font-size: 0.9rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .about-card .card-body ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--about-terminal);
+    font-weight: bold;
+  }
+
+  .skill-group {
+    margin-bottom: 1.25rem;
+  }
+  .skill-group:last-child {
+    margin-bottom: 0;
+  }
+  .skill-group-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    color: var(--about-terminal);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+  }
+  .skill-badge {
+    background: var(--about-bg-muted);
+    border: 1px solid var(--about-border);
+    color: var(--about-muted);
+    border-radius: 6px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    cursor: default;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .skill-badge:hover {
+    background: var(--about-terminal-soft);
+    border-color: var(--about-terminal);
+    color: var(--about-terminal);
+  }
+
+  .timeline-intro {
+    color: var(--about-muted);
+    font-size: 0.88rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.45rem;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--about-terminal), var(--about-border) 80%, transparent);
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.25rem;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.63rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--about-bg);
+    border: 2px solid var(--about-terminal);
+    transition: background 0.25s;
+  }
+  .timeline-item:hover::before {
+    background: var(--about-terminal);
+  }
+  .timeline-item-title {
+    color: var(--about-text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.4;
+  }
+  .timeline-item-title strong {
+    color: var(--about-terminal);
+    font-weight: 700;
+  }
+  .timeline-item-content {
+    color: var(--about-muted);
+    font-size: 0.875rem;
+    line-height: 1.85;
+  }
+  .timeline-item-content p {
+    margin-bottom: 0.75rem;
+  }
+  .timeline-item-content p:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-item-content img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    margin: 0.75rem auto;
+    display: block;
+    border: 1px solid var(--about-border);
+  }
+</style>
+
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="flex flex-col pt-4 gap-0 w-full">
+
+    
+    <section id="about-hero">
+      <div class="hero-eyebrow">// about me</div>
+      <div class="hero-role">Systems &amp; Embedded Engineer</div>
+      <p class="hero-tagline">意图驱动现实</p>
+    </section>
+
+    
+    <div id="about-md-source" style="display:none"><!-- 单页 -->
+<h2 id="关于我">关于我</h2>
+<p>我是一名偏系统方向的工程师，主要关注：</p>
+<ul>
+<li>从 自然语言/环境感知 =&gt; 系统决策 =&gt; 实际执行 的完整链路</li>
+<li>嵌入式系统、RTOS、Linux、控制与调度之间的连接</li>
+<li>如何把分散的技术能力，组织成一个“能工作的系统”</li>
+</ul>
+<h2 id="我在做什么当前关注">我在做什么（当前关注）</h2>
+<p>如何把人的意图，逐步转化为系统中的可执行行为。</p>
+<p>当前关注点：</p>
+<ul>
+<li>使用 LLM 做意图理解，并连接到实际系统执行</li>
+<li>分布式系统中的通信与协作</li>
+<li>MCU/ROTS，SoC/linux 系统抽象与统一</li>
+<li>简单但完整的“感知 =&gt; 理解 =&gt; 决策 =&gt; 执行”闭环</li>
+</ul>
+<p>我更倾向于从工程角度出发，做一些：可以跑起来、可以验证、可以逐步扩展的系统</p>
+<h2 id="技术能力">技术能力</h2>
+<ul>
+<li>系统与嵌入式
+<ul>
+<li>熟悉 ARM Cortex-M、RTOS、嵌入式 Linux 开发流程</li>
+<li>能独立完成简单的单板软硬件开发与调试</li>
+<li>理解调度、通信、资源管理等系统基础问题</li>
+</ul>
+</li>
+<li>控制与机器人
+<ul>
+<li>熟悉 PID / LQR / 最优控制</li>
+<li>有机器人相关项目经验</li>
+</ul>
+</li>
+<li>工程与系统设计
+<ul>
+<li>能从功能实现上升到系统设计</li>
+<li>有一定分布式系统实践经验</li>
+</ul>
+</li>
+</ul>
+<h2 id="技术路线">技术路线</h2>
+<p>如果回头看我的技术路线，其实并不是一开始就规划好的，而是由一系列当下看似随机、事后却高度连贯的选择拼起来的。</p>
+<h3 id="早期上世纪---2016-年">早期：<strong>上世纪 - 2016 年</strong></h3>
+<p>平平无奇的小学初中高中生活，游戏是无聊的学习生活中唯一能让人感到兴奋的东西。在互联网并不发达的年代，买盗版游戏光盘是获得新游戏唯一的方式。盗版游戏的不稳定或是夹杂的病毒流氓软件不知道多少次让家里的 windows XP <strong>番茄花园版</strong>崩溃，为了避免挨打我从小就练了一手装系统的技能。2010 年前后在我那个西北小县城，找电脑店装一次要 50 元，以至于后来邻居家的电脑一有问题也来找我。后来家里终于通网了，2Mbps 的 ADSL 向我灌输着各种和游戏相关的电脑知识，比如：为了和同学联机打红警去给电脑配网；我的世界(Minecraft)比较火的那段时间，自己搭了个游戏服务器；穿越火线有个 4 人的挑战模式，有段时间可以用 CE 修改器把 4 人房间改成 32 人&hellip;(这个做的有点过分了😂)。这些事情当时并不被当作“学习”，现在想想，这些实践可能就是对我计算机学习的一些最初的启蒙吧。</p>
+<h3 id="本科阶段2016---2020-年">本科阶段：<strong>2016 - 2020 年</strong></h3>
+<p>我来到南京读大学，父母为我选择了电气工程及其自动化专业，一个看起来“未来已经被规划好”的专业方向（供电局）。进入大学后一切都是新鲜的，我加入了学院学生会的宣传部(<strong>伏笔</strong>)。入学第一年除了数学物理基础课，居然大一上就开了 C 语言课。但是谭浩强的书和面向考试学习的编程把人折磨的不轻，诸如手算 <code>i++ + ++i</code> 之类的。</p>
+<p>国庆过完，学生会换届，我成为了宣传部部长，正好我们学院举行机器人大赛，我负责拍照、写稿。当时举着相机，看着别人做的小车能自己跑起来，第一次产生了非常强烈的震撼感：把一个东西“做出来”，而且真的能动、能跑，是一件非常有成就感的事情。一些种子，也是在那时候埋下的。</p>
+<p>大二下学期开了模拟电子技术和数字电子技术课程。在某一天的晚上，“想做点什么东西”的想法越来越强烈，也可能是网易云音乐听多了的年轻人日常深夜 emo ，但是在行动上我迈出了重要的一步：斥巨资(RMB 121.00，约等于 3 次 KFC)买了一个 51 单片机的开发板。这么多年过去了，我仍然觉得这是我最成功的一次深夜激情购物(2018/04/09-01:56)。</p>
+<img src="./blog/images/about/about-1.png" width="600" style="display: block; margin: auto;">
+<p>现在回头看，那是我技术路线中一个非常关键的节点。那时的我并不理解“架构”“抽象”“可维护性”，唯一的目标只有一个：<strong>让它跑起来</strong>。当时第一个完整做出来的东西是电子秤：应变片检测形变量，经 ADC 转换，结果显示在 LCD1602 上。代码并不是我完整写的，而是下载别人的工程，调通、改动、理解。在这个基础上，我觉得“自己行了”，可以参加学校的机器人比赛了，于是激情下单 STM32 开发板。对一个 51 都用的不是很顺畅的人来说，直接用 STM32 还是没那么容易的。虽然也磕磕绊绊的自己搞出了一个东西，但是比赛的结果只是拿了江苏省三等奖。现在回头看，那时候完全是靠一腔热血，代码是典型的新手风格，最多只能算是“会用单个外设”。但这仍然算是一个比较好的开始。</p>
+<p>因为前面的经验，我获得了参加全国大学生智能车汽车竞赛的资格。比赛指定使用 NXP 芯片，不幸的是换了平台，幸运的是有官方源码可参考。硬着头皮去读那些明显出自多年经验工程师之手的代码，反而学到了很多东西。芯片在变，复杂度在上升，但真正发生变化的是我的关注点：为了实现一个控制效果，<strong>芯片是载体，核心是控制算法</strong>。外设、RTOS、调度、算法，本质上是在为“系统行为”服务。</p>
+<p>同年，智能车竞赛结束后，正好赶上了电子设计竞赛。电赛是综合的考验，几天的时间要快速的出方案，验证，迭代。我和队友的一起努力让我们的作品有着还不错的性能，一度闯入国赛进入总测评争夺全国一等奖，但是在总测评的时候坏掉了，这是整个本科阶段唯一一个比较遗憾的事情，本可以但没做到。</p>
+<h3 id="工作初期工程与现实">工作初期：工程与现实</h3>
+<p>本科毕业后，我进入一家小公司做单板软硬件开发，偏物联网方向，第一次在真实项目中使用 FreeRTOS。也是在这时，我非常清晰地感受到：“能写代码”和“能设计系统”之间，隔着一道非常明显的鸿沟。我开始认真思考职业路径，逐渐发现嵌入式开发的一条常见路线：从 STM32 出发，走向 Linux 和更复杂的软件系统。于是我开始有意识地补计算机基础，这一步对我来说意义很大。</p>
+<p>新冠 1 年，各种形势都很严峻，在不知道未来该干什么的情况下或许先考研看看，于是考了控制专业。但是看过职业规划，觉得做嵌入式学一点计算机的知识是必要的，但是 linux 确实很劝退，于是我从我熟悉的 STM32 开始，尝试学习 RTOS，我现在感觉不幸的是：我一开始居然就对着野火的《教你手把手实现 rt-thread》开始学习，果然学习这个也很劝退。凭着一腔热血，我开始从原理入手，找了不少操作系统课程来看，第一个系统性看完的是哈工大李志军的《操作系统》。</p>
+<p>2022 年，比较幸运考上了，考上了以后 8 月份才开学，于是前半年去一家公司实习，一开始写裸机程序，这个公司领导和同事们都很不错，当我提出想用 rt-thread 直接上项目时，领导说可以试试。这段时间是我成长最快的阶段之一。带着一点操作系统的理论基础，直接在项目中使用 RT-Thread，两三个月下来，已经可以独立设计比较复杂的业务逻辑。之后我开始反过来补原理，也是在这一阶段，看到了南京大学 JYY 的操作系统课程。这门课对我后来的系统观影响非常大，甚至可以说，是我从“会用系统”走向“理解系统”的一个关键节点。</p>
+<h3 id="硕士阶段系统化延伸">硕士阶段：系统化延伸</h3>
+<p>研究生阶段重新和同学一起做机器人项目。想清楚毕业后要面对的是现实的工作选择之后，学习时间就必须做取舍。期间，继续去学习操作系统的东西，从自己最熟悉的 STM32 出发，学习 rt-thread 和操作系统原理。边学边用，研二整体相对自由，导师干预不多，我也在这段时间里做了不少“小而完整”的东西，尝试了一些新方向，顺便也赚了点零花钱。期间，因为本身是控制专业，做机器人方向，从 RTOS 到 Linux、从 MCU 到 SoC、从“写功能”到“搭系统”，这条路线几乎是自然延伸出来的。到 2024 年中，开始正式找工作，也不可避免地走了一遍“大厂路径”：背八股、刷 LeetCode。年底，工作落实，学位论文提交，研究生阶段也顺利收尾。</p>
+<h3 id="当前ai-时代">当前：AI 时代</h3>
+<p>从学生到职场人的再次切换。毕业后的人生第一课很朴素：找工作、赚钱、对结果负责。回头看学生时代，几乎是一个“低配财富自由”的状态——父母健康、没有家庭负担、时间充裕、想法很多、衣食无忧(市中心地段的宿舍 + 一月 2000 的生活费几乎全都用来吃了)。</p>
+<p>回头看技术史，像贝尔实验室那样的时期，总会让人产生一种错觉：几个人凑在一起，有一点想法，用代码把它们实现出来，就能改变世界。那当然和时代、资源、位置有关，但本质上，他们做的事并不复杂——把想法迅速变成可运行的东西。</p>
+<p>有意思的是，在今天这个 AI 时代，这种“把想法落地”的门槛反而被大幅拉低了。验证一个思路是否可行，不再一定需要完整掌握所有底层细节，有时只需要一个清晰的问题，加上一点耐心，就能快速得到反馈。AI 应用是我目前在探索的方向，因为它真的降低了”把想法变成可运行的东西”的门槛。这件事从第一次让小车跑起来一样，只不过现在的工具变了。</p>
+<p>这并不意味着努力变得廉价了，而是意味着：在精力有限的前提下，选择什么去投入，变得比”会不会”更重要。</p>
+</div>
+
+    
+    <section id="section-intro" class="about-card">
+      <h2>关于我</h2>
+      <div class="card-body"></div>
+    </section>
+
+    
+    <section id="section-focus" class="about-card">
+      <h2>我在做什么</h2>
+      <div class="card-body"></div>
+    </section>
+
+    
+    <section id="section-skills" class="about-card">
+      <h2>技术能力</h2>
+      <div id="skills-container"></div>
+    </section>
+
+    
+    <section id="section-timeline" class="about-card">
+      <h2>技术路线</h2>
+      <div id="timeline-container"></div>
+    </section>
+
+    <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+  </div>
+
+<script>
+(function () {
+  
+  function findSectionNodes(root, headingText) {
+    var headings = root.querySelectorAll('h2');
+    var target = null;
+    headings.forEach(function (h) {
+      if (h.textContent.indexOf(headingText) !== -1) target = h;
+    });
+    if (!target) return [];
+    var nodes = [];
+    var node = target.nextSibling;
+    while (node && node.nodeName !== 'H2') {
+      nodes.push(node.cloneNode(true));
+      node = node.nextSibling;
+    }
+    return nodes;
+  }
+
+  
+  function fillCardBody(sectionEl, nodes) {
+    var body = sectionEl.querySelector('.card-body');
+    if (!body) return;
+    nodes.forEach(function (n) { body.appendChild(n); });
+  }
+
+  
+  function buildSkills(source) {
+    var nodes = findSectionNodes(source, '技术能力');
+    var container = document.getElementById('skills-container');
+    if (!container || nodes.length === 0) return;
+
+    var scratch = document.createElement('div');
+    nodes.forEach(function (n) { scratch.appendChild(n); });
+    var outerUl = scratch.querySelector('ul');
+    if (!outerUl) return;
+
+    outerUl.querySelectorAll(':scope > li').forEach(function (catLi) {
+      
+      var labelText = '';
+      catLi.childNodes.forEach(function (child) {
+        if (child.nodeType === Node.TEXT_NODE) labelText += child.textContent;
+      });
+      labelText = labelText.trim();
+
+      var group = document.createElement('div');
+      group.className = 'skill-group';
+
+      var labelEl = document.createElement('div');
+      labelEl.className = 'skill-group-label';
+      labelEl.textContent = labelText;
+      group.appendChild(labelEl);
+
+      var badgesEl = document.createElement('div');
+      badgesEl.className = 'skill-badges';
+
+      var subUl = catLi.querySelector('ul');
+      if (subUl) {
+        subUl.querySelectorAll('li').forEach(function (skillLi) {
+          var badge = document.createElement('span');
+          badge.className = 'skill-badge';
+          badge.textContent = skillLi.textContent.trim();
+          badgesEl.appendChild(badge);
+        });
+      }
+
+      group.appendChild(badgesEl);
+      container.appendChild(group);
+    });
+  }
+
+  
+  function buildTimeline(source) {
+    var nodes = findSectionNodes(source, '技术路线');
+    var container = document.getElementById('timeline-container');
+    if (!container || nodes.length === 0) return;
+
+    
+    var introNodes = [];
+    var i = 0;
+    while (i < nodes.length && nodes[i].nodeName !== 'H3') {
+      introNodes.push(nodes[i]);
+      i++;
+    }
+
+    if (introNodes.length > 0) {
+      var introEl = document.createElement('div');
+      introEl.className = 'timeline-intro';
+      introNodes.forEach(function (n) { introEl.appendChild(n); });
+      container.appendChild(introEl);
+    }
+
+    var timeline = document.createElement('div');
+    timeline.className = 'timeline';
+
+    while (i < nodes.length) {
+      if (nodes[i].nodeName === 'H3') {
+        var item = document.createElement('div');
+        item.className = 'timeline-item';
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'timeline-item-title';
+        titleEl.innerHTML = nodes[i].innerHTML;
+        item.appendChild(titleEl);
+
+        var contentEl = document.createElement('div');
+        contentEl.className = 'timeline-item-content';
+        i++;
+        while (i < nodes.length && nodes[i].nodeName !== 'H3') {
+          contentEl.appendChild(nodes[i].cloneNode(true));
+          i++;
+        }
+        item.appendChild(contentEl);
+        timeline.appendChild(item);
+      } else {
+        i++;
+      }
+    }
+
+    container.appendChild(timeline);
+  }
+
+  
+  function setupScrollReveal() {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.about-card').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  function init() {
+    var source = document.getElementById('about-md-source');
+    if (!source) return;
+
+    
+    var introNodes = findSectionNodes(source, '关于我');
+    fillCardBody(document.getElementById('section-intro'), introNodes);
+
+    
+    var focusNodes = findSectionNodes(source, '我在做什么');
+    fillCardBody(document.getElementById('section-focus'), focusNodes);
+
+    
+    buildSkills(source);
+
+    
+    buildTimeline(source);
+
+    
+    setupScrollReveal();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

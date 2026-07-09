@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[project] 搭载于密闭环境检测无人机的环境数据采集与上报模块软件开发 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[project] 搭载于密闭环境检测无人机的环境数据采集与上报模块软件开发</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2024-08-28</p>
+        
+          <p>🔄 2024-08-28</p>
+        
+        <p>⌚ Reading time: 6 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E9%A1%B9%E7%9B%AE'
+    class="site-chip border p-1 text-center transition-colors">> 项目</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <h2 id="0-介绍">0. 介绍</h2>
+<img src="./images/1-data-collector-rt/data-collector-rt-3.png" width="300" style="display: block; margin: auto;">
+<p>这是一个物联网项目，合作公司的主要业务是使用无人机进行密闭环境的无人检测，如船舶、大型锅炉、化工厂储罐等内部观察检测。该项目需要开发一套用于密闭环境近观检测的无人机系统，涵盖硬件设计、软件开发与系统集成。该系统由无人机端、地面监控端和数据传输与系留供电模块组成，专门用于密闭空间内的精细检测任务。无人机端搭载高清相机、飞控系统，以及<strong>一个基于 STM32F407 的环境数据采集与上报模块</strong>。该模块通过外挂的 W5500 芯片与无人机局域网内的机载工控机进行通信，采用 UDP 协议实现数据传输。</p>
+<p><strong>我负责环境数据采集与上报模块的所有软件功能开发</strong>。</p>
+<p><a href="https://github.com/xym-ee/data-collector-rt"><strong>源码仓库</strong></a></p>
+<h2 id="1-硬件方案">1. 硬件方案</h2>
+<img src="./images/1-data-collector-rt/data-collector-rt-1-2.png" width="200" style="display: block; margin: auto;">
+<p>此项目我不负责硬件设计部分，但这里也简单介绍一下硬件方案。</p>
+<ul>
+<li>主控芯片：STM32F407VET6</li>
+<li>网络芯片：W5500</li>
+</ul>
+<p>W5500(<a href="https://atta.szlcsc.com/upload/public/pdf/source/20230714/E10C32B058E0BA54FCE1C1556BE10C07.pdf">datasheet</a>)是一款全硬件 TCP/IP 协议栈以太网控制器，内部集成了以太网数据链路层（MAC）和以太网物理层（PHY），内嵌的 8 个独立硬件 Socket 可以进行 8 路独立通信。使用标准 4 线 SPI 接口与主机进行通信。</p>
+<p>传感器部分</p>
+<ul>
+<li>1 个高精度温度传感器 MCP9808
+<ul>
+<li>IIC 接口</li>
+</ul>
+</li>
+<li>2 个电化学可燃气体浓度传感器
+<ul>
+<li>UART 接口</li>
+</ul>
+</li>
+<li>3 个 ToF 距离传感器
+<ul>
+<li>IIC 接口</li>
+</ul>
+</li>
+</ul>
+<p>此外，还有共 20 个 GPIO 用来控制灯光、电源的开关。</p>
+<table>
+<thead>
+<tr>
+<th>激光测距传感器</th>
+<th>可燃气体浓度传感器</th>
+<th>高精度温度传感器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="./images/1-data-collector-rt/data-collector-rt-2-2.png" width="200" style="display: block; margin: auto;"></td>
+<td><img src="./images/1-data-collector-rt/data-collector-rt-2-3.png" width="100" style="display: block; margin: auto;"></td>
+<td><img src="./images/1-data-collector-rt/data-collector-rt-2-4.png" width="200" style="display: block; margin: auto;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-软件开发情况总体介绍">2. 软件开发情况总体介绍</h2>
+<h3 id="rtos-选择-rt-thread">RTOS 选择: rt-thread</h3>
+<p>在软件开发上，考虑到此模块外接的设备较多并且需要网络协议栈，裸机开发可能会比较棘手，因此基于 RTOS 完成开发。</p>
+<p>比较常用的 RTOS 是 freeRTOS ，我学习的第一个是 rt-thread，rtt 除了实时内核，对设备驱动也做了抽象，有更易调用的方法和软件包，因此基于 rt-thread 开发该模块的软件。我看过一些 freeRTOS 项目的源码，外设驱动大多是和裸机操作一样基于 HAL 库来完成。rtt 设计一套统一的 api ，和 linux 类似使用 open close read write 来操作设备，此外我更喜欢 rtt 源码风格，其和 linux 风格类似使用全小写+_的方式。</p>
+<h3 id="软件开发流程">软件开发流程</h3>
+<p>rtt 可以使用 Keil、IAR、RT-Thread Studio、makefile 来开发，我使用 Keil 来开发。整个软件的开发流程</p>
+<pre tabindex="0"><code>BSP 开发 ---&gt;  传感器驱动开发  -&gt; 传感器驱动测试    ---&gt; 业务功能开发 -&gt; 业务功能测试 -&gt; 整机测试 -&gt; 生产环境测试
+          \--&gt; 网络通信功能开发 -&gt; 网络通信功能测试 -/ 
+</code></pre><p>rt-thread 现在也比较成熟了，对 arm cortex-m 内核、STM32 系列支持的都挺好，不需要做 kernel 的移植和外设驱动的开发了。但是这个板是自己设计的，因此还是要做一下板级适配，需要适配的地方也不多，参考<a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/tutorial/make-bsp/stm32-bsp/STM32%E7%B3%BB%E5%88%97BSP%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B">官方说明文档关于 BSP 开发的部分</a></p>
+<ul>
+<li>链接脚本和 <code>board.h</code> 中，指定 RAM 和 ROM 的大小</li>
+<li>使用 CubeMX 配置时钟和引脚复用</li>
+<li>添加要使用的外设的 Kconfig 选项</li>
+<li>适配项目构建脚本和工程配置模板</li>
+</ul>
+<p>rtt 的 BSP 相比于 linux 还是要简单的多，rtt 在一些设计上借鉴了 linux，比如说使用 Kconfig 来配置内核编译选项，使用 menuconfig 工具来配置需要使用的外设，这也使得熟悉 rtt 后上手 linux 也会更容易一些。</p>
+<p>BSP 准备好以后，下载到目标板，msh 就能看到输出内容了，一些交互指令也可以使用了。后面的网络通信功能和传感器驱动开发可以并行进行。</p>
+<h3 id="业务功能实现方式">业务功能实现方式</h3>
+<p>此项目业务功能并不复杂，读各个传感器的数据然后通过网络发送就可以了。采用了多线程完成，每个线程负责不同传感器的数据采集或设备控制。所有数据和指令存储在一个全局的数据结构体中，通过各线程的读写实现了高效的数据通信。UDP 通信分为发送和接收两个线程，使用两个端口进行数据交互，简化了程序设计，并确保了实时数据的可靠传输。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*-------------------- 电源状态 -------------------*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> {
+</span></span><span style="display:flex;"><span>    POWER_OFF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    POWER_ON,
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">power_status_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> out_24v_en;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> pc_12v_en;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> cam_12v_en;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> ser_5v_en1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> ser_5v_en2;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> ser_5v_en3;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> ser_5v_en4;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> ser_5v_en5;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> iic_5v_en1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_status_t</span> iic_5v_en2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> voltage_24v;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> voltage_led_18v;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> voltage_cam_12v;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> voltage_pc_12v;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> voltage_5v; 
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">power_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*-------------------- 灯光状态 -------------------*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> {
+</span></span><span style="display:flex;"><span>    LIGHT_OFF <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    LIGHT_ON,
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">light_status_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> {
+</span></span><span style="display:flex;"><span>    LIGHT_17V <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    LIGHT_17_5V,
+</span></span><span style="display:flex;"><span>    LIGHT_18V,
+</span></span><span style="display:flex;"><span>    LIGHT_18_5V,
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">light_level_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_level_t</span>   level;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span>      protect;    
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light0;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light2;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light3;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light4;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light5;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span>  light6;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_status_t</span> light7;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">light_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*-------------------- 传感器状态 -------------------*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_int16_t</span> temp;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint16_t</span> gas1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint16_t</span> gas2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint16_t</span> distance1;      <span style="color:#75715e">/* 单位 cm */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint16_t</span> distance2;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint16_t</span> distance3;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">seneor_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*------------------------------------------------------------------*/</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">power_t</span> power;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">light_t</span> light;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">seneor_t</span> sensor;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">status_t</span>;
+</span></span></code></pre></div><p><code>status_t status</code> 为全局变量，存放有关该模块的所有数据。</p>
+<p>任务线程的设计：</p>
+<ul>
+<li>气体传感器 2 个，接在 2 个 UART 上，每个传感器 1 个线程；</li>
+<li>距离传感器 3 个，接在 1 个 IIC 总线上，在 1 个线程中读取数据；</li>
+<li>温度传感器 1 个，接在 1 个 IIC 总线上，在 1 个线程中读写数据；</li>
+<li>灯光控制1个线程</li>
+<li>电源控制1个线程。</li>
+</ul>
+<p>udp 接收与发送处于简化程序设计的考虑，使用了 2 个端口</p>
+<ul>
+<li>5500 端口：模块作为 UDP 服务器，只向上位机发送传感器数据</li>
+<li>5501 端口：模块作为 UDP 客户端，只接收上位机的控制数据</li>
+</ul>
+<p>使用不同的端口来区分发送和接收一些优点</p>
+<ul>
+<li>调试方便，分工清晰，收发逻辑分开设计</li>
+<li>不在一个端口减小数据冲突的可能性</li>
+</ul>
+<p>大概工作流程，采集传感器数据的线程不断读取数据写入 <code>status</code>。灯光电源控制线程不断从<code>status</code> 读数据，然后根据指令进行控制。udp 发送线程循环发送<code> status</code> 数据，udp 接收线程接收上位机发送的数据，然后写入 <code>status</code>。</p>
+<h2 id="3传感器驱动与网络功能实现">3.传感器驱动与网络功能实现</h2>
+<h3 id="uart-接口的传感器驱动">UART 接口的传感器驱动</h3>
+<p>两个可燃气体浓度传感器为 uart 接口，根据手册使用串口调试助手配置发送频率 1hz，波特率 9600，一个数据帧为 10 byte。数据格式</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">byte[0]</th>
+<th style="text-align:center">byte[1]</th>
+<th style="text-align:center">byte[2]</th>
+<th style="text-align:center">byte[3]</th>
+<th style="text-align:center">byte[4]</th>
+<th>byte[5]</th>
+<th>byte[6]</th>
+<th>byte[7]</th>
+<th>byte[8]</th>
+<th>byte[9]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">FF</td>
+<td style="text-align:center">01</td>
+<td style="text-align:center">07</td>
+<td style="text-align:center">02</td>
+<td style="text-align:center">HH</td>
+<td>LL</td>
+<td>00</td>
+<td>00</td>
+<td>00</td>
+<td>SUM</td>
+</tr>
+</tbody>
+</table>
+<p>byte[3] 为分辨率</p>
+<ul>
+<li>0x00  1</li>
+<li>0x01  0.1</li>
+<li>0x02  0.01</li>
+<li>0x03  0.001</li>
+</ul>
+<p>如一次数据为 <code>FF 01 07 02 00 55 00 00 00 5E</code>，那么气体浓度为 <code>((0x00&lt;&lt;8) | 0x55 )*0.01 = 0.85 ppm</code></p>
+<p>串口消息接收使用 DMA + 串口空闲中断的方式。使用 rtt 的 uart 驱动框架来实现通信。</p>
+<p>使用 rtt 提供的<strong>消息队列机制</strong>来实现串口接收中断回调函数和接收数据处理线程的同步。当一批数据接收完成，进入接收中断回调函数中发送一个消息。数据处理线程阻塞等待接收消息队列中的消息。然后处理数据，并写入 <code>status</code> 全局变量中。</p>
+<p>完整的源码<a href="https://github.com/xym-ee/data-collector-rt/blob/main/applications/sensor/gas1.c">data-collector-rt/applications/sensor
+/gas1.c</a>，简化的代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* 接收数据回调函数 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">rt_err_t</span> <span style="color:#a6e22e">gas1_input</span>(<span style="color:#66d9ef">rt_device_t</span> dev, <span style="color:#66d9ef">rt_size_t</span> size)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* msg 定义和赋值 */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_mq_send</span>(<span style="color:#f92672">&amp;</span>rx_mq, <span style="color:#f92672">&amp;</span>msg, <span style="color:#66d9ef">sizeof</span>(msg));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 错误检查 */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 数据处理线程 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">gas1_rx_thread</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> rx_msg msg;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_err_t</span> result;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint32_t</span> rx_length;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> rx_buffer[<span style="color:#ae81ff">12</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> <span style="color:#f92672">*</span>byte <span style="color:#f92672">=</span> rx_buffer;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_memset</span>(<span style="color:#f92672">&amp;</span>msg, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(msg));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 从消息队列中读取消息*/</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_mq_recv</span>(<span style="color:#f92672">&amp;</span>rx_mq, <span style="color:#f92672">&amp;</span>msg, <span style="color:#66d9ef">sizeof</span>(msg), RT_WAITING_FOREVER);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (result <span style="color:#f92672">==</span> RT_EOK)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/* 从串口读取数据*/</span>
+</span></span><span style="display:flex;"><span>            rx_length <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_device_read</span>(msg.dev, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">&amp;</span>rx_buffer[data_count], msg.size);
+</span></span><span style="display:flex;"><span>            data_count <span style="color:#f92672">=</span> data_count <span style="color:#f92672">+</span> rx_length;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (byte[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0xFF</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (data_count <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span>) 
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    status.sensor.gas1 <span style="color:#f92672">=</span>  (byte[<span style="color:#ae81ff">4</span>]<span style="color:#f92672">&lt;&lt;</span><span style="color:#ae81ff">8</span> <span style="color:#f92672">|</span> byte[<span style="color:#ae81ff">5</span>]);
+</span></span><span style="display:flex;"><span>                    data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                data_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="iic-传感器的驱动开发">IIC 传感器的驱动开发</h3>
+<p>此项目有两类传感器，1 个温度传感器 ，3 个距离传感器。这两个传感器使用类似，都先发送一个要读的寄存器地址，然后读值就行。这里以温度传感器为例。型号为 MCP9808 (<a href="https://atta.szlcsc.com/upload/public/pdf/source/20180326/C129490_430B95D87F5D4C35CB02E453C03C190F.pdf">datasheet</a>)。</p>
+<p>程序上也不复杂，轮询查询的模式，使用 rtt 的 I2C 接口来完成通信。完整的源码<a href="https://github.com/xym-ee/data-collector-rt/blob/main/applications/sensor/iic_dev.c">data-collector-rt/applications/sensor/iic_dev.c</a>，简化的代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">temperature1_thread</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> recv_buf[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> send_buf[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> {MCP9808_MODE_TA};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> temperature <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_memset</span>(recv_buf, <span style="color:#ae81ff">0x00</span>, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 发送要读的寄存器的地址 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_i2c_master_send</span>(i2c_bus, MCP9808_ADDR, RT_I2C_WR, send_buf, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 读寄存器 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_i2c_master_recv</span>(i2c_bus, MCP9808_ADDR, RT_I2C_RD, recv_buf, <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 高字节高位3bit为标志位 */</span>
+</span></span><span style="display:flex;"><span>        recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x1F</span>;       <span style="color:#75715e">//Clear flag bits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 高字节 bit4 为符号位 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ((recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x10</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x10</span>)         <span style="color:#75715e">//TA &lt; 0°C
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        { 
+</span></span><span style="display:flex;"><span>            recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0F</span>;   <span style="color:#75715e">//Clear SIGN
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            temperature <span style="color:#f92672">=</span> <span style="color:#ae81ff">256.0</span> <span style="color:#f92672">-</span> (recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">16.0</span> <span style="color:#f92672">+</span> recv_buf[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">16.0</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>    <span style="color:#75715e">//TA ³ 0°C
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        {
+</span></span><span style="display:flex;"><span>            temperature <span style="color:#f92672">=</span> (recv_buf[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">16.0</span> <span style="color:#f92672">+</span> recv_buf[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">16.0</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        status.sensor.temp <span style="color:#f92672">=</span> temperature<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_thread_mdelay</span>(<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>参考手册的 24 页，读环境温度寄存器，地址为 0x05，按照 26 页的读写时序图完成通信。</p>
+<h3 id="网络通信相关功能的开发">网络通信相关功能的开发</h3>
+<p>rtt 本事是有网络组件的，提供了 SAL 套接字抽象层提供了 socket 编程接口，这使得在 MCU 上进行网络应用开发和在 linux 上的没有区别。更多关于 rtt 的网络组建的介绍参考 <a href="https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/programming-manual/net/net_introduce">rt-thread 文档中心-网络组件</a>。</p>
+<p>除了编程接口，rtt 也有一个 netdev 网卡层。</p>
+<img src="https://www.rt-thread.org/document/site/rt-thread-version/rt-thread-standard/programming-manual/net/docs/network_frame.jpg" width="350" style="display: block; margin: auto;">
+<p>我使用了 rtt 的 <a href="https://github.com/RT-Thread-packages/wiznet">wiznet 软件包</a>，基于 WIZnet 官网 ioLibrary_Driver 代码库的移植实现，对接 RT-Thread SAL 套接字抽象层。不需要做太多的协议栈上的移植，使用起来比较方便</p>
+<p>w5500 使用 SPI 总线通信，因此需要在硬件上做一些配置，此项目使用了 spi2，w5500设备注册到 spi2 总线上，并指定复位引脚。唯一要做的就是指定通信用的总线设备的名字，设备注册函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">rt_err_t</span> <span style="color:#a6e22e">rt_hw_spi_device_attach</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>bus_name, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>device_name, GPIO_TypeDef <span style="color:#f92672">*</span>cs_gpiox, <span style="color:#66d9ef">uint16_t</span> cs_gpio_pin);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">rt_hw_spi_device_attach</span>(<span style="color:#e6db74">&#34;spi2&#34;</span>, <span style="color:#e6db74">&#34;spi20&#34;</span>, GPIOB, GPIO_PIN_12);
+</span></span></code></pre></div><p>netdev 网卡层提供了常用的网络命令如 ping ifconfig netstat 等。这部分配置好以后，插上网线，就已经可以 ping 通一个网段的主机了。然后就可以直接使用 socket 的 api 来进行应用开发。</p>
+<ul>
+<li><a href="https://github.com/xym-ee/data-collector-rt/blob/main/applications/udpserver.c">udp server 源码</a></li>
+<li><a href="https://github.com/xym-ee/data-collector-rt/blob/main/applications/udpclient.c">udp client 源码</a></li>
+</ul>
+<p>udp server 的核心代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">udpserver_thread_entry</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> bytes_read;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>recv_data;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">socklen_t</span> addr_len;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in server_addr, client_addr;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 分配接收用的数据缓冲 */</span>
+</span></span><span style="display:flex;"><span>    recv_data <span style="color:#f92672">=</span> <span style="color:#a6e22e">rt_malloc</span>(BUFSZ); <span style="color:#75715e">/* 错误检查 */</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 创建一个socket，类型是SOCK_DGRAM，UDP类型 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(AF_INET, SOCK_DGRAM, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 错误检查、资源释放、错误日志输出、程序退出 */</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 初始化服务端地址 */</span>
+</span></span><span style="display:flex;"><span>    server_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    server_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(UDP_RECIVE_PORT);
+</span></span><span style="display:flex;"><span>    server_addr.sin_addr.s_addr <span style="color:#f92672">=</span> INADDR_ANY;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rt_memset</span>(<span style="color:#f92672">&amp;</span>(server_addr.sin_zero), <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(server_addr.sin_zero));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 绑定socket到服务端地址 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">bind</span>(sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>server_addr, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> sockaddr)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 错误检查、资源释放、错误日志输出、程序退出 */</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    addr_len <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> sockaddr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rt_kprintf</span>(<span style="color:#e6db74">&#34;UDPServer Waiting for client on port 5500...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> msg_length <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 来自上位机的数据的读取 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 从sock中收取最大BUFSZ - 1字节数据 */</span>
+</span></span><span style="display:flex;"><span>        bytes_read <span style="color:#f92672">=</span> <span style="color:#a6e22e">recvfrom</span>(sock, recv_data, BUFSZ <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>client_addr, <span style="color:#f92672">&amp;</span>addr_len);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*------------------------------- 帧头判断 ------------------------------------*/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ( (recv_data[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x55</span>) <span style="color:#f92672">&amp;&amp;</span> (recv_data[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">==</span><span style="color:#ae81ff">0x55</span>) )
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            msg_length <span style="color:#f92672">=</span> recv_data[<span style="color:#ae81ff">3</span>];  <span style="color:#75715e">/* byte3为数据长度 */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*------------------------------- 求和校验 ------------------------------------*/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">rt_uint8_t</span> sum <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum_check</span>((<span style="color:#66d9ef">rt_uint8_t</span><span style="color:#f92672">*</span>)recv_data, <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> msg_length);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (recv_data[<span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> msg_length] <span style="color:#f92672">==</span> sum)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">switch</span>(recv_data[<span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/* 传入第一个数据的起始地址 */</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">case</span> RMSG_ID_POWER : <span style="color:#a6e22e">rmsg_power_handle</span>((<span style="color:#66d9ef">rt_uint8_t</span><span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>recv_data[<span style="color:#ae81ff">4</span>])); <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">case</span> RMSG_ID_LIGHT : <span style="color:#a6e22e">rmsg_lighr_handle</span>((<span style="color:#66d9ef">rt_uint8_t</span><span style="color:#f92672">*</span>)(<span style="color:#f92672">&amp;</span>recv_data[<span style="color:#ae81ff">4</span>])); <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">default</span> <span style="color:#f92672">:</span> ; <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">rt_kprintf</span>(<span style="color:#e6db74">&#34;sum error~</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);            
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">rt_kprintf</span>(<span style="color:#e6db74">&#34;head error~</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">closesocket</span>(sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rt_free</span>(recv_data);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>udp client 的核心代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">udpclient_thread_entry</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>parameter)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">rt_uint8_t</span> send_data[<span style="color:#ae81ff">20</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0x55</span>, <span style="color:#ae81ff">0x55</span>};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> hostent <span style="color:#f92672">*</span>host;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in server_addr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    host <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> hostent <span style="color:#f92672">*</span>) <span style="color:#a6e22e">gethostbyname</span>(UDP_SERVER_IP);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 创建一个socket，类型是SOCK_DGRAM，UDP类型 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(AF_INET, SOCK_DGRAM, <span style="color:#ae81ff">0</span>)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* 错误检查、资源释放、错误日志输出、程序退出 */</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 初始化预连接的服务端地址 */</span>
+</span></span><span style="display:flex;"><span>    server_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    server_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(UDP_SERVER_PORT);
+</span></span><span style="display:flex;"><span>    server_addr.sin_addr <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>((<span style="color:#66d9ef">struct</span> in_addr <span style="color:#f92672">*</span>)host<span style="color:#f92672">-&gt;</span>h_addr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rt_memset</span>(<span style="color:#f92672">&amp;</span>(server_addr.sin_zero), <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(server_addr.sin_zero));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 发送数据 */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*----------------------------------  电压信息上报 --------------------------------*/</span>
+</span></span><span style="display:flex;"><span>        send_data[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> SMSG_ID_VOLTAGE;     <span style="color:#75715e">/* 发送消息ID   */</span>
+</span></span><span style="display:flex;"><span>        send_data[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;                   <span style="color:#75715e">/* 发送数据长度 */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* ,,,, 其他数据 */</span>
+</span></span><span style="display:flex;"><span>        send_data[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum_check</span>(send_data, <span style="color:#ae81ff">12</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sendto</span>(sock, send_data, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">0</span>, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>server_addr, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> sockaddr));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*----------------------------------  电源与灯光开启状态上报 --------------------------------*/</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//******* 其他所有的数据都是类似的发送
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">rt_thread_mdelay</span>(<span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* 关闭这个socket */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//closesocket(sock);    
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>udp server 接收上位机发送的控制指令，udp client 向上位机发送所有的数据。</p>
+<p>出于编程的方便和 MCU 性能的考虑，这里发送和接收的都是用的原始的二进制数据，协议格式也比较简单，我设计好了以后把协议文档交给上位机的工程师，然后使用网络调试助手就能调试了。</p>
+<h2 id="4可以改进的地方">4.可以改进的地方</h2>
+<h3 id="软件分层传感器驱动框架">软件分层、传感器驱动框架</h3>
+<p>关于软件的分层设计。前面写着传感器驱动，但实际上传感器驱动和应用还是混杂在了一个线程里了，我只是使用了 rtt 的片内外设驱动接口，并没有给传感器抽象出 read 接口。当然这几个传感器通信都比较简单。</p>
+<p>按照 linux 驱动的概念，外设驱动即总线驱动，传感器驱动即设备驱动，rtt 设计了 sensor 设备框架，抽象出了一些通用的 api 如</p>
+<ul>
+<li><code>rt_device_find()</code> 根据名字获得传感器设备句柄</li>
+<li><code>rt_device_read()</code> 读传感器值</li>
+<li><code>rt_device_control()</code> 传感器控制，如精度</li>
+</ul>
+<p>可以将传感器对接到此框架中，实现真正的驱动和应用分离，将来更换传感器也无需修改应用代码。我实现的温度传感器MCP9808的驱动 <a href="https://github.com/xym-ee/rtt_sensor_mcp9808">rtt_sensor_mcp9808</a>。</p>
+<h3 id="共享内存读写的保护">共享内存读写的保护</h3>
+<p>这里使用共享内存在多线程之间传递数据。于情于理来讲，都要用互斥锁保护这块数据，放置出现坏值。</p>
+<p>但是没有使用互斥锁好像也没出现问题，分析原因。</p>
+<h3 id="代码结构上">代码结构上</h3>
+<p>代码结构的优化，气体浓度传感器使用了两个串口，目前的做法是每个传感器一个线程，代码直接复制了两份，放在了两个 .c 里，这两份代码逻辑完全相同，甚至内容也几乎相同。</p>
+<p>可以考虑给线程入口传入参数来区别，使用一份代码完成两个串口的读和写。</p>
+<h2 id="5开发中-bug-总结">5.开发中 bug 总结</h2>
+<p>虽然感觉写起来好像挺轻松😂，但是实际调试的时候还是遇到了不少问题，尤其是网络包的适配。</p>
+<p>一个有意思的事情，调试的时候模块插在路由器能和主机通信，但是现场使用的是交换机，总是会提示已经存在一个没关闭的连接，。然后后面测试发现通电的时候连路由器，然后换到交换机上，也是可以正常通信的。</p>
+<p>然后单步调试，发现网卡初始化的时候回连接 rt-thread 的官网测试网络是否工作正常，模块连路由器能访问呢外网，连交换机没法访问，然后就一直尝试连接，😂。这个问题折腾了好几天，后来才发现 menuconfig 中可以配置是否通过外网测试网络连接正常，去掉这个选项就好了。</p>
+<h2 id="6需要深入学习的地方">6.需要深入学习的地方</h2>
+<p>关于网络部分，底层用的是 lwip 协议栈。以及网卡如何一层层抽象，对接的 socket 接口，我觉得都有学习价值。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/data-collector-rt.html";
+    this.page.identifier = "\/blog\/data-collector-rt.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[project] 使用麦克纳姆轮底盘的一些机器人运动控制项目 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[project] 使用麦克纳姆轮底盘的一些机器人运动控制项目</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2024-08-30</p>
+        
+          <p>🔄 2024-08-30</p>
+        
+        <p>⌚ Reading time: 2 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E9%A1%B9%E7%9B%AE'
+    class="site-chip border p-1 text-center transition-colors">> 项目</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <h2 id="0简介">0.简介</h2>
+<p>这一部分总结一下我以前做过的使用麦克纳姆轮底盘的机器人的一些小项目。</p>
+<p>底盘运动控制，麦克纳姆轮底盘分析，运动学解算，4 个电机速度和空间速度的关系。使用遥控器控制实现底盘的平移和旋转运动</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/mecanum-chassis-1.mp4" type="video/mp4">
+</video>
+<p>在此基础上，加一个位置控制器，实现空间位置的跟踪控制，空间目标位置可以使用 UWB 定位或者视觉检测 airtag 等，这里给一个识别 airtag 的演示，使用 openmv 的到标签的距离，并控制底盘保持距离恒定。</p>
+<video controls style="margin: 0 auto;" width="240">
+  <source src="./videos/mecanum-chassis-3.mp4" type="video/mp4">
+</video>
+<h2 id="1麦克纳姆轮底盘的控制原理">1.麦克纳姆轮底盘的控制原理</h2>
+<p>设定一个底盘坐标系，其中：</p>
+<ul>
+<li>x 轴：沿机器人前方的方向（前进方向）。</li>
+<li>y 轴：沿机器人右侧的方向（侧向）。</li>
+<li>z 轴：垂直于地面（向上）。</li>
+</ul>
+<p>已知底盘空间速度求个轮子的速度。反解</p>
+<p>$$
+\left [
+\begin{array}{}
+v_1 \\
+v_2 \\
+v_3 \\
+v_4 \\
+\end{array}
+\right ] = J
+\left [
+\begin{array}{}
+v_x \\
+v_y \\
+v_z \\<br>
+\end{array}
+\right ]
+$$</p>
+<p>一个底盘速度空间到四轮转速空间的变换。通过对麦克纳姆轮的分析，速度合成然后结算后，这个变换矩阵为</p>
+<p>$$
+J =
+\left [
+\begin{array}{}
+1 &amp; -1 &amp; L + W \\
+1 &amp; 1 &amp; - (L + W) \\
+1 &amp; 1 &amp; L + W \\
+1 &amp; -1 &amp; - (L + W) \\
+\end{array}
+\right ]
+$$</p>
+<p>也即根据给定控制指令计算 4 个轮速的表达式</p>
+<p>$$
+\left \{
+\begin{array}{l}
+v_1 = v_x - v_y + k \cdot v_z \\
+v_2 = v_x + v_y - k \cdot v_z \\
+v_3 = v_x + v_y + k \cdot v_z \\
+v_4 = v_x - v_y - k \cdot v_z \\
+\end{array}
+\right .
+\tag{1}
+$$</p>
+<p>最核心的方法上的东西就这么多。</p>
+<p>计算得到 4 个轮的给定速度以后，可以在做一个电机的闭环控制，当然直接当做给定的电压输出也是能看到效果的，但是底盘运行的精度严重依赖于电机特性。</p>
+<p>对于 ROS 底盘来讲，闭环是有必要的，并且有些导航定位算法可能需要里程计的信息。</p>
+<h2 id="2控制代码的实现">2.控制代码的实现</h2>
+<p>控制代码并不复杂，当时的控制代码找不到了，大概的思路：串口接收控制指令，或者接收遥控器的控制指令，处理为三维空间速度，然后进行解算得到 4 个电机速度调用电机控制函数完成控制。</p>
+<p>这里我写一个参考实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> y;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> z;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">chassis_velocity_t</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/* 存放控制指令 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">chassis_velocity_t</span> v;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">chassis_control</span>(<span style="color:#66d9ef">chassis_velocity_t</span> <span style="color:#f92672">*</span>v)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> motor_1, motor_2, motor_3, motor_4;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    motor_1 <span style="color:#f92672">=</span> v<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">-</span> v<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">+</span> v<span style="color:#f92672">-&gt;</span>z;
+</span></span><span style="display:flex;"><span>    motor_1 <span style="color:#f92672">=</span> v<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">+</span> v<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">-</span> v<span style="color:#f92672">-&gt;</span>z;
+</span></span><span style="display:flex;"><span>    motor_1 <span style="color:#f92672">=</span> v<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">+</span> v<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">+</span> v<span style="color:#f92672">-&gt;</span>z;
+</span></span><span style="display:flex;"><span>    motor_1 <span style="color:#f92672">=</span> v<span style="color:#f92672">-&gt;</span>x <span style="color:#f92672">-</span> v<span style="color:#f92672">-&gt;</span>y <span style="color:#f92672">-</span> v<span style="color:#f92672">-&gt;</span>z;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">motor_contorl</span>(motor_1, motor_2, motor_3, motor_4);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="3裸机开发麦轮底盘遥控车">3.裸机开发，麦轮底盘遥控车</h2>
+<p>裸机开发的话，主要考虑代码结构，控制逻辑、算法、设备驱动、片内外设驱动的分层。</p>
+<p>裸机的话，做闭环控制需要定时器中断，程序设计上复杂了，就简单一点读遥控器数据，然后解算，然后发送电机 pwm 占空比。</p>
+<p>主函数，控制逻辑的实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">init</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ctrl_data_t</span> ctrl_data <span style="color:#f92672">=</span> (<span style="color:#66d9ef">struct</span> ctrl_data<span style="color:#f92672">*</span>)<span style="color:#a6e22e">malloc</span>(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> ctrl_data));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">read_controller_data_to</span>(ctrl_data);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">chassis_control</span>(ctrl_data);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">delay_ms</span>(<span style="color:#ae81ff">50</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以使用轮询查询 + 控制输出的方式。</p>
+<p><code>read_controller_data_to</code> 函数内部需要实现硬件上对遥控数据的读取如从 uart 读取并解析。</p>
+<p><code>chassis_control</code> 函数内调用了 <code>motor_contorl</code> 函数，此函数需要对接具体的电机控制驱动，直流电机的话就是 PWM 和 一些 GPIO，CAN 总线电机的话就是用 CAN 外设对着通信协议实现。</p>
+<p>核心的逻辑不依赖于底层外设驱动，这样的话可以在仿真环境中测试算法的正确性。在仿真环境中同样也就实现仿真环境提供的 api 完成数据读取和电机控制。</p>
+<h2 id="4基于-rt-thread-空间位置目标跟踪控制">4.基于 rt-thread 空间位置目标跟踪控制</h2>
+<p>当要考虑的事情变多以后，裸机开发就有一些思维上的小麻烦了，也不是不能做，但是多线程的想法可以让开发时更专注的考虑拆解开的问题。</p>
+<p>基本的底盘逻辑还是上面的那样。现在只需要多开一个线程，接收跟踪目标的空间位置，然后与期望位置做差，后面跟一个 PID 控制器即可，PID 控制器的输出为期望速度。</p>
+<p>新的线程需要做的事情类似下面这个控制框图</p>
+<img src="./images/1-mecanum-chassis/laser-track-4.png" width="400">
+<p>将期望速度替换遥控器接收指令，即可完成跟踪的效果。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/mecanum-chassis.html";
+    this.page.identifier = "\/blog\/mecanum-chassis.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

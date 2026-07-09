@@ -1,0 +1,68 @@
+# xym-ee
+
+> xym-ee is a personal engineering blog focused on embedded systems, RTOS/Linux, control theory, robotics, system integration, and AI-assisted engineering. Most content is written in Chinese.
+
+This site is organized around the path from intent and environment sensing to system decision and real-world execution. Prefer published pages only; drafts and templates are intentionally excluded unless listed as optional reference material.
+
+## Author Profile
+
+- The author is a systems and embedded engineer working across MCU/RTOS, embedded Linux, control theory, robotics, and AI-assisted engineering.
+- The core direction is turning ambiguous human intent and environmental signals into executable system behavior: sensing, understanding, decision-making, scheduling, communication, control, and actuation.
+- The author's strength is connecting low-level hardware constraints, real-time software, communication protocols, control algorithms, and system architecture into working systems that can be tested and iterated.
+- Read this site as the record of an engineer moving from "make the device run" toward "design the complete loop from intent to real-world execution."
+- Current focus: LLM-based intent understanding, agent workflows, distributed collaboration, and practical system integration where AI becomes an interface to real execution rather than only a text generator.
+
+## Site Overview
+
+- [About Me](https://xym.work/about.html): Author background, technical route, current focus, and engineering interests.
+- [Blog](https://xym.work/blog): Published project writeups and technical notes.
+- [Notebook](https://xym.work/notebook.html): Learning map covering embedded systems, control, robotics, electronics, and AI/system integration.
+- [Gallery](https://xym.work/gallery.html): Visual project and media archive.
+
+## Core Topics
+
+- [Embedded project build systems](https://xym.work/blog/system-dev.html): Notes on medium and large embedded project development, build systems, and project organization.
+- [STM32 bare-metal development with GCC](https://xym.work/blog/baremetal.html): Toolchain-oriented embedded development notes.
+- [From S32DS to VS Code](https://xym.work/blog/s32ds_vscdoe.html): Understanding embedded IDE build processes by moving toward explicit build tooling.
+- [Static website and networking notes](https://xym.work/blog/hugowebsite.html): Notes from building and deploying a static website.
+- [Vibe coding and programming agents](https://xym.work/blog/vibe-coding.html): Notes on AI-assisted programming, coding agents, and engineering workflow changes.
+
+## Projects
+
+- [2019 NXP smart car competition](https://xym.work/blog/2019-nxp-car.html): Smart car competition project and code review.
+- [Motion control and target tracking system](https://xym.work/blog/laser-track.html): Electronic design competition project for motion control and target tracking.
+- [Environmental data collection module](https://xym.work/blog/data-collector-rt.html): Drone-mounted data acquisition and reporting module for enclosed environments.
+- [Electromagnetic curved-fire launcher](https://xym.work/blog/curved-fire-gun.html): Electronic design competition project involving sensing, control, and actuation.
+- [Mecanum chassis control projects](https://xym.work/blog/mecanum-chassis.html): Robot motion control examples using mecanum-wheel chassis platforms.
+- [Omni steering chassis](https://xym.work/blog/omni-chassis.html): Full-direction steering chassis motion control software.
+- [ROS robot chassis](https://xym.work/blog/ros-chassis.html): Notes on differential and Ackermann chassis development with ROS.
+- [Servo control system](https://xym.work/blog/servo-system.html): Servo control system for a high-load turntable.
+- [Line-tracking robot summary](https://xym.work/blog/tracking-robot.html): Competition notes on control methods and code structure for tracking robots.
+
+## Control, Robotics, and Electronics
+
+- [Three-phase asynchronous motor vector control](https://xym.work/blog/motor-foc.html): MATLAB simulation notes for motor control.
+- [PID controller and compensator analysis](https://xym.work/blog/pid-controller.html): Control theory comparison of PID and series compensators.
+- [2D vector field visualization](https://xym.work/blog/field-play.html): Interactive notes on vector fields and phase plane diagrams.
+- [PID control in C](https://xym.work/blog/pid-in-c.html): C implementation notes for PID control algorithms.
+- [Inverted pendulum simulation](https://xym.work/blog/simscape.html): Simscape-based control algorithm simulation.
+
+## Linux and Tools
+
+- [Minimal Linux system](https://xym.work/blog/minimal-linux.html): Notes on building a minimal Linux system.
+- [Installing an OS on a development board](https://xym.work/blog/dev-board-os.html): Notes on development board operating system installation.
+- [Git and GitHub notes](https://xym.work/blog/git.html): Project management and collaboration notes using Git and GitHub.
+- [GitHub Pages website build record](https://xym.work/blog/jekyll1.html): Older record of building a personal website with GitHub Pages.
+
+## Learning Maps
+
+- [Knowledge graph data](https://xym.work/knowledge-graph.json): Machine-readable concept graph used by the notebook page.
+- [Embedded knowledge base](https://embedded.xym.work): Computer technology and embedded development notes.
+- [Control knowledge base](https://control.xym.work): Control theory and robotics notes.
+- [Electronics knowledge base](https://electronics.xym.work): Electronics and motor control notes.
+
+## Optional
+
+- [Markdown template](https://xym.work/blog/markdown-template.html): Theme/demo content, not representative of the main site.
+- [GitHub Pages typography record](https://xym.work/blog/jekyll2.html): Older website styling notes.
+- [Cheat Engine game modifier project](https://xym.work/blog/cheat-engine.html): Older exploratory project note.

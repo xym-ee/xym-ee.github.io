@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[post] 从一次博客部署，到一套可复用的服务器初始化方案 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[post] 从一次博客部署，到一套可复用的服务器初始化方案</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2026-01-10</p>
+        
+          <p>🔄 2026-01-10</p>
+        
+        <p>⌚ Reading time: 4 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E7%AC%94%E8%AE%B0'
+    class="site-chip border p-1 text-center transition-colors">> 笔记</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <h2 id="0-引言系统整体工作流程全景视角">0. 引言：系统整体工作流程（全景视角）</h2>
+<p>在这套博客系统中，刻意把写作、构建和部署拆分成了几个彼此解耦的阶段。日常内容的开发只发生在 GitHub 的 <code>hugodev</code> 分支，这个分支只包含 Hugo 源码，用来承载写作本身，而不关心任何部署形态。每当 <code>hugodev</code> 有新的提交，GitHub Actions 会自动触发构建流程，将源码生成纯静态文件，并把结果推送到 <code>pub</code> 分支。<code>pub</code> 分支的定位非常明确，它不是给人编辑的，而是作为一个稳定、可被机器直接使用的部署接口存在。</p>
+<p>为了让整个流程在国内网络环境下更加稳定，服务器并不直接从 GitHub 获取构建产物，而是通过 Gitee 对 <code>pub</code> 分支进行镜像同步。服务器端不参与任何构建过程，也不需要安装 Hugo 或 CI 工具，它只以固定节奏从 Gitee 拉取 <code>pub</code> 分支的最新内容，并在内容发生变化后 <code>reload nginx</code>，使更新对外生效。整个服务器侧的行为被刻意压缩为三件事：定时同步、静态托管、对外服务。</p>
+<p>下面这张图展示了这套流程的完整链路，以及各个阶段之间的边界关系：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>                ┌────────────────────┐
+</span></span><span style="display:flex;"><span>                │   Local Writing    │
+</span></span><span style="display:flex;"><span>                │  <span style="color:#f92672">(</span>Markdown / Hugo<span style="color:#f92672">)</span> │
+</span></span><span style="display:flex;"><span>                └─────────┬──────────┘
+</span></span><span style="display:flex;"><span>                          │
+</span></span><span style="display:flex;"><span>                          │ git push
+</span></span><span style="display:flex;"><span>                          ▼
+</span></span><span style="display:flex;"><span>                ┌────────────────────┐
+</span></span><span style="display:flex;"><span>                │   GitHub Repo      │
+</span></span><span style="display:flex;"><span>                │   hugodev branch   │
+</span></span><span style="display:flex;"><span>                │  <span style="color:#f92672">(</span>source only<span style="color:#f92672">)</span>     │
+</span></span><span style="display:flex;"><span>                └─────────┬──────────┘
+</span></span><span style="display:flex;"><span>                          │
+</span></span><span style="display:flex;"><span>                          │ GitHub Actions
+</span></span><span style="display:flex;"><span>                          │ <span style="color:#f92672">(</span>build<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                          ▼
+</span></span><span style="display:flex;"><span>                ┌────────────────────┐
+</span></span><span style="display:flex;"><span>                │   GitHub Repo      │
+</span></span><span style="display:flex;"><span>                │     pub branch     │
+</span></span><span style="display:flex;"><span>                │ <span style="color:#f92672">(</span>static artifacts<span style="color:#f92672">)</span> │
+</span></span><span style="display:flex;"><span>                └─────────┬──────────┘
+</span></span><span style="display:flex;"><span>                          │
+</span></span><span style="display:flex;"><span>                          │ mirror sync
+</span></span><span style="display:flex;"><span>                          ▼
+</span></span><span style="display:flex;"><span>                ┌────────────────────┐
+</span></span><span style="display:flex;"><span>                │       Gitee        │
+</span></span><span style="display:flex;"><span>                │     pub branch     │
+</span></span><span style="display:flex;"><span>                │ <span style="color:#f92672">(</span>domestic mirror<span style="color:#f92672">)</span>  │
+</span></span><span style="display:flex;"><span>                └─────────┬──────────┘
+</span></span><span style="display:flex;"><span>                          │
+</span></span><span style="display:flex;"><span>                          │ cron <span style="color:#f92672">(</span>pull<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                          ▼
+</span></span><span style="display:flex;"><span>        ┌────────────────────────────────┐
+</span></span><span style="display:flex;"><span>        │            Server              │
+</span></span><span style="display:flex;"><span>        │                                │
+</span></span><span style="display:flex;"><span>        │  cron → git pull <span style="color:#f92672">(</span>pub<span style="color:#f92672">)</span>         │
+</span></span><span style="display:flex;"><span>        │        → nginx reload          │
+</span></span><span style="display:flex;"><span>        │                                │
+</span></span><span style="display:flex;"><span>        │  <span style="color:#f92672">(</span>no build tools, no CI<span style="color:#f92672">)</span>       │
+</span></span><span style="display:flex;"><span>        └────────────────────────────────┘
+</span></span></code></pre></div><p>这种拆分方式带来的直接结果是，构建环境与运行环境完全分离。博客的生成逻辑被固定在 CI 中，而服务器只面对已经生成好的静态文件。即使将来不再使用 Hugo，或更换为其他静态站点生成器，这套流程中真正需要调整的，也只是构建阶段；服务器侧的逻辑可以保持不变。同样地，当服务器需要迁移或重装时，也不需要关心构建工具链，只要能够从仓库获取 pub 分支并提供静态服务即可。</p>
+<p>最终形成的结构是，写作发生在开发分支 <code>hugodev</code>，构建发生在 CI，分发由仓库镜像承担，而服务器只负责运行。每一层的职责都被刻意限制在最小范围内，这不仅降低了单点复杂度，也让系统在面对工具替换、环境变化或时间流逝时，依然能够保持清晰和可控。</p>
+<p>在这套流程最终稳定下来之后，服务器上的站点目录结构也变得非常简单：</p>
+<pre tabindex="0"><code>/var/www/xym-ee.github.io/
+├── index.html
+├── sync.log
+└── tools/
+    ├── blog_env_init.sh
+    └── sync_from_gitee.sh
+</code></pre><p><code>index.html</code> 是构建完成后的静态入口文件，<code>sync.log</code> 用于记录服务器侧的自动同步行为，而 tools 目录则只放与环境和运行相关的脚本。构建过程并不会在服务器上留下任何痕迹。</p>
+<p>这些设计最终指向同一个结果：服务器不再绑定具体工具，失败被自然分层，变化被限制在可控范围内。</p>
+<h2 id="01-引系统整体工作流程2026-01-24-更新">0.1 引系统整体工作流程，2026-01-24 更新</h2>
+<p>将原来 xym-ee.github.io 中的 hugodev 分支拆分成一个单独仓库 xym-blog，xym-ee.github.io 中只保留 pub 。</p>
+<ul>
+<li>仓库：xym-blog（Private）：存放 Hugo 博客源码，不直接发布，不承载任何构建产物</li>
+<li>构建与部署（CI / 自动化）：xym-blog:main 有新提交（push）自动触发，生成 public/ 目录（纯 HTML / CSS / JS），通过 Personal Access Token 将构建结果推送至 xym-ee.github.io</li>
+<li>仓库：xym-ee.github.io（Public）：承载最终可访问的静态站点，作为 GitHub Pages 的数据源，仅存在 pub 分支，始终只有一个 commit，纯发布仓库，不参与内容生产。</li>
+<li>Gitee 同步（国内镜像 / 分发）：提供国内访问友好的镜像源</li>
+<li>公网服务器部署（最终访问入口）：公网服务器定时任务 cron，周期性从 Gitee 仓库拉取最新内容，仅做文件同步与静态托管</li>
+</ul>
+<pre tabindex="0"><code>本地写作
+   ↓
+xym-blog（Private, Source）
+   ↓ GitHub Actions（Build）
+xym-ee.github.io（Public, pub）
+   ↓ 同步
+Gitee 镜像
+   ↓ 定时拉取
+公网服务器（静态托管）
+</code></pre><ul>
+<li>内容只在一个地方产生</li>
+<li>构建只在一个地方发生</li>
+<li>分发可以有 多个节点</li>
+<li>所有流向 单向、无回写</li>
+<li>push 触发所有流程</li>
+</ul>
+<h2 id="1-问题的起点重复部署">1. 问题的起点：重复部署</h2>
+<p>在最初动手部署的时候，对于这种个人应用的简单场景其实并没有真正困难的问题。照着教程安装 nginx，把静态文件放到对应目录里，配置好站点路径，确认浏览器能够正常访问，这些步骤本身并不复杂。只要耐心一点，几乎都能一次完成。</p>
+<p>但问题在于，这样的部署过程<strong>高度依赖当下的理解状态</strong>。每当更换一台新机器，或者在一段时间之后回头重新配置环境时，几乎都需要重新去翻教程、重新对照命令、重新在脑子里梳理一遍流程。单次看起来并不难，但这个“重新理解一遍”的过程，本身就是一种隐性的成本。</p>
+<p>一旦环境发生变化，问题就不再是“再部署一次”，而是“<strong>重新理解一次之前做过什么</strong>”。当初为什么要这么配、哪些步骤是必要的、哪些只是临时权宜之计，这些信息如果没有被明确记录下来，那么相当于重新走一遍学习和试错过程。我的一些博客内容就是在记录配置信息。</p>
+<p>真正需要解决的，并不是“如何把服务跑起来”，而是如何让这件事在下一次、下下次依然成立。如果每次换机器都需要重新摸索，那么这个系统的稳定，其实只是停留在表面。一旦时间拉长，或者环境变化频繁，这种“能跑就行”的状态，很快就会变成负担。</p>
+<p>一个更根本的问题：**如果明天换一台全新的服务器，我是否还能用同样的方式，把整个系统完整地还原出来？**如果答案是否定的，那么说明问题并不在某一次部署失败，而在于系统本身缺乏可重复性。</p>
+<p>相比一次性的部署，env_init 描述的是一种状态 —— 一台新的、空白的机器，通过明确的步骤，被初始化为“可以长期承载这个系统”的状态。它不依赖个人记忆，也不依赖当时的上下文，而是把部署过程本身变成了一种可以被反复执行、被清楚理解的描述。</p>
+<p>那么后面的所有设计选择，关注的都不再是“当前能不能跑”，而是<strong>当环境变化、时间推移、细节被遗忘时，这套系统是否依然可靠</strong>。</p>
+<p>将脚本命名为 env_init，意味着它描述的是一种状态，而不是一次性操作。这也直接要求脚本本身必须是<strong>可重复执行</strong>的。</p>
+<p>在实际实现中，这种幂等性通过一系列明确的约束来实现的。例如，脚本一开始就会拒绝以 root 身份运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 防止 sudo 执行</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$EUID<span style="color:#e6db74">&#34;</span> -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;❌ Do not run this script with sudo&#34;</span>
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>为了避免脚本在不同权限上下文中产生不可预期的副作用。环境初始化应该由普通用户触发，必要的权限提升只发生在明确的位置。</p>
+<h2 id="2-构建与运行的边界ci-该做什么服务器该做什么">2. 构建与运行的边界：CI 该做什么，服务器该做什么</h2>
+<p>在明确了系统需要具备可重复性之后，接下来的问题其实非常自然：哪些事情应该发生在 CI，哪些事情应该留在服务器上。</p>
+<p>在这套博客系统中，我把 Hugo 的构建完全放在 CI 中完成。CI 的职责只有一个：把源码变成可以被直接使用的静态结果，并将这个结果以 pub 分支的形式固定下来。</p>
+<p>服务器不参与构建，不需要理解 Hugo，也不需要知道文章是如何生成的。它只面对一件事情：如何稳定地提供已经生成好的静态文件。从这个角度看，服务器和具体的生成工具之间不存在直接依赖关系，哪怕将来完全不再使用 Hugo，这一侧的逻辑也不需要发生变化。</p>
+<p>这种拆分带来的一个直接好处，是构建失败和运行失败在结构上被区分开来。CI 失败意味着构建过程本身存在问题，而服务器侧的问题只可能发生在同步或服务阶段。</p>
+<p>在这个前提下，仓库本身也发生了角色变化：它成为构建系统与运行系统之间的明确接口。CI 负责向这个接口写入结果，服务器只负责从这个接口读取结果。只要这个接口保持稳定，其它部分就可以独立演化。</p>
+<p>在最初搭建这套流程时，我也尝试过让 CI 直接 SSH 到服务器，在构建完成后执行 git pull 和 nginx reload。从结果上看，这种方式完全可行，页面也能按预期更新。但部署失败时，很难第一时间判断问题究竟发生在构建阶段、网络阶段，还是服务器自身的运行状态上。失败的语义开始变得混杂，而不是清晰地指向某一层。</p>
+<p>在边界划清之后，blog_env_init.sh 所做的事情本身其实并不多，每一项都指向一个明确的结果状态。</p>
+<p>首先是系统依赖的准备：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y git nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable nginx
+</span></span><span style="display:flex;"><span>sudo systemctl start nginx
+</span></span></code></pre></div><p>这些操作本身是幂等的，多次执行并不会改变系统状态，但它们明确表达了运行这个系统所依赖的最小组件集合。</p>
+<p>接下来是站点目录的权限修正：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo chown -R <span style="color:#e6db74">&#34;</span>$USER<span style="color:#e6db74">:</span>$USER<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$SITE_DIR<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>这一步的目的不是调整权限本身，而是确保后续所有自动化行为都可以在普通用户权限下完成。</p>
+<p>nginx 的配置同样被视为环境初始化的一部分，而不是部署步骤中的临时操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo cp <span style="color:#e6db74">&#34;</span>$NGINX_CONF_SRC<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$NGINX_CONF_DST<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>sudo ln -sf <span style="color:#e6db74">&#34;</span>$NGINX_CONF_DST<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;/etc/nginx/sites-enabled/</span><span style="color:#e6db74">${</span>SITE_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>sudo rm -f /etc/nginx/sites-enabled/default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo nginx -t
+</span></span><span style="display:flex;"><span>sudo systemctl reload nginx
+</span></span></code></pre></div><p>配置文件来源于仓库本身，这使得 nginx 的运行状态不再依赖服务器上的手工修改，而是可以通过代码被完整还原。</p>
+<h2 id="3-服务器侧的节奏选择cron-不是越频繁越好">3. 服务器侧的节奏选择：cron 不是越频繁越好</h2>
+<p>对于一个静态博客来说，发布的即时性并不是核心需求。相比“尽快上线”，更重要的是系统在长期运行中保持简单和安静。因此，服务器侧并不需要在每一次构建完成后立即同步，而只需以一个稳定、低频的节奏拉取更新。</p>
+<p>cron 在这里承担的不是“实时触发”的角色，而是为系统设定一个可以接受的延迟上限。频率的降低并不会影响最终结果，却能减少不必要的系统噪声，也让运行状态更容易被忽略和信任。</p>
+<p>服务器侧的同步由 cron 触发，其职责非常单一：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>CRON_JOB<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0 */6 * * * </span><span style="color:#e6db74">${</span>SITE_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/tools/sync_from_gitee.sh&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SITE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/var/www/xym-ee.github.io&#34;</span>
+</span></span><span style="display:flex;"><span>LOG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$SITE<span style="color:#e6db74">/sync.log&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;==== </span><span style="color:#66d9ef">$(</span>date<span style="color:#66d9ef">)</span><span style="color:#e6db74"> ====&#34;</span>
+</span></span><span style="display:flex;"><span>  cd <span style="color:#e6db74">&#34;</span>$SITE<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  git pull origin pub
+</span></span><span style="display:flex;"><span>  sudo systemctl reload nginx
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> &gt;&gt; <span style="color:#e6db74">&#34;</span>$LOG<span style="color:#e6db74">&#34;</span> 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>同步行为虽然是后台执行的，但并不是不可观测的。每一次自动拉取都会被记录到 sync.log 中，这使得系统的运行状态可以被回溯，而不需要人为介入。</p>
+<h2 id="4-权限边界与最小授权让系统自己跑而不是靠人盯着">4. 权限边界与最小授权：让系统自己跑，而不是靠人盯着</h2>
+<p>在服务器侧，同步和服务并不需要完整的管理权限。通过将定时任务运行在普通用户下，并只为必要的操作开放最小范围的 sudo 权限，可以把潜在风险限制在可控范围内。</p>
+<p>权限在这里不是为了防止“人为失误”，而是为了让系统在无人干预的情况下，也不会意外越界。</p>
+<p>为了让同步脚本能够在不输入密码的情况下 reload nginx，而不扩大权限范围，初始化脚本只为这一条命令开放 sudo 权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$USER ALL<span style="color:#f92672">=</span>NOPASSWD: /bin/systemctl reload nginx
+</span></span></code></pre></div><p>这使得自动化流程可以完整运行，同时又不会把服务器的控制权整体交给后台脚本。</p>
+<h2 id="5-日志不是写完就算logrotate-与系统的自我清理能力">5. 日志不是写完就算：logrotate 与系统的自我清理能力</h2>
+<p>自动拉取本身是一种后台行为，如果完全不可观测，系统就会变得不透明。因此，同步过程需要通过日志被记录下来，用来确认系统是否在按预期运行。</p>
+<p>但日志的存在并不意味着需要被长期保留。对于一个稳定运行的系统来说，日志更多是用于异常时的回溯，而不是日常阅读。为同步日志配置 logrotate，让日志既能被记录，也能被按规则清理，是系统具备长期自维护能力的前提。</p>
+<p>为了避免同步日志在长期运行中无限增长，env_init 同时负责为 sync.log 配置 logrotate：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#e6db74">${</span>SITE_DIR<span style="color:#e6db74">}</span>/sync.log <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    daily
+</span></span><span style="display:flex;"><span>    rotate <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>    compress
+</span></span><span style="display:flex;"><span>    missingok
+</span></span><span style="display:flex;"><span>    notifempty
+</span></span><span style="display:flex;"><span>    copytruncate
+</span></span><span style="display:flex;"><span>    su $USER $USER
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>这段配置并不关注日志内容本身，而只关心生命周期。日志被记录，是为了在异常时能够定位问题；日志被清理，是为了让系统在没有异常时，不引入新的风险。</p>
+<h2 id="6当多种方案结果相同时设计差异体现在哪里">6.当多种方案结果相同时，设计差异体现在哪里</h2>
+<p>在这套系统中，许多不同的实现方式在结果上并没有区别：博客都会更新，页面也都能正常访问。如果只从“是否成功”来判断，这些方案看起来是等价的。</p>
+<p>真正的差异并不体现在一切顺利的时候，而是在环境变化、时间推移或细节被遗忘之后，系统是否依然容易理解、容易修复、也容易被信任。设计的价值，并不在于让系统“看起来更复杂”，而在于让它在不可避免的变化中，仍然保持清晰。</p>
+<p>当一个系统不再依赖人的记忆，也不需要被频繁关注，却依然能够按预期运行时，这种差异才真正显现出来。</p>
+<p>总结这套方案的最终目标：不是追求复杂度，而是让系统长期安静运行。</p>
+<h2 id="源码blog_env_initsh-实现">源码，blog_env_init.sh 实现</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== 防止 sudo 执行 =====</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$EUID<span style="color:#e6db74">&#34;</span> -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;❌ Do not run this script with sudo&#34;</span>
+</span></span><span style="display:flex;"><span>  exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== 脚本所在目录（关键）=====</span>
+</span></span><span style="display:flex;"><span>BASE_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&amp;&amp;</span> pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SITE_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;xym-ee.github.io&#34;</span>
+</span></span><span style="display:flex;"><span>SITE_DIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/var/www/</span><span style="color:#e6db74">${</span>SITE_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NGINX_CONF_SRC<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>BASE_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/xym-ee.github.io.conf&#34;</span>
+</span></span><span style="display:flex;"><span>NGINX_CONF_DST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/etc/nginx/sites-available/</span><span style="color:#e6db74">${</span>SITE_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>CRON_JOB<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0 */6 * * * </span><span style="color:#e6db74">${</span>SITE_DIR<span style="color:#e6db74">}</span><span style="color:#e6db74">/tools/sync_from_gitee.sh&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[env_init] start&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== 系统依赖 =====</span>
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y git nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable nginx
+</span></span><span style="display:flex;"><span>sudo systemctl start nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== 站点目录 =====</span>
+</span></span><span style="display:flex;"><span>sudo chown -R <span style="color:#e6db74">&#34;</span>$USER<span style="color:#e6db74">:</span>$USER<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$SITE_DIR<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== nginx 配置 =====</span>
+</span></span><span style="display:flex;"><span>sudo cp <span style="color:#e6db74">&#34;</span>$NGINX_CONF_SRC<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$NGINX_CONF_DST<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>sudo ln -sf <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#e6db74">&#34;</span>$NGINX_CONF_DST<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#e6db74">&#34;/etc/nginx/sites-enabled/</span><span style="color:#e6db74">${</span>SITE_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo rm -f /etc/nginx/sites-enabled/default
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo nginx -t
+</span></span><span style="display:flex;"><span>sudo systemctl reload nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== cron 同步 =====</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[bootstrap] install cron job for user: </span>$USER<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>crontab -l 2&gt;/dev/null | grep -v sync_from_gitee.sh &gt; /tmp/cron.tmp <span style="color:#f92672">||</span> true
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;</span>$CRON_JOB<span style="color:#e6db74">&#34;</span> &gt;&gt; /tmp/cron.tmp
+</span></span><span style="display:flex;"><span>crontab /tmp/cron.tmp
+</span></span><span style="display:flex;"><span>rm -f /tmp/cron.tmp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== sudo 权限（允许无密码 reload nginx）=====</span>
+</span></span><span style="display:flex;"><span>SUDOERS_FILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/etc/sudoers.d/nginx-reload&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[bootstrap] configure sudo for nginx reload&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo tee <span style="color:#e6db74">&#34;</span>$SUDOERS_FILE<span style="color:#e6db74">&#34;</span> &gt; /dev/null <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">$USER ALL=NOPASSWD: /bin/systemctl reload nginx
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#ae81ff">440</span> <span style="color:#e6db74">&#34;</span>$SUDOERS_FILE<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ===== logrotate =====</span>
+</span></span><span style="display:flex;"><span>LOGROTATE_DST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/etc/logrotate.d/</span><span style="color:#e6db74">${</span>SITE_NAME<span style="color:#e6db74">}</span><span style="color:#e6db74">-sync&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[bootstrap] configure logrotate for sync.log (user: </span>$USER<span style="color:#e6db74">)&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo tee <span style="color:#e6db74">&#34;</span>$LOGROTATE_DST<span style="color:#e6db74">&#34;</span> &gt; /dev/null <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">${SITE_DIR}/sync.log {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    daily
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    rotate 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    compress
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    missingok
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    notifempty
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    copytruncate
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    su $USER $USER
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[bootstrap] done&#34;</span>
+</span></span></code></pre></div>
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/deploy-to-server.html";
+    this.page.identifier = "\/blog\/deploy-to-server.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[post] 从 S32DS 到 VS Code：嵌入式 IDE 中被隐藏的编译过程 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[post] 从 S32DS 到 VS Code：嵌入式 IDE 中被隐藏的编译过程</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2025-08-30</p>
+        
+          <p>🔄 2025-08-30</p>
+        
+        <p>⌚ Reading time: 4 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E7%AC%94%E8%AE%B0'
+    class="site-chip border p-1 text-center transition-colors">> 笔记</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <h2 id="1引言">1.引言</h2>
+<p>进入汽车电子行业之后，我开始接触车规级 MCU，比如 NXP S32K144、S32K312。NXP 官方提供的开发环境是 S32 Design Studio (S32DS)，它实际上是一个基于 Eclipse 定制的 IDE。这类 IDE 在嵌入式开发里很常见，像 RT-Thread Studio 也是基于 Eclipse 定制的，都是类似的思路：</p>
+<ul>
+<li>集成 GCC 工具链</li>
+<li>提供 MCU 配置和外设初始化界面</li>
+<li>自动生成 makefile</li>
+<li>一键编译、下载、调试</li>
+</ul>
+<p>和 S32DS 相比，嵌入式开发更常用的是 Keil (MDK-ARM) 或 IAR Embedded Workbench。在 Keil/IAR 中，几乎所有编译选项都藏在 GUI 配置对话框里（工程 → Options for Target…），开发者点几下就能完成编译设置。工程文件（Keil 的 .uvprojx / IAR 的 .ewp）就是这些配置的保存载体，用户很少需要直接接触编译器命令行。</p>
+<p>编译时 IDE 开发者几乎看不到底层命令和流程。相比之下，S32DS (Eclipse) 的方式要“开放”得多，工程目录里直接存在 makefile，编译过程透明可见，甚至可以完全脱离 Eclipse IDE，直接在命令行里运行 <code>make -C Debug_FLASH</code> 完成编译。</p>
+<p>在实际项目里，一些经验丰富的老工程师喜欢 Source Insight 作为轻量的代码浏览器，快速搜索、跳转；也有人尝试 VS Code，借助 C/C++ 插件获得更现代的编辑体验如补全、跳转、代码检查、Git 集成。而对于 S32DS 这样的 Eclipse 系 IDE，如果仅仅把它当成“工程生成器”和“编译工具链”，代码编辑的部分就完全可以交给 VS Code。</p>
+<p>我最初的出发点也很简单：👉 想在 VS Code 里像用 Source Insight 一样浏览代码。</p>
+<p>不过，Keil/IAR 的编译过程是被封装和隐藏的，S32DS 的编译过程则是透明的，可以直接拿 makefile 在外部调用。那么完全可以在 VS Code 中直接启动编译，而且效果与 S32DS 一模一样。IDE 背后看似“一键编译”的按钮，其实就是在调用预处理、编译、汇编、链接这几个步骤；只是 Keil/IAR 把它藏了起来，而 Eclipse/S32DS 把它展示出来。</p>
+<p>本文目标：</p>
+<ul>
+<li>如何在 VS Code 中打开、编辑、编辑 S32DS 工程</li>
+<li>如何在 VS Code 下调用 S32DS 的工具链进行编译</li>
+<li>顺带整理一下嵌入式 IDE 背后被“隐藏”的编译过程</li>
+</ul>
+<h2 id="2s32ds-工程结构与编译相关设置">2.S32DS 工程结构与编译相关设置</h2>
+<p>这里我使用的芯片为 S32K144，IDE 为 S32 Design Studio for ARM Version 2018.R1，安装了 S32 Design Studio for ARM v2018.R1 Update 11 with S32 SDK，新建一个 SDK 自带的例程并命名为 led_sdk</p>
+<figure>
+  <img src="./images/2-s32ds_vscode/exampl_project.png" width=500>
+</figure>
+<p>目录结构大致如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>led_sdk/
+</span></span><span style="display:flex;"><span>├── Sources/                <span style="color:#75715e"># 用户代码</span>
+</span></span><span style="display:flex;"><span>│   └── main.c
+</span></span><span style="display:flex;"><span>├── Generated_Code/         <span style="color:#75715e"># Processor Expert 或 SDK 自动生成的代码</span>
+</span></span><span style="display:flex;"><span>├── Project_Settings/       <span style="color:#75715e"># 工程配置（编译器参数、链接脚本）</span>
+</span></span><span style="display:flex;"><span>│   ├── Linker_Files/
+</span></span><span style="display:flex;"><span>│   │   └── S32K144_*.ld    <span style="color:#75715e"># 链接脚本 (决定 Flash/RAM 布局)</span>
+</span></span><span style="display:flex;"><span>│   └── Startup_Code/
+</span></span><span style="display:flex;"><span>│       └── startup_S32K144.S  <span style="color:#75715e"># 启动文件 (复位向量表、默认中断处理)</span>
+</span></span><span style="display:flex;"><span>├── Debug_FLASH/            <span style="color:#75715e"># Debug_FLASH 配置编译输出目录</span>
+</span></span><span style="display:flex;"><span>    └── makefile
+</span></span></code></pre></div><p>其中几个目录和文件非常关键：</p>
+<ul>
+<li>Sources/：用户自己写的业务代码。</li>
+<li>Generated_Code/：如果启用了 Processor Expert 或 SDK 驱动，会在这里生成初始化函数、外设驱动。</li>
+<li>Project_Settings/Linker_Files/*.ld：链接脚本，描述了 MCU 的内存布局（Flash 起始地址、RAM 大小、代码段/数据段的分布）。</li>
+<li>Project_Settings/Startup_Code/startup_xxx.S：启动文件，完成最小硬件初始化，定义中断向量表，并最终跳转到 main()。</li>
+<li>Debug_FLASH/：编译输出目录，里面有 自动生成的 makefile，以及目标文件（.o）、映射文件（.map）、最终的 .elf .hex。</li>
+</ul>
+<p>从开发者的角度看，我们通常在 Eclipse 界面里完成以下操作：</p>
+<ul>
+<li>选择 MCU 型号（S32K144/S32K312）</li>
+<li>配置编译选项（优化等级、宏定义、浮点 ABI 等）</li>
+<li>添加/移除源文件</li>
+</ul>
+<p>这些操作会被保存到<strong>工程配置文件里</strong>（.project、.cproject），然后由 S32DS 自动生成对应的 makefile。因此，真正的编译体系源头是 makefile。当点下 “Build Project” 按钮时，发生的事情其实是执行 make 命令，make 会找到 makefile，并根据规则调用 arm-none-eabi-gcc 完成编译和链接。</p>
+<p>在 Keil/IAR 中，所有编译器参数都通过 GUI 设置（Project → Options…），很少暴露底层命令。工程文件（Keil 的 .uvprojx，IAR 的 .ewp）只是 GUI 配置的 XML/文本形式，rt-thread 的 scons 工具自动生成 keil 项目时，就是去写这个文本文件，编译时 IDE 会在后台生成临时规则，但用户几乎看不到 makefile，所以很难把工程搬到 VS Code 或命令行环境下直接编译。</p>
+<p>而 S32DS (Eclipse + make) 则不同，makefile 明明白白写在工程目录中，甚至可以完全脱离 Eclipse，直接在命令行运行 <code>make -C Debug_FLASH</code>，这也是为什么能在 VS Code 里轻松接入编译的根本原因。</p>
+<h2 id="3编译过程回顾">3.编译过程回顾</h2>
+<p>在 IDE 里，点下 Build 按钮之后，一段时间后就能得到一个 <code>.elf</code> 文件。这背后，实际上经历了四个步骤，和 linux 环境下 gcc 去编译一个 helloworld.c 没有区别。</p>
+<p>这里写成适用于 MCU 的交叉编译的命令形式</p>
+<ul>
+<li>预处理 (Preprocessing)
+<ul>
+<li><code>arm-none-eabi-gcc -E main.c -o main.i</code></li>
+</ul>
+</li>
+<li>编译 (Compilation)
+<ul>
+<li><code>arm-none-eabi-gcc -S main.i -o main.s</code></li>
+</ul>
+</li>
+<li>汇编 (Assembling)
+<ul>
+<li><code>arm-none-eabi-gcc -c main.s -o main.o</code></li>
+</ul>
+</li>
+<li>链接 (Linking)
+<ul>
+<li><code>arm-none-eabi-ld -T S32K144_*.lds startup.o main.o -o led_sdk.elf</code></li>
+</ul>
+</li>
+</ul>
+<p>链接时把所有 <code>.o</code> 文件和库文件合并，按照<strong>链接脚本 (.lds)</strong> 把代码和数据放到 Flash、RAM 的指定位置。</p>
+<p>有些时候需要下载到 MCU 上的 hex 文件，需要用到 objcopy 工具转换</p>
+<p>在 S32DS 生成的工程中，有几个特殊文件参与到编译过程中：</p>
+<ul>
+<li>接脚本 (.ld)：定义了 MCU 的内存分布（Flash 起始地址、RAM 大小、堆栈位置）。决定了 .text、.data、.bss 等段放在什么地址。</li>
+<li>启动文件 (startup_xxx.S)：用汇编编写，完成 MCU 上电后的初始化。定义复位向量表、中断向量表。在复位后执行，最终跳转到 main()。</li>
+<li>C 标准库 (newlib-nano)：提供基本函数：memset、printf、malloc 等。在裸机工程中，通常用 newlib-nano 替代完整版 newlib，以减小体积。</li>
+</ul>
+<p>当我们在 S32DS 中点击 “Build Project”，其实就是在后台调用这些命令。比如日志中常见的几行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>arm-none-eabi-gcc -c ../Sources/main.c -o main.o -mcpu<span style="color:#f92672">=</span>cortex-m4 -mthumb ...
+</span></span><span style="display:flex;"><span>arm-none-eabi-gcc -c ../Project_Settings/Startup_Code/startup_S32K144.S -o startup.o ...
+</span></span><span style="display:flex;"><span>arm-none-eabi-ld -T ../Project_Settings/Linker_Files/S32K144_64_ram.ld main.o startup.o ... -o led_sdk.elf
+</span></span><span style="display:flex;"><span>arm-none-eabi-objcopy -O binary led_sdk.elf led_sdk.bin
+</span></span></code></pre></div><p>这些就是 四阶段编译的直接体现。只是在 IDE 里，这些命令被「隐藏」了。</p>
+<p>其实，不管是编译一个 Linux 应用，还是编译一个 MCU 工程，底层步骤都是一样的：预处理 → 编译 → 汇编 → 链接。</p>
+<p>不同点在于：</p>
+<ul>
+<li>MCU 需要链接脚本 (.lds) 来精确控制内存分布</li>
+<li>MCU 工程会有启动文件和裸机库</li>
+<li>PC 程序则更多依赖操作系统的动态库</li>
+</ul>
+<h2 id="4在-vs-code-编辑代码并编译工程">4.在 VS Code 编辑代码并编译工程</h2>
+<p>刚开始在 VS Code 打开 S32DS 工程时，我的目标非常单纯：就是把 VS Code 当作 Source Insight 的替代品，用来做代码阅读。</p>
+<p>为此我做的配置很简单：</p>
+<ul>
+<li>装上 <strong>C/C++</strong> 插件</li>
+<li>在 <code>.vscode/c_cpp_properties.json</code> 里补充 <code>includePath</code> 和 <code>defines</code>，可以直接参考 S32DS 中的设置</li>
+</ul>
+<p>这样 VS Code 就能识别 <code>#include &quot;S32K144.h&quot;</code>、补全 <code>PTC-&gt;PDDR</code>，甚至能跳转到 <code>PINS_DRV_WritePin()</code> 的定义。到这一步，其实已经满足了我最初的需求：代码能补全，能跳转，看着比 S32DS 舒服。</p>
+<p>随着对工程的熟悉理解，我意识到：S32DS 工程目录下的 <code>Debug/</code>、<code>Debug_FLASH/</code> 里，本来就有完整的 makefile，编译的本质就是执行 <code>make -C Debug_FLASH</code> 命令，那么理论上，在 VS Code 里调用同样的命令，就能得到完全一致的编译结果。或者在 cmd 、windows powershell 里执行这个命令也是一样的。那么就需要使用安装 S32DS 时一同安装的工具链。</p>
+<p>有两个关键的东西 make 和 arm-none-eabi-gcc，打开工程目录，打开 cmd，直接执行 <code>D:\NXP\S32DS_ARM_v2018.R1\utils\msys32\usr\bin\make.exe -C Debug_FLASH</code> 其实就已经能编译整个项目了。但是一般来说不会搞得这么冗余。把 S32DS 的工具链添加到系统的环境变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>D:/NXP/S32DS_ARM_v2018.R1/Cross_Tools/gcc-arm-none-eabi-4_9/bin/
+</span></span><span style="display:flex;"><span>D:/NXP/S32DS_ARM_v2018.R1/utils/msys32/usr/bin/
+</span></span></code></pre></div><p>此时可以在 cmd 中直接使用 <code>make</code> 命令编译工程了。在 .vscode/tasks.json 里添加任务：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;label&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Build S32DS Project&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;command&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;make&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;args&#34;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;-C&#34;</span>, <span style="color:#e6db74">&#34;Debug_FLASH&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;group&#34;</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;kind&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;build&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;isDefault&#34;</span><span style="color:#f92672">:</span> true
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;problemMatcher&#34;</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;$gcc&#34;</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>本质上就是为一个 UI 按钮指定了对应的命令。这样按 <code>Ctrl+Shift+B</code> 就会自动执行命令。整个过程与 S32DS 一模一样没有任何区别，因为用的就是 S32DS 生成的 makefile 和同一个工具链。</p>
+<figure>
+  <img src="./images/2-s32ds_vscode/vscode.png" width=800>
+</figure>
+<h2 id="5总结与思考">5.总结与思考</h2>
+<p>通过这次尝试，把 S32DS 工程搬到了 VS Code：</p>
+<ul>
+<li>Eclipse/S32DS 依然是项目的“根基”，它负责配置 MCU、生成 makefile、集成调试工具；</li>
+<li>VS Code 则承担了日常写代码的工作，提供了更轻量、更现代化的编辑体验。</li>
+</ul>
+<p>在这个过程中，关于 IDE 与编译器之间的关系：</p>
+<ul>
+<li>对于 Keil / IAR 这样的传统 IDE，编译过程大多被 GUI 封装，开发者几乎接触不到底层命令；</li>
+<li>而 Eclipse (S32DS) 的优势在于透明：makefile 就在工程目录里，完全可以脱离 IDE，在命令行或 VS Code 下完成编译。</li>
+</ul>
+<p>这种 “IDE 生成 + VS Code 编辑” 的组合模式，带来了几个好处：</p>
+<ul>
+<li>编辑体验：代码补全、跳转、搜索更顺畅，Git 集成也更自然。</li>
+<li>编译一致性：VS Code 调用的就是 S32DS 工具链和 makefile，最终产物和 Eclipse 编译完全一致。</li>
+</ul>
+<p>当然，目前 Eclipse 依然不可或缺：</p>
+<ul>
+<li>MCU 外设配置（Processor Expert 或 RTD/SDK 配置）；</li>
+<li>编译器参数调整（优化等级、浮点选项、链接脚本路径）；</li>
+<li>调试支持（PEMicro/J-Link）</li>
+</ul>
+<p>这些功能仍然需要依赖 S32DS。VS Code 虽然可以部分替代 Eclipse，但要完全替代，还需要更多插件和配置，成本并不低。</p>
+<p>未来可以有一些更多的探索：</p>
+<ul>
+<li>借助 VS Code 的 Cortex-Debug 插件，是否可以实现更完整的调试体验；</li>
+<li>有没有更自动化的方式，把 S32DS 里配置的 includePath、defines 同步到 VS Code，而不是手工维护；</li>
+<li>甚至能不能在团队开发中，把 S32DS 作为项目生成工具，而 VS Code 作为日常开发环境，做到真正的轻量化协作。</li>
+</ul>
+<p>无论最终是否完全替代 Eclipse，一个底层逻辑：从 PC 到 MCU，编译的本质过程是相同的，只是 IDE 在不同程度上“隐藏”了它。</p>
+<h2 id="附录vs_code-配置">附录：vs_code 配置</h2>
+<p>以下示例假设工程名为 <code>led_sdk</code>，编译目录是 <code>Debug_FLASH</code>，S32DS 安装在 <code>D:/NXP/S32DS_ARM_v2018.R1/</code>。</p>
+<h3 id="vscodetasksjson">.vscode/tasks.json</h3>
+<p>定义编译任务，一键调用 make</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;2.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;tasks&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;Build S32DS Project&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;make&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#e6db74">&#34;-C&#34;</span>, <span style="color:#e6db74">&#34;Debug_FLASH&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;group&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;kind&#34;</span>: <span style="color:#e6db74">&#34;build&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;isDefault&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;problemMatcher&#34;</span>: [<span style="color:#e6db74">&#34;$gcc&#34;</span>]
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;label&#34;</span>: <span style="color:#e6db74">&#34;Clean S32DS Project&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;make&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#e6db74">&#34;-C&#34;</span>, <span style="color:#e6db74">&#34;Debug_FLASH&#34;</span>, <span style="color:#e6db74">&#34;clean&#34;</span>],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;group&#34;</span>: <span style="color:#e6db74">&#34;build&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="vscodec_cpp_propertiesjson">.vscode/c_cpp_properties.json</h3>
+<p>配置 头文件路径 和 宏定义，让 IntelliSense 正确工作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;configurations&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;S32DS&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;includePath&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;${workspaceFolder}/Sources&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;${workspaceFolder}/Generated_Code&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;D:/NXP/S32DS_ARM_v2018.R1/S32DS/software/S32SDK_S32K1xx_RTM_3.0.0/platform/devices/S32K144/include&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;D:/NXP/S32DS_ARM_v2018.R1/S32DS/software/S32SDK_S32K1xx_RTM_3.0.0/platform/drivers/inc&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;defines&#34;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;CPU_S32K144HFT0VLLT&#34;</span>
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;compilerPath&#34;</span>: <span style="color:#e6db74">&#34;arm-none-eabi-gcc&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;cStandard&#34;</span>: <span style="color:#e6db74">&#34;c99&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;intelliSenseMode&#34;</span>: <span style="color:#e6db74">&#34;gcc-arm&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/s32ds_vscdoe.html";
+    this.page.identifier = "\/blog\/s32ds_vscdoe.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

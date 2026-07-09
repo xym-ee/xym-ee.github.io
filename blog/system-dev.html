@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[post] 中大型嵌入式项目开发与管理：构建系统 | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[post] 中大型嵌入式项目开发与管理：构建系统</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2025-03-29</p>
+        
+          <p>🔄 2025-03-29</p>
+        
+        <p>⌚ Reading time: 3 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E7%AC%94%E8%AE%B0'
+    class="site-chip border p-1 text-center transition-colors">> 笔记</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <h2 id="大型嵌入式项目的开发与管理构建系统">大型嵌入式项目的开发与管理：构建系统</h2>
+<p>在嵌入式系统开发中，项目的规模和复杂性随着需求的增加而不断扩大。对于小型项目，开发者通常能够直接操作硬件，利用简洁的编译和开发环境进行开发。这类项目通常是裸机开发，例如使用 C51 或 STM32 等微控制器，通过集成开发环境（IDE）来进行开发。开发者通常专注于核心业务功能的实现，而不关心过多的底层细节，如编译过程、链接器配置或系统架构。这种方式的优点是快速实现和简单的开发流程，但在面对更复杂的需求时往往显得力不从心。</p>
+<p>例如，使用 C51 的经典项目通常包括简单的应用，如控制一个 LED 的闪烁、读取传感器数据并输出，或者其他单一功能的嵌入式系统。这些项目通常不涉及操作系统或复杂的硬件抽象层，开发者只需要专注于代码的实现和调试。</p>
+<p>同样，使用 STM32 的开发者通常通过 STM32CubeIDE 或 Keil MDK 等集成开发环境进行开发。这些工具提供了完整的硬件支持库和简化的项目设置，开发者能够快速构建和测试程序，只需关注核心业务逻辑，而不必过多处理与硬件平台和构建系统相关的细节。</p>
+<p>然而，随着项目规模的扩大，特别是当项目需要支持多个硬件平台、复杂的功能模块以及持续集成等需求时，裸机开发的方式就暴露出其局限性。此时，构建系统就显得尤为重要。</p>
+<p><strong>什么是构建系统？</strong></p>
+<p>构建系统是自动化处理代码构建过程的工具，通常包括以下功能：</p>
+<ul>
+<li>源代码编译：将源代码（如 .c、.cpp 文件）编译为目标文件（.o、.obj 文件）。</li>
+<li>模块依赖管理：在大型项目中，代码模块之间通常有复杂的依赖关系。构建系统能够自动识别依赖，并按正确顺序进行编译和链接。</li>
+<li>配置管理：根据项目需求或目标平台，配置哪些模块需要启用，哪些功能需要裁剪。</li>
+<li>跨平台支持：支持不同的硬件平台、操作系统或编译器工具链，以便生成适配不同目标平台的可执行文件或固件。</li>
+</ul>
+<p>在嵌入式开发中，编译通常并非在目标硬件平台上进行，而是通过交叉编译来生成目标平台的代码。交叉编译工具链（如 Keil、IAR 和 GCC）是构建系统的核心组成部分，负责将开发环境中的源代码编译成目标平台能够执行的二进制文件。在构建系统中，交叉编译工具链的选择和配置直接影响到项目的编译速度、生成代码的效率以及对目标平台的支持能力。构建系统需要能够灵活地集成不同的交叉编译工具链，并根据目标硬件架构和操作系统配置相应的编译参数。通过这一过程，开发者能够确保代码能够在不同的硬件平台上正确运行。</p>
+<p>本篇文章以 RT-Thread 为代表，结合 Linux Kernel、U-Boot、PX4-Autopilot 等开源项目，系统性探讨大型嵌入式项目的开发管理思路、构建系统对比及实际工程中可复用的最佳实践。</p>
+<h3 id="1-中大型嵌入式项目开发特征使用构建系统的必要性">1 中大型嵌入式项目开发特征，使用构建系统的必要性</h3>
+<h4 id="11-特征一多模块与组件化架构依赖管理功能可裁剪与配置能力">1.1 特征一：多模块与组件化架构，依赖管理，功能可裁剪与配置能力</h4>
+<blockquote>
+<p>大型项目功能全面，但是项目中的嵌入式设备是高度定制化的，并不需要用到全部功能，
+由此带来的，依赖管理。如传感器软件包依赖通信接口的驱动
+功能裁剪与配置，功能本身的裁剪，功能的配置，如引脚等</p>
+</blockquote>
+<p>中大型嵌入式项目往往采用多模块、组件化架构来组织系统。每个模块对应一类功能或外设，可单独开发、调试和裁剪，便于项目的可维护性和可扩展性。</p>
+<p>以 RT-Thread 中的 OLED 显示模块为例：</p>
+<p>OLED 模块是一个可裁剪模块，用户可以根据项目需求选择是否启用该功能。</p>
+<p>OLED 显示屏的驱动接口可配置，支持使用 IIC 或 SPI 接口与主控通信。</p>
+<p>若选择 IIC 接口，系统会依赖一个 IIC 驱动模块。此驱动本身也具有多种实现方式，比如：</p>
+<p>使用硬件 IIC 控制器；</p>
+<p>使用模拟 IIC（Soft IIC） 实现。软 IIC 驱动中，GPIO 引脚是可配置的，需根据硬件实际连接进行适配。</p>
+<p>OLED 驱动模块对外只暴露一组标准接口（如初始化、写数据、更新显示等），而具体使用哪种底层通信方式则由构建系统根据配置决定。</p>
+<p>这一系列的裁剪与配置动作，都可以通过 RT-Thread 的 menuconfig 系统完成，底层由 Kconfig 文件和构建系统配合解析，并由 SCons 构建工具根据配置决定最终构建哪些代码。</p>
+<p>这体现了模块之间的依赖（OLED 依赖 IIC/SPI，IIC 又依赖 GPIO）、功能可裁剪（启用或关闭 OLED）、配置灵活性（选择接口和引脚等），以及构建系统对这些特性的有力支持。</p>
+<p>由此带来的软件上的一些设计：使用自动著恶策和初始化流程，使得不需要做源码级别上的修改实现对功能的初始化</p>
+<p>不是所有的功能都在所有设备中都启用，裁剪机制变得非常关键：</p>
+<ul>
+<li>RT-Thread 和 Linux 使用 <code>Kconfig/menuconfig</code> 来做配置裁剪</li>
+<li>PX4 使用 <code>cmake + config.cmake</code> 组合管理功能启用</li>
+<li>Zephyr 使用 <code>Kconfig</code> + <code>west</code> 统一配置与依赖管理</li>
+</ul>
+<p>通过良好的配置机制，不仅可以精简目标固件大小，还可以减少编译依赖、加快构建速度。</p>
+<h4 id="12-特征二多平台多架构支持">1.2 特征二：多平台、多架构支持</h4>
+<blockquote>
+<p>三个层次：架构的不同，芯片的不同，单板级硬件的不同</p>
+</blockquote>
+<p>大型项目往往需要支持多种硬件平台，这种支持分为三个层次：</p>
+<p>一、架构层级差异
+处理器架构的不同直接影响到指令集、寄存器模型、启动流程、异常管理等底层行为。比如：</p>
+<p>ARM Cortex-M 系列就包含 Cortex-M3/M4/M7，用于中低端嵌入式设备；</p>
+<p>Cortex-A 系列如 Cortex-A7/A53，则多用于高性能嵌入式设备；</p>
+<p>新兴架构如 RISC-V，因其开源特性在近年来快速发展，受到越来越多项目支持。</p>
+<p>构建系统需要根据架构选择相应的编译器、链接脚本和启动代码。</p>
+<p>二、芯片层级差异
+即使在相同架构下，不同厂商设计的芯片或同一厂商的不同系列芯片在外设资源、时钟系统、中断配置等方面都存在差异。例如：</p>
+<p>ST 公司推出了 STM32F1、F4、H7 等系列，虽然都使用 ARM Cortex-M 架构，但在 DMA、Flash、USB 等方面的支持差异很大；</p>
+<p>同一个 ARM Cortex-M4 内核，可能被 ST、NXP、TI 等多个公司用在不同产品线上，构建系统需要能够识别和适配这些差异。</p>
+<p>构建系统通过选择 BSP（Board Support Package）来应对这一层的变化，统一芯片初始化流程。</p>
+<p>三、单板层级差异</p>
+<p>芯片作为核心器件，会被设计成各种开发板或实际产品板，而不同板子的引脚配置、电源架构、外设连接方式可能不同。</p>
+<p>举例来说，同一块 STM32F407 芯片可以被用于：</p>
+<p>一款开发板上，OLED 接在 SPI1；</p>
+<p>另一款工业控制板上，OLED 接在 IIC2；</p>
+<p>这类差异通常由 board-level 配置文件决定，构建系统需根据目标板选择对应的初始化代码、引脚映射和驱动配置。</p>
+<p>大型项目往往不是“为一个板子服务”，而是需要支持多个硬件平台，比如：</p>
+<ul>
+<li>不同系列的 STM32（F1、F4、H7）</li>
+<li>NXP i.MX RT、LPC 系列</li>
+<li>RISC-V 架构设备（如 RT1052、BL808 等）</li>
+</ul>
+<p>为了支持这些平台，项目需要具备以下能力：</p>
+<ul>
+<li>支持多个交叉编译器（如 <code>arm-none-eabi-gcc</code>, <code>riscv64-unknown-elf-gcc</code>）</li>
+<li>根据平台差异编译不同的启动文件、驱动文件</li>
+<li>通常会将 BSP（Board Support Package）分离成子项目或子模块进行管理</li>
+</ul>
+<h4 id="13-特征三软件项目管理的必要性">1.3 特征三：软件项目管理的必要性</h4>
+<p>随着项目复杂度上升，开发者不仅需要处理技术细节，也要面对诸如团队协作、质量控制、持续交付等工程问题。构建系统在这其中起到了桥梁作用，是支撑项目高效运作的核心工具之一：</p>
+<p>在中大型项目中，项目管理的复杂性远超小型项目。在这种环境下，传统的开发方式已经不能满足需求，开发团队需要依赖构建系统来高效管理整个项目。以下是构建系统在项目管理中的几个关键功能：</p>
+<p>依赖管理：在大型项目中，模块间的依赖关系变得极其复杂。构建系统能够自动识别模块之间的依赖，确保构建顺序正确，并减少模块的冗余编译。</p>
+<p>自动化测试与验证：构建系统可以集成测试工具，自动执行单元测试和集成测试，确保代码在集成时的正确性。</p>
+<p>版本控制与管理：构建系统与版本控制系统（如 Git）集成，能够方便地管理不同版本的构建，支持分支管理和版本发布。</p>
+<p>团队协作：构建系统通过统一的构建流程和环境，使得开发团队能够协同工作，避免因环境不同引发的构建错误。</p>
+<p>持续集成（CI）：构建系统能够集成持续集成工具（如 Jenkins、GitLab CI），自动化构建、测试和部署过程，确保软件质量和开发进度。</p>
+<p>例如，RT-Thread 项目通过集成 Git 和 Jenkins 等工具，能够实现持续集成，自动化构建、测试和验证，大大提高了团队的开发效率和代码质量。</p>
+<ul>
+<li>提交 PR → 自动触发构建 → 自动单元测试 + 代码规范检查 → 报告结果 → 决定是否合并</li>
+</ul>
+<p>构建系统的职责不只是“把代码编译过”。它还承载：</p>
+<ul>
+<li>多模块的依赖关系管理</li>
+<li>编译选项和优化级别的控制</li>
+<li>目标平台的选择与工具链配置</li>
+<li>构建过程与初始化流程的组织（如链接脚本、汇编文件等）</li>
+</ul>
+<p>优秀的构建系统可以显著提升开发效率，而差的构建系统会严重阻碍开发节奏。</p>
+<h3 id="2-构建系统原理与对比分析makefilesconscmake">2 构建系统原理与对比分析（Makefile、SCons、CMake）</h3>
+<p>嵌入式系统的构建系统是工程管理的“骨架”，它不仅决定了如何编译、链接和裁剪代码，更影响了项目的模块化、平台适配、CI 自动化等重要特性。</p>
+<p>本章将介绍三种主流构建系统工具的基本原理及其适用场景，并通过 RT-Thread、Linux Kernel、PX4-Autopilot 三个实际项目对比其使用方式。</p>
+<p>在嵌入式项目中，一个完整的构建系统应具备以下职责：</p>
+<ul>
+<li>源码编译：将 .c/.cpp/.S 文件编译为 .o 对象文件</li>
+<li>链接生成：根据链接脚本将 .o 链接为最终固件 .elf/.bin</li>
+<li>模块依赖：控制模块启用、禁用、依赖顺序</li>
+<li>配置管理：根据 Kconfig/CMake 配置功能开关</li>
+<li>平台适配：支持不同 MCU 架构与工具链</li>
+<li>资源处理：处理头文件、启动代码、汇编、链接脚本等</li>
+</ul>
+<h4 id="21-makefilelinux-kernel--u-boot">2.1 makefile：linux kernel / u-boot</h4>
+<p>原理： 基于规则的依赖构建工具，使用特定语法描述“目标 &lt;- 依赖 + 命令”，执行顺序由文件时间戳决定。</p>
+<p>特点：</p>
+<p>稳定可靠，广泛应用于嵌入式和系统软件</p>
+<p>语法灵活但易出错，可读性和可维护性较差</p>
+<p>需要手动维护子目录编译逻辑</p>
+<p>Linux Kernel 构建系统本质上是 Makefile 套 Makefile，配合 Kconfig 实现模块配置。</p>
+<h4 id="22-rt-thread-scons">2.2 rt-thread: Scons</h4>
+<p>原理： 基于 Python 脚本的声明式构建系统，用 Python 语言描述源文件、目标文件、依赖关系与构建规则。</p>
+<p>特点：</p>
+<p>使用真实的 Python 语言，语义灵活，可扩展性强</p>
+<p>支持跨平台构建、自动模块扫描、条件编译</p>
+<p>社区相对小众，生态不如 CMake 广泛</p>
+<p>SConstruct 示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> rtconfig
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注册顶层组件和路径</span>
+</span></span><span style="display:flex;"><span>DefaultEnvironment(tools<span style="color:#f92672">=</span>[])
+</span></span><span style="display:flex;"><span>Export(<span style="color:#e6db74">&#39;RTT_ROOT&#39;</span>, <span style="color:#e6db74">&#39;BSP_ROOT&#39;</span>)
+</span></span><span style="display:flex;"><span>SConscript(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BSP_ROOT, <span style="color:#e6db74">&#39;SConscript&#39;</span>))
+</span></span></code></pre></div><p>SConscript 示例（模块注册）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> building <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>cwd <span style="color:#f92672">=</span> GetCurrentDir()
+</span></span><span style="display:flex;"><span>src <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;my_module.c&#39;</span>]
+</span></span><span style="display:flex;"><span>group <span style="color:#f92672">=</span> DefineGroup(<span style="color:#e6db74">&#39;MyModule&#39;</span>, src, LOCAL_CPPPATH<span style="color:#f92672">=</span>[cwd])
+</span></span></code></pre></div><h4 id="ros--px4-autopilotcmake">ROS / px4-autopilot：cmake</h4>
+<p>原理： 使用 DSL 语言（CMakeLists.txt）描述构建目标，生成平台相关 Makefile 或 Ninja 文件。</p>
+<p>特点：</p>
+<p>跨平台支持强，主流 IDE 支持好（如 CLion、VS Code）</p>
+<p>target 概念强，模块管理清晰</p>
+<p>难以调试，语法不直观，初学者学习曲线陡峭</p>
+<p>示例（PX4 的子模块）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>add_library(<span style="color:#e6db74">mavlink</span> <span style="color:#e6db74">INTERFACE</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>target_include_directories(<span style="color:#e6db74">mavlink</span> <span style="color:#e6db74">INTERFACE</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_SOURCE_DIR<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>示例（板卡配置）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span>px4_add_board(
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">PLATFORM</span> <span style="color:#e6db74">nuttx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">VENDOR</span> <span style="color:#e6db74">holybro</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">MODEL</span> <span style="color:#e6db74">pixhawk4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>)<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><h3 id="3-rt-thread-的构建系统">3 rt-thread 的构建系统</h3>
+<p>RT-Thread 是一个国产开源嵌入式实时操作系统，其构建系统基于 Python 的 SCons，相比传统 Makefile 方式具有更强的可读性、灵活性与模块化管理能力。</p>
+<p>本章将系统性分析 RT-Thread 构建系统的架构和工作流程，讲解 SConstruct 和 SConscript 的角色、组件注册机制、Kconfig 配置系统如何配合构建过程，以及如何支持多平台和自动化构建。</p>
+<h4 id="构建系统结构概览">构建系统结构概览</h4>
+<p>RT-Thread 项目的典型目录结构如下（以 stm32f407-atk-explorer 为例）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span>rt<span style="color:#f92672">-</span>thread<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> bsp<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> stm32<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>       <span style="color:#960050;background-color:#1e0010">└──</span> stm32f407<span style="color:#f92672">-</span>atk<span style="color:#f92672">-</span>explorer<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>           <span style="color:#960050;background-color:#1e0010">├──</span> SConscript          <span style="color:#f92672">&lt;--</span> <span style="color:#960050;background-color:#1e0010">当前</span> BSP <span style="color:#960050;background-color:#1e0010">的构建脚本</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>           <span style="color:#960050;background-color:#1e0010">├──</span> board.c <span style="color:#f92672">/</span> startup.s
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> components<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> finsh<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│</span>       <span style="color:#960050;background-color:#1e0010">└──</span> SConscript              <span style="color:#f92672">&lt;--</span> <span style="color:#960050;background-color:#1e0010">组件模块构建脚本</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> libcpu<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> SConstruct                      <span style="color:#f92672">&lt;--</span> <span style="color:#960050;background-color:#1e0010">顶层构建入口脚本</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">├──</span> Kconfig                         <span style="color:#f92672">&lt;--</span> <span style="color:#960050;background-color:#1e0010">全局配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└──</span> tools<span style="color:#f92672">/</span>
+</span></span></code></pre></div><ul>
+<li>linux kernel <a href="https://github.com/torvalds/linux">source code</a></li>
+<li>u-boot <a href="https://github.com/u-boot/u-boot">source code</a></li>
+<li>rt-thread <a href="https://github.com/RT-Thread/rt-thread">source code</a></li>
+<li>PX4-Autopilot <a href="https://github.com/PX4/PX4-Autopilot">source code</a> <a href="https://github.com/PX4/PX4-Autopilot">document</a></li>
+</ul>
+<h3 id="常见的构建工具">常见的构建工具</h3>
+<p>makefile scons cmake</p>
+<p>与具体的 keil IAR 的区别</p>
+<h3 id="系统配置模块裁剪">系统配置，模块裁剪</h3>
+<p>Kconfig menuconfig</p>
+<h3 id="跨平台与多架构支持">跨平台与多架构支持</h3>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/system-dev.html";
+    this.page.identifier = "\/blog\/system-dev.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

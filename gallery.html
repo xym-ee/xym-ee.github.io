@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="Gallery - {{ .Site.Title }}">
+<title>🖼️ Gallery | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="pt-8">
+    
+    <div class="masonry-grid">
+      <!-- 激光点跟踪 -->
+<a class="gallery-link" href="/blog/images/1-laser-tracker/laser-track-4.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-laser-tracker/laser-track-4.png" alt="激光雷达跟踪" loading="lazy" decoding="async">
+</a>
+<div class="video-container">
+  <video controls playsinline preload="metadata">
+    <source src="/blog/videos/laser-track-1.mp4" type="video/mp4">
+  </video>
+</div>
+<!-- 2019 智能车竞赛 -->
+<a class="gallery-link" href="/blog/images/1-2019-nxp-car/智能车.jpg" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-2019-nxp-car/智能车.jpg" alt="2019 智能车竞赛" loading="lazy" decoding="async">
+</a>
+<div class="video-container">
+  <video controls playsinline preload="metadata">
+    <source src="/blog/videos/2019-nxp-car.mp4" type="video/mp4">
+  </video>
+</div>
+<!-- 电磁炮 -->
+<a class="gallery-link" href="/blog/images/1-curved-fire-gun/curved-fire-gun-1.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-curved-fire-gun/curved-fire-gun-1.png" alt="电磁炮" loading="lazy" decoding="async">
+</a>
+<!-- 更多图片 -->
+<a class="gallery-link" href="/blog/images/1-servo-system/servo-system-1.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-servo-system/servo-system-1.png" alt="伺服系统" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-laser-tracker/laser-track-1.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-laser-tracker/laser-track-1.png" alt="激光雷达1" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-laser-tracker/laser-track-2.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-laser-tracker/laser-track-2.png" alt="激光雷达2" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-laser-tracker/laser-track-3.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-laser-tracker/laser-track-3.png" alt="激光雷达3" loading="lazy" decoding="async">
+</a>
+<!-- 智能车更多图片 -->
+<a class="gallery-link" href="/blog/images/1-2019-nxp-car/宿舍搭车.jpg" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-2019-nxp-car/宿舍搭车.jpg" alt="智能车宿舍搭车" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-2019-nxp-car/图像处理.jpg" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-2019-nxp-car/图像处理.jpg" alt="智能车图像处理" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-2019-nxp-car/电路板.jpg" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-2019-nxp-car/电路板.jpg" alt="智能车电路板" loading="lazy" decoding="async">
+</a>
+<!-- 电磁炮更多 -->
+<a class="gallery-link" href="/blog/images/1-curved-fire-gun/curved-fire-gun-2.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-curved-fire-gun/curved-fire-gun-2.png" alt="电磁炮2" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-curved-fire-gun/curved-fire-gun-4.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-curved-fire-gun/curved-fire-gun-4.png" alt="电磁炮4" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-curved-fire-gun/curved-fire-gun-5.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-curved-fire-gun/curved-fire-gun-5.png" alt="电磁炮5" loading="lazy" decoding="async">
+</a>
+<a class="gallery-link" href="/blog/images/1-curved-fire-gun/curved-fire-gun-6.png" data-lightbox>
+  <img class="gallery-img" src="/blog/images/1-curved-fire-gun/curved-fire-gun-6.png" alt="电磁炮6" loading="lazy" decoding="async">
+</a>
+
+    </div>
+  </div>
+
+  <div class="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+    <button class="gallery-lightbox-close" type="button" aria-label="Close image preview">&times;</button>
+    <button class="gallery-lightbox-nav gallery-lightbox-prev" type="button" aria-label="Previous image">&lsaquo;</button>
+    <figure class="gallery-lightbox-figure">
+      <img class="gallery-lightbox-img" alt="">
+      <figcaption class="gallery-lightbox-caption"></figcaption>
+      <a class="gallery-lightbox-original" href="#" target="_blank" rel="noopener">Open original</a>
+    </figure>
+    <button class="gallery-lightbox-nav gallery-lightbox-next" type="button" aria-label="Next image">&rsaquo;</button>
+  </div>
+
+  <script>
+    (function () {
+      const links = Array.from(document.querySelectorAll('.gallery-link[data-lightbox]'));
+      const lightbox = document.querySelector('.gallery-lightbox');
+      if (!links.length || !lightbox) return;
+
+      const image = lightbox.querySelector('.gallery-lightbox-img');
+      const caption = lightbox.querySelector('.gallery-lightbox-caption');
+      const original = lightbox.querySelector('.gallery-lightbox-original');
+      const closeButton = lightbox.querySelector('.gallery-lightbox-close');
+      const prevButton = lightbox.querySelector('.gallery-lightbox-prev');
+      const nextButton = lightbox.querySelector('.gallery-lightbox-next');
+      let activeIndex = 0;
+      let lastFocused = null;
+
+      function showImage(index) {
+        activeIndex = (index + links.length) % links.length;
+        const link = links[activeIndex];
+        const thumb = link.querySelector('img');
+        const alt = thumb ? thumb.getAttribute('alt') || '' : '';
+
+        image.src = link.href;
+        image.alt = alt;
+        caption.textContent = alt;
+        original.href = link.href;
+      }
+
+      function openLightbox(index) {
+        lastFocused = document.activeElement;
+        showImage(index);
+        lightbox.hidden = false;
+        document.documentElement.classList.add('gallery-lightbox-open');
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        image.removeAttribute('src');
+        document.documentElement.classList.remove('gallery-lightbox-open');
+        if (lastFocused) lastFocused.focus();
+      }
+
+      links.forEach((link, index) => {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          openLightbox(index);
+        });
+      });
+
+      closeButton.addEventListener('click', closeLightbox);
+      prevButton.addEventListener('click', () => showImage(activeIndex - 1));
+      nextButton.addEventListener('click', () => showImage(activeIndex + 1));
+
+      lightbox.addEventListener('click', event => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', event => {
+        if (lightbox.hidden) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') showImage(activeIndex - 1);
+        if (event.key === 'ArrowRight') showImage(activeIndex + 1);
+        if (event.key === 'Tab') {
+          const focusable = [closeButton, prevButton, original, nextButton];
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>

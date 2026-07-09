@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr"
+  style="scrollbar-gutter: stable;">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://*.disqus.com https://*.disquscdn.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' https: data:; media-src 'self' https: data:; frame-src https://*.disqus.com https://disqus.com https://player.bilibili.com https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://www.dailymotion.com; connect-src 'self' https://*.disqus.com https://*.disquscdn.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://*.disqus.com">
+<meta name="description" content="">
+<title>[post] vibe coding 与编程 Agent | xym-ee</title>
+
+
+        <link rel="stylesheet" href="/css/tailwind.min.44ff4822199f556046559f81db577f147dcba694234282608a301a9fac85e49f.css" type="text/css" integrity="sha256-RP9IIhmfVWBGVZ&#43;B21d/FH3LppQjQoJgijAan6yF5J8=" crossorigin="anonymous">
+
+</head>
+
+<body class="font-sans text-gray-900">
+  <div class="container mx-auto flex flex-col px-4 xl:w-8/12 sm:max-w-full">
+    
+  
+
+  <header class="flex flex-row py-4" >
+
+  
+
+
+
+  <nav
+    class="flex flex-row items-center w-full justify-between">
+
+
+  
+  
+    <div class="flex flex-col gap-1">
+      <a href="https://xym.work/" class="site-title-link text-4xl font-bold whitespace-nowrap">xym-ee</a>
+      <p class="text-gray-600">Embedded Systems & Robot Control</p>
+    </div>
+  
+
+  <div id="site-mobile-menu" class="dropdown-menu flex flex-row absolute max-lg:w-full max-lg:items-center max-lg:justify-center max-lg:-top-full lg:static max-lg:bg-white max-lg:h-[calc(100dvh)] max-lg:left-0">
+    <ul class="flex flex-col lg:flex-row gap-2">
+      
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/about.html">> About</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/gallery.html">> Gallery</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/blog">> Blog</a>
+  </li>
+
+  <li class="site-nav-item font-bold border px-3 py-2 focus:text-gray-800 text-center transition-colors">
+    <a href="/notebook.html">> Notebook</a>
+  </li>
+
+
+    </ul>
+  </div>
+  <button type="button" class="open-dropdown-button mobile-menu-toggle lg:hidden" aria-label="Open navigation menu" aria-controls="site-mobile-menu" aria-expanded="false">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="#374151">
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </button>
+  <button type="button" class="close-dropdown-button mobile-menu-toggle hidden z-50" aria-label="Close navigation menu" aria-controls="site-mobile-menu">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 384 512" width="32" height="32" fill="#374151">
+      <path
+        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+    </svg>
+  </button>
+</nav>
+
+</header>
+
+  <p class="site-rule text-xs font-mono">/*-----------------------------*/</p>
+
+  <div class="post-layout flex gap-8">
+    
+    <div class="post-main flex flex-col gap-4">
+      <h1 class="text-3xl max-sm:text-2xl font-bold">[post] vibe coding 与编程 Agent</h1>
+      
+      <div class="flex flex-row flex-wrap max-md:gap-4 gap-10">
+        <p>📅 2026-05-25</p>
+        
+          <p>🔄 2026-05-25</p>
+        
+        <p>⌚ Reading time: 2 min</p>
+      </div>
+      
+      <div class="flex flex-row gap-2 flex-nowrap">
+        <p class="py-1">📂</p>
+<div class="flex flex-wrap gap-2">
+  
+    <a href='/categories/%E7%AC%94%E8%AE%B0'
+    class="site-chip border p-1 text-center transition-colors">> 笔记</a>
+  
+</div>
+
+      </div>
+      <hr />
+      <div class="flex flex-col gap-10">
+        <div class="prose max-w-full">
+          <p>（待完善）</p>
+<p>Agent = Model + Harness</p>
+<p>Agent 本身的原理，以及如何更好的使用如 claude code，codex，open claw</p>
+<p>自然语言会是新的 Shell 吗？</p>
+<h2 id="0-背景">0 背景</h2>
+<h3 id="01-与-chatgpt-聊天">0.1 与 ChatGPT 聊天</h3>
+<p>ChatGPT 像一个“专家问答窗口”，用户输入自然语言，模型返回自然语言。</p>
+<p>生成式预训练大模型 GPT，NLP 的技术路线从为每个任务单独训练转向预训练大模型 + 微调/提示。</p>
+<p><a href="https://openai.com/zh-Hans-CN/index/chatgpt/">https://openai.com/zh-Hans-CN/index/chatgpt/</a></p>
+<p>2022 年 11 月 30 日，隆重推出 ChatGPT，3.5。能对话，写文章，回答追问，这个时候的模型已经比较厉害了，但是还是能看出来车轱辘话来回讲。</p>
+<p>2023 年 3 月，GPT-4 出来，AI 真的能做些事情了。</p>
+<p>2024 年 5 月 GPT-4o，免费用户能体验到的最先进的模型。</p>
+<h3 id="02-通过-api-与-llm-对话">0.2 通过 api 与 llm 对话</h3>
+<p>关于 LLM API，2020 年 6 月，GPT3-API 开放给开发者</p>
+<p><a href="https://openai.com/zh-Hans-CN/index/openai-api/">https://openai.com/zh-Hans-CN/index/openai-api/</a></p>
+<p>api 比网页对话问答更接近模型，早期的 GPT3 模型就已经有 API 的调用接口了，将大模型集成进软件工作流的尝试也开始了。</p>
+<p>大模型，大语言模型，字符串进字符串出（文本进文本出，严格来说 token 进，token 出，字符串被 Tokenizer 处理为 token，https://platform.openai.com/tokenizer）其实和 unix 的 cli 工具如 <code>ls</code> ，在外部视角看起来没什么区别如 <code>ls /dev</code></p>
+<p><code>/dev</code> 是一个字符串，<code>argv[1]</code> 的类型为 <code>char*</code>，终端显示的东西，都是 printf 出来的字符串。从标准输出流出去的字符串，steace 看到 <code>write(1，)</code> 输出了 dev 里的文件。</p>
+<p>用比较高的视角来看，这些工具也是 stdin 计算之后 stdout，只不过是专用的工具，并且是靠近计算机的语言，不是严格的C这种的，对于非程序员来说也不是完全可读的。</p>
+<p>那么可以做一个程序，在 API 外面封装一层很简单的代码，接受终端的字符串进，然后输出计算过后的字符串。</p>
+<blockquote>
+<p>“帮我实现一个 cli 程序，实通过 LLM API 的调用，实现在终端完成单次对话的效果。”
+作为提示词给 codex 几分钟就能实现出来，一个集成到终端的聊天工具</p>
+</blockquote>
+<p>如果去看模型厂商的开发手册，curl 快速测 api，sdk 大多提供了 python 的包。但这里还是强行要求用 C 语言解析，cjson，http请求。如果做二进制分发 go 语言可能更合适，标准库的支持更多。</p>
+<p>对 ai 编程来说，如果只关心行为，用什么语言实现也不重要了，甚至可以要求 AI 拿汇编去写，上上强度。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>./llm <span style="color:#e6db74">&#34;hello &#34;</span>
+</span></span></code></pre></div><p>对于终端来说，参数作为输入，管道、重定向，也可以作为程序的输入。组合输入，可以做更多的事情，需要做一些提示词的组装，对 AI 身份的预设，(Prompt Engineering 会考虑的比较周到的东西)</p>
+<p>一些典型用法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cat log | llm <span style="color:#e6db74">&#34;总结一下“
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">cat main.c | llm &#34;</span>解释一下<span style="color:#e6db74">&#34;
+</span></span></span></code></pre></div><p>已经像是一个集成进 cli 的能用的小工具了。到这里，还是对 llm api 的一次性使用，组装 rpompt -&gt; 调 api -&gt; 拿结果，展示给用户</p>
+<p>LLM API wrapper</p>
+<p>LLM 的字符串进字符串出天然和 unix 工具通过管道传递信息的方式适配，这也是关于 MCP 与 CLI 的讨论的来源，飞书出了 飞书CLI，可以给 agent 一个详细的命令行使用文档，通过飞书 CLI 实现各种功能。</p>
+<h3 id="03-输出也进入执行系统">0.3 输出也进入执行系统？</h3>
+<p>到此为止，只考虑了进入端的接入。是否可以让 llm 的输出也作为下一个 unix 工具的输入？</p>
+<p>让 llm 启动时读一个 System.md，里面存放了 System Prompt，全局行为的约束 (预训练大模型 + 提示，做专用的事情)，连同所有的输入，一起组装起来。</p>
+<p>这个 System.md 与 CLAUDE.md 或者 AGENTS.md 作用相同，都是文件名匹配，在启动时加载的。</p>
+<p>比如说，System.md 要求，输出可以直接在 shell 执行的指令，并且，不加任何符号包围。</p>
+<p>然后，使用一些 shell 的机制，$()</p>
+<p><strong>思想实验/最小原型</strong></p>
+<p>那么比如 $(llm &ldquo;创建一个名为 readme.md 的文件&rdquo;) ，这个整体就真的创建了一个新的文件。</p>
+<p>在 LLM 的帮助下，讲几句话，一些东西发生了变化。</p>
+<p>当能创建一个文件，理论上读写修改删除都能做到，在 linux 里，能读写文件 = 能做任何事情，比如操作硬件。</p>
+<blockquote>
+<p>claude -p 看起来和 llm 有点像，llm 是 claude -p 的极简版吧，差了非常多的东西。</p>
+</blockquote>
+<p><code>$(llm &quot;创建一个名为 readme.md 的文件&quot;)</code> 是一个思维实验，</p>
+<p>当 LLM 的输出不再只是给人看，而是进入 shell，被系统执行时，LLM 就从“回答者”变成了“行动建议生成器”。</p>
+<h2 id="mini-agent">mini agent</h2>
+<p>最小原型缺了非常多的东西</p>
+<p>命令执行结果、权限控制、任务状态。。。。</p>
+<h3 id="从行动建议到做事情">从行动建议到做事情</h3>
+<p>LLM 直管文字的输入输出，能做事情，依赖了 prompt 和 $()，LLM 的需要有些代码去帮助 LLM 做他想做的操作。</p>
+<p>早期，排bug，复制 log 粘贴到网页，然后根据 gpt 的提示，粘贴代码，直到问题被解决。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>提要求  -&gt;   LLM  调用工具？  -&gt;  否，做总结输出，结束
+</span></span><span style="display:flex;"><span>      |                   |
+</span></span><span style="display:flex;"><span>       -- 调工具，拿工具结果-
+</span></span></code></pre></div><p>想要用什么，先得让 LLM 知道有什么，因此，工具信息也需要给到 LLM，</p>
+<p>每一轮推理的结果，和工作调用的结果，都会附加在前面的内容，做最新的一次推理。</p>
+<p>一个万能工具，bash，几乎能做任何事情。</p>
+<h3 id="更多的工具">更多的工具</h3>
+<p>bash 是最高自由度工具，也是最低语义密度、最高风险的工具。</p>
+<p>新增 read write 工具，这也是一种封装，</p>
+<p>gpio_set，led_set</p>
+<p>bash(&ldquo;gpioset gpiochip0 17=1&rdquo;) 和 led_set(&ldquo;on&rdquo;)</p>
+<p>的区别，我也可以去看原理图，知道 gpioset 是 led，但是中间的全是没用的信息。前者需要理解 Linux、GPIO、硬件映射、命令参数；后者直接暴露了“能力”。</p>
+<p>让人更好的工作都需要给人提供更顺手的工具。工具设计的目标，不是让 Agent 什么都能做，而是让 Agent 更容易做对事。（工程化补充 MCP）</p>
+<p>工程上的实现，工具注册表，</p>
+<p>关于权限的问题，调用工具前要考虑的东西，作为一个生产级的程序，应该要关心的</p>
+<p>工程上，如何实现？工程审美问题，hooks 机制，主逻辑一眼看清，人的关注力也有限，人还不如 AI，软件上的抽象概念完全是为了照顾人的理解能力。系统做大和还能被人理解，全靠抽象。</p>
+<p>Agent 系统最终仍然是软件系统。模型可以处理复杂文本，但系统设计不能把复杂性全部甩给模型。抽象、模块、hooks、权限、日志、可观测性，本质上都是为了让人还能理解这个系统。</p>
+<h2 id="使用时遇到了问题">使用时遇到了问题</h2>
+<p>上面的这个已经能用了，核心原理上已经解决了。后面去改善</p>
+<h3 id="目标坚定">目标坚定？</h3>
+<p>大任务，给自己做一个计划表，todowrite，自己慢慢做</p>
+<p>todo、plan、checkpoint、阶段验收。Claude Code、Codex 这类工具会有计划、任务列表、子任务、diff review。</p>
+<p>一些只需要知道结果，用结果决策的，找一个实习生，临时外包 ，subagent</p>
+<h3 id="llm-性能的限制">LLM 性能的限制</h3>
+<p>context windows，</p>
+<p>用到时加载全部，上下文压缩</p>
+<p>记忆？内存和硬盘？记脑子里，写笔记本上？</p>
+<p>东西越来越多，system prompt 是时候考量一下了。</p>
+<h2 id="一些想法">一些想法</h2>
+<p>vibe coding 不是编程消失，而是编程活动的重心迁移：从手写每一行代码，转向描述目标、组织上下文、设计工具、约束权限、检查结果。</p>
+<p>编程 Agent 也不是魔法。它更像一个新的操作层：LLM 负责理解意图，工具负责改变世界，上下文负责维持状态，权限系统负责控制边界。真正的工程能力，仍然体现在如何设计这个系统。</p>
+
+          <hr />
+        </div>
+        <div>
+          
+
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+    this.page.url = "https:\/\/xym.work\/blog\/vibe-coding.html";
+    this.page.identifier = "\/blog\/vibe-coding.html";
+    };
+    (function () { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xym.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="post-toc">
+      <div class="border-l-2 border-gray-200 pl-4">
+        <h3 class="text-sm font-bold text-gray-500 mb-3 uppercase tracking-wide">目录</h3>
+        <nav id="toc" class="text-sm text-gray-600 space-y-2">
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .post-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: stretch;
+      padding-top: 2rem;
+    }
+    .post-main {
+      flex: 1 1 0%;
+      min-width: 0;
+      width: 100%;
+    }
+    .post-toc {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .post-layout {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .post-toc {
+        display: block;
+        width: 12rem;
+        min-width: 12rem;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+      }
+    }
+    .prose table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #toc a {
+      display: block;
+      color: #666;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      transition: color 0.2s, border-left 0.2s;
+      border-left: 2px solid transparent;
+      padding-left: 0.5rem;
+      margin-left: -0.5rem;
+    }
+    #toc a:hover {
+      color: #15803d;
+    }
+    #toc a.active {
+      color: #15803d;
+      border-left-color: #15803d;
+    }
+  </style>
+
+  <script>
+    (function() {
+      
+      var headings = document.querySelectorAll('.prose h2');
+      var toc = document.getElementById('toc');
+
+      if (headings.length > 0 && toc) {
+        headings.forEach(function(h, i) {
+          if (!h.id) {
+            h.id = 'section-' + i;
+          }
+          var link = document.createElement('a');
+          link.href = '#' + h.id;
+          link.textContent = h.textContent;
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth' });
+          });
+          toc.appendChild(link);
+        });
+
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('#toc a').forEach(function(a) {
+                a.classList.remove('active');
+              });
+              var activeLink = document.querySelector('#toc a[href="#' + entry.target.id + '"]');
+              if (activeLink) activeLink.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      } else if (toc) {
+        toc.innerHTML = '<p class="text-gray-600 text-xs">暂无目录</p>';
+      }
+    })();
+  </script>
+
+  <div class="footer flex items-center justify-center">
+  <div class="py-4">
+  <footer>
+    <p class="whitespace-nowrap">© 2026. <a href="https://github.com/xym-ee" target="_blank">xym-ee
+    </a> all rights reserved.</p>
+  </footer>
+</div>
+</div>
+
+
+  </div>
+  
+        <script type="text/javascript" src="/js/navbar.min.712f181b5da0b394f438c9c26770da49db50de6726e9bd486749b02ffd280081.js" integrity="sha256-cS8YG12gs5T0OMnCZ3DaSdtQ3mcm6b1IZ0mwL/0oAIE=" crossorigin="anonymous"></script>
+
+  
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],  
+      displayMath: [['$$', '$$']]  
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ['svgwechat', 'svgqq'].forEach(function(iconId) {
+      var icon = document.getElementById(iconId);
+      if (!icon) return;
+
+      var container = icon.closest('.social-item');
+      var tooltip = container && container.querySelector('.tooltip');
+      if (!container || !tooltip) return;
+
+      container.addEventListener('mouseenter', function() {
+        tooltip.classList.add('is-visible');
+      });
+
+      container.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('is-visible');
+      });
+    });
+  });
+</script>
+
+</body>
+
+</html>
